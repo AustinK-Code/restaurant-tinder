@@ -24,6 +24,7 @@
         v-model="user.password"
         required
       />
+      <password-meter :password="user.password" />
       <input
         type="password"
         id="confirmPassword"
@@ -41,15 +42,17 @@
 </template>
 
 <script>
+import passwordMeter from "vue-simple-password-meter"
 import authService from '../services/AuthService';
 
 export default {
   name: 'register',
+  components: {passwordMeter},
   data() {
-    return {
+         return {
       user: {
         username: '',
-        password: '',
+        password: null,
         confirmPassword: '',
         role: 'user',
       },
@@ -90,4 +93,5 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+</style>
