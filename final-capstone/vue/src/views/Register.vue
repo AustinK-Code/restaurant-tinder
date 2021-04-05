@@ -61,7 +61,58 @@ export default {
     };
   },
   methods: {
+    // start of crazy crazy method to do password security
+    checkIfSecure(pass){
+  var score = 0;
+  var length = 0;
+  var specialChar = 0;
+  var caseMix = 0;
+  var passHasNum = 0;
+  var specialCharRegex = /[^A-Za-z0-9]/g;
+  var lowercaseRegex = /(.*[a-z].*)/g;
+  var uppercaseRegex = /(.*[A-Z].*)/g;
+  var numberRegex = /(.*[0-9].*)/g;
+  var repeatCharRegex = /(\w)(\1+\1+\1+\1+)/g;
+  var hasSpecialChar = specialCharRegex.test(pass);
+  var hasLowerCase = lowercaseRegex.test(pass);
+  var hasUpperCase = uppercaseRegex.test(pass);
+  var hasNumber = numberRegex.test(pass);
+  var hasRepeatChars = repeatCharRegex.test(pass);
+
+  if (pass.length > 7) {
+    if (hasNumber) {
+      passHasNum = 1;
+    }
+
+    if (hasUpperCase && hasLowerCase) {
+      caseMix = 1;
+    }
+
+    if ((hasLowerCase || hasUpperCase || hasNumber) && hasSpecialChar) {
+      specialChar = 1;
+    }
+
+    if (pass.length > 8 && !hasRepeatChars) {
+      length = 1;
+    }
+
+    score = length + specialChar + caseMix + passHasNum;
+
+    if (score > 4) {
+      score = 4;
+    }
+  }
+
+  return score;
+},
+// end
+    },
     register() {
+      let passwordToCheck = checkIfSecure(this.user.password)//this is where the error is
+      if (passwordToCheck != 4 ){//
+        this.registrationErrors = true//
+        this.registrationErrorMsg = "Password is not secure. Password must contain: At least 8 characters, No repeated characters, 1 uppercase and 1 lowercase character, 1 special character, and 1 number."
+      }
       if (this.user.password != this.user.confirmPassword) {
         this.registrationErrors = true;
         this.registrationErrorMsg = 'Password & Confirm Password do not match.';
@@ -89,9 +140,37 @@ export default {
       this.registrationErrors = false;
       this.registrationErrorMsg = 'There were problems registering this user.';
     },
-  },
-};
+  }
+;
 </script>
 
 <style>
+/* this is for password color bar */
+.po-password-strength-bar {
+  border-radius: 2px;
+  transition: all 0.2s linear;
+  height: 60px;
+  margin-top: 8px;
+}
+
+.po-password-strength-bar.risky {
+  background-color: #f95e68;
+}
+
+.po-password-strength-bar.guessable {
+  background-color: #fb964d;
+}
+
+.po-password-strength-bar.weak {
+  background-color: #fdd244;
+}
+
+.po-password-strength-bar.safe {
+  background-color: #b0dc53;
+}
+
+.po-password-strength-bar.secure {
+  background-color: #35cc62;
+}
+/* end of color bar */
 </style>
