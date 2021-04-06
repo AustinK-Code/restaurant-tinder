@@ -42,106 +42,106 @@
 </template>
 
 <script>
-import passwordMeter from "vue-simple-password-meter"
-import authService from '../services/AuthService';
+import passwordMeter from "vue-simple-password-meter";
+import authService from "../services/AuthService";
 
 export default {
-  name: 'register',
-  components: {passwordMeter},
+  name: "register",
+  components: { passwordMeter },
   data() {
-         return {
+    return {
       user: {
-        username: '',
+        username: "",
         password: null,
-        confirmPassword: '',
-        role: 'user',
+        confirmPassword: "",
+        role: "user",
       },
       registrationErrors: false,
-      registrationErrorMsg: 'There were problems registering this user.',
+      registrationErrorMsg: "There were problems registering this user.",
     };
   },
   methods: {
     // start of crazy crazy method to do password security
-    checkIfSecure(pass){
-  var score = 0;
-  var length = 0;
-  var specialChar = 0;
-  var caseMix = 0;
-  var passHasNum = 0;
-  var specialCharRegex = /[^A-Za-z0-9]/g;
-  var lowercaseRegex = /(.*[a-z].*)/g;
-  var uppercaseRegex = /(.*[A-Z].*)/g;
-  var numberRegex = /(.*[0-9].*)/g;
-  var repeatCharRegex = /(\w)(\1+\1+\1+\1+)/g;
-  var hasSpecialChar = specialCharRegex.test(pass);
-  var hasLowerCase = lowercaseRegex.test(pass);
-  var hasUpperCase = uppercaseRegex.test(pass);
-  var hasNumber = numberRegex.test(pass);
-  var hasRepeatChars = repeatCharRegex.test(pass);
+    checkIfSecure(pass) {
+      let score = 0;
+      let length = 0;
+      let specialChar = 0;
+      let caseMix = 0;
+      let passHasNum = 0;
+      let specialCharRegex = /[^A-Za-z0-9]/g;
+      let lowercaseRegex = /(.*[a-z].*)/g;
+      let uppercaseRegex = /(.*[A-Z].*)/g;
+      let numberRegex = /(.*[0-9].*)/g;
+      let repeatCharRegex = /(\w)(\1+\1+\1+\1+)/g;
+      let hasSpecialChar = specialCharRegex.test(pass);
+      let hasLowerCase = lowercaseRegex.test(pass);
+      let hasUpperCase = uppercaseRegex.test(pass);
+      let hasNumber = numberRegex.test(pass);
+      let hasRepeatChars = repeatCharRegex.test(pass);
 
-  if (pass.length > 7) {
-    if (hasNumber) {
-      passHasNum = 1;
-    }
+      if (pass.length > 7) {
+        if (hasNumber) {
+          passHasNum = 1;
+        }
 
-    if (hasUpperCase && hasLowerCase) {
-      caseMix = 1;
-    }
+        if (hasUpperCase && hasLowerCase) {
+          caseMix = 1;
+        }
 
-    if ((hasLowerCase || hasUpperCase || hasNumber) && hasSpecialChar) {
-      specialChar = 1;
-    }
+        if ((hasLowerCase || hasUpperCase || hasNumber) && hasSpecialChar) {
+          specialChar = 1;
+        }
 
-    if (pass.length > 8 && !hasRepeatChars) {
-      length = 1;
-    }
+        if (pass.length > 8 && !hasRepeatChars) {
+          length = 1;
+        }
 
-    score = length + specialChar + caseMix + passHasNum;
+        score = length + specialChar + caseMix + passHasNum;
 
-    if (score > 4) {
-      score = 4;
-    }
-  }
-
-  return score;
-},
-// end
-    },
-    register() {
-      let passwordToCheck = checkIfSecure(this.user.password)//this is where the error is
-      if (passwordToCheck != 4 ){//
-        this.registrationErrors = true//
-        this.registrationErrorMsg = "Password is not secure. Password must contain: At least 8 characters, No repeated characters, 1 uppercase and 1 lowercase character, 1 special character, and 1 number."
+        if (score > 4) {
+          score = 4;
+        }
       }
-      if (this.user.password != this.user.confirmPassword) {
-        this.registrationErrors = true;
-        this.registrationErrorMsg = 'Password & Confirm Password do not match.';
-      } else {
-        authService
-          .register(this.user)
-          .then((response) => {
-            if (response.status == 201) {
-              this.$router.push({
-                path: '/login',
-                query: { registration: 'success' },
-              });
-            }
-          })
-          .catch((error) => {
-            const response = error.response;
-            this.registrationErrors = true;
-            if (response.status === 400) {
-              this.registrationErrorMsg = 'Email Is Already In Use';
-            }
-          });
-      }
+
+      return score;
     },
-    clearErrors() {
-      this.registrationErrors = false;
-      this.registrationErrorMsg = 'There were problems registering this user.';
-    },
-  }
-;
+    // end
+  
+  register() {
+    let passwordToCheck = this.user.password; //this is where the error is
+    if (this.checkIfSecure(passwordToCheck) != 4) {
+      this.registrationErrors = true; 
+      this.registrationErrorMsg =
+        "Password is not secure. Password must contain: At least 8 characters, No repeated characters, 1 uppercase and 1 lowercase character, 1 special character, and 1 number.";
+    }
+    if (this.user.password != this.user.confirmPassword) {
+      this.registrationErrors = true;
+      this.registrationErrorMsg = "Password & Confirm Password do not match.";
+    } else {
+      authService
+        .register(this.user)
+        .then((response) => {
+          if (response.status == 201) {
+            this.$router.push({
+              path: "/login",
+              query: { registration: "success" },
+            });
+          }
+        })
+        .catch((error) => {
+          const response = error.response;
+          this.registrationErrors = true;
+          if (response.status === 400) {
+            this.registrationErrorMsg = "Email Is Already In Use";
+          }
+        });
+    }
+  },
+  clearErrors() {
+    this.registrationErrors = false;
+    this.registrationErrorMsg = "There were problems registering this user.";
+  }}
+};
 </script>
 
 <style>
