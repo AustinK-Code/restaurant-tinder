@@ -61,7 +61,7 @@ export default {
     };
   },
   methods: {
-    // start of crazy crazy method to do password security
+    // start of method to do password security
     checkIfSecure(pass) {
       let score = 0;
       let length = 0;
@@ -113,11 +113,13 @@ export default {
       this.registrationErrors = true; 
       this.registrationErrorMsg =
         "Password is not secure. Password must contain: At least 8 characters, No repeated characters, 1 uppercase and 1 lowercase character, 1 special character, and 1 number.";
+      return
     }
     if (this.user.password != this.user.confirmPassword) {
       this.registrationErrors = true;
       this.registrationErrorMsg = "Password & Confirm Password do not match.";
-    } else {
+    } 
+    else {
       authService
         .register(this.user)
         .then((response) => {
@@ -145,7 +147,9 @@ export default {
 </script>
 
 <style>
+
 /* this is for password color bar */
+
 .po-password-strength-bar {
   border-radius: 2px;
   transition: all 0.2s linear;
