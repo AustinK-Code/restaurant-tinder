@@ -99,7 +99,7 @@ INSERT INTO restaurant (restaurant_name,cuisine_id,phone_number,star_rating,thum
 	'https://www.google.com/maps/place/Miyako+Sushi+%26+Grill/@39.3536632,-84.3639446,3a,75y,90t/data=!3m8!1e2!3m6!1sAF1QipNVLAw4jkxvA_-l0L0HDRGoaGlVA5IZNTe2As3v!2e10!3e12!6shttps:%2F%2Flh5.googleusercontent.com%2Fp%2FAF1QipNVLAw4jkxvA_-l0L0HDRGoaGlVA5IZNTe2As3v%3Dw114-h86-k-no!7i4032!8i3024!4m5!3m4!1s0x88405a063cdba4ef:0xf2d79d76a4685df4!8m2!3d39.353933!4d-84.364008?hl=en&authuser=0#');
 INSERT INTO restaurant (restaurant_name,cuisine_id,phone_number,star_rating,thumbnail_img) VALUES (
 	'Soho Japanese Bistro','6','5137596876','4.3',
-	'');
+	'https://www.google.com/maps/place/Soho+Japanese+Bistro/@39.3557275,-84.3633564,3a,75y,90t/data=!3m8!1e2!3m6!1sAF1QipOVGkCc71oul6pp9PbVqqybs8U6zmMGizIFmMyZ!2e10!3e12!6shttps:%2F%2Flh5.googleusercontent.com%2Fp%2FAF1QipOVGkCc71oul6pp9PbVqqybs8U6zmMGizIFmMyZ%3Dw129-h86-k-no!7i2048!8i1363!4m5!3m4!1s0x88405a06f1bfcc1f:0x9e17de6a72d58a6c!8m2!3d39.3557635!4d-84.3636931?hl=en&authuser=0#');
 INSERT INTO restaurant (restaurant_name,cuisine_id,phone_number,star_rating,thumbnail_img) VALUES (
 	'Another Broken Egg Cafe','7','5138471961','4.6',
 	'https://www.google.com/maps/place/Another+Broken+Egg+Cafe/@39.35308,-84.36336,3a,75y/data=!3m8!1e2!3m6!1sAF1QipNJSS1QnuXh-yqMoCVqPNU5nFejMux50Ryy4KVT!2e10!3e12!6shttps:%2F%2Flh5.googleusercontent.com%2Fp%2FAF1QipNJSS1QnuXh-yqMoCVqPNU5nFejMux50Ryy4KVT%3Dw114-h86-k-no!7i4608!8i3456!4m5!3m4!1s0x88405b76987049a9:0x7613fe02583d1c21!8m2!3d39.3530797!4d-84.3633599?hl=en&authuser=0#');
