@@ -24,7 +24,7 @@
         v-model="user.password"
         required
       />
-      <password-meter :password="user.password" />
+      <label for="password" class="sr-only">Confirm Password</label>
       <input
         type="password"
         id="confirmPassword"
@@ -34,10 +34,11 @@
         required
       />
       <router-link :to="{ name: 'login' }">Have an account?</router-link>
-      <button class="btn btn-lg btn-primary btn-block" type="submit">
+      <button class=" myButton" type="submit">
         Create Account
       </button>
     </form>
+    <password-meter :password="user.password" />
   </div>
 </template>
 
@@ -72,12 +73,11 @@ export default {
       let lowercaseRegex = /(.*[a-z].*)/g;
       let uppercaseRegex = /(.*[A-Z].*)/g;
       let numberRegex = /(.*[0-9].*)/g;
-      let repeatCharRegex = /(\w)(\1+\1+\1+\1+)/g;
       let hasSpecialChar = specialCharRegex.test(pass);
       let hasLowerCase = lowercaseRegex.test(pass);
       let hasUpperCase = uppercaseRegex.test(pass);
       let hasNumber = numberRegex.test(pass);
-      let hasRepeatChars = repeatCharRegex.test(pass);
+      
 
       if (pass.length > 7) {
         if (hasNumber) {
@@ -92,7 +92,7 @@ export default {
           specialChar = 1;
         }
 
-        if (pass.length > 8 && !hasRepeatChars) {
+        if (pass.length > 8) {
           length = 1;
         }
 
@@ -108,6 +108,7 @@ export default {
     // end
   
   register() {
+    this.clearErrors()
     let passwordToCheck = this.user.password; //this is where the error is
     if (this.checkIfSecure(passwordToCheck) != 4) {
       this.registrationErrors = true; 
@@ -148,13 +149,56 @@ export default {
 
 <style>
 
+form{
+  display:flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  align-items: center;
+}
+input{
+  margin-bottom: 1em;
+  padding-top: 15px;
+  padding-bottom: 10px;
+  border-radius: 3px;
+  width: 60%;
+}
+label{
+  padding-bottom: 15px;
+  padding-top: 5px;
+}
+.flex-container {
+  display: flex;
+  flex-direction: row;
+}
+.myButton {
+color: rgb(255, 255, 255); 
+font-size: 20px; 
+line-height: 10px; 
+padding: 9px; 
+border-radius: 45px; 
+font-family: Georgia, serif; 
+font-weight: normal; 
+text-decoration: none; 
+font-style: normal; 
+font-variant: normal; 
+text-transform: none; 
+background-image: linear-gradient(to right, rgb(28, 110, 164) 0%, rgb(35, 136, 203) 50%, rgb(20, 78, 117) 100%); 
+
+ border: 2px solid rgb(28, 110, 164); 
+ display: inline-block;}
+.myButton:hover {
+background: #1C6EA4; }
+.myButton:active {
+background: #144E75; }
+
 /* this is for password color bar */
 
 .po-password-strength-bar {
+  
   border-radius: 2px;
   transition: all 0.2s linear;
-  height: 60px;
-  margin-top: 8px;
+  height: 1FR;
+  margin-top: 0px;
 }
 
 .po-password-strength-bar.risky {
