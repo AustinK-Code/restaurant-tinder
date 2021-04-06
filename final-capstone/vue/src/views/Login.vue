@@ -33,7 +33,7 @@
         required
       />
       <router-link :to="{ name: 'register' }">Need an account?</router-link>
-      <button type="submit">Sign in</button>
+      <button type="submit" class="myButton">Sign in</button>
     </form>
   </div>
 </template>
@@ -107,5 +107,57 @@ label{
   display: flex;
   flex-direction: row;
 }
+/* button {
+    display: inline-block;
+    border: none;
+    padding: 1rem 2rem;
+    margin: 0;
+    text-decoration: none;
+    background: #740808;
+    color: #ffffff;
+    font-family: sans-serif;
+    font-size: 1rem;
+    cursor: pointer;
+    text-align: center;
+    transition: background 250ms ease-in-out, 
+                transform 150ms ease;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+button:hover,
+button:focus {
+    background: #0053ba;
+}
+
+button:focus {
+    outline: 1px solid #fff;
+    outline-offset: -4px;
+}
+
+button:active {
+    transform: scale(0.99);
+} */
+.myButton {
+color: rgb(255, 255, 255); 
+font-size: 20px; 
+line-height: 10px; 
+padding: 9px; 
+border-radius: 45px; 
+font-family: Georgia, serif; 
+font-weight: normal; 
+text-decoration: none; 
+font-style: normal; 
+font-variant: normal; 
+text-transform: none; 
+background-image: linear-gradient(to right, rgb(28, 110, 164) 0%, rgb(35, 136, 203) 50%, rgb(20, 78, 117) 100%); 
+
+ border: 2px solid rgb(28, 110, 164); 
+ display: inline-block;}
+.myButton:hover {
+background: #1C6EA4; }
+.myButton:active {
+background: #144E75; }
+
 </style>
 
