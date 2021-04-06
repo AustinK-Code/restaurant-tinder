@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+
 export default {
 
   login(user) {
@@ -8,6 +9,7 @@ export default {
 
   register(user) {
     return axios.post('/register', user)
-  }
+  },
+    // takes an input from search and pushes to backend to perform
 
 }
