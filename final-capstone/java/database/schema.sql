@@ -120,6 +120,23 @@ CREATE TABLE restaurant_location (
 	CONSTRAINT FK_location_references_restaurant FOREIGN KEY (restaurant_id) REFERENCES restaurant(restaurant_id)
 );
 
+INSERT INTO restaurant_location (restaurant_id,street_address,city,region,zip_code) VALUES ('1','753 Reading Rd','Mason','OH','45040');
+INSERT INTO restaurant_location (restaurant_id,street_address,city,region,zip_code) VALUES ('2','6890 Tylersville Rd','West Chester Township','OH','45069');
+INSERT INTO restaurant_location (restaurant_id,street_address,city,region,zip_code) VALUES ('3','7621 Gibson St','Liberty Township','OH','45044');
+INSERT INTO restaurant_location (restaurant_id,street_address,city,region,zip_code) VALUES ('4','1036 Delta Ave','Cincinnati','OH','45208');
+INSERT INTO restaurant_location (restaurant_id,street_address,city,region,zip_code) VALUES ('5','4618 Eastern Ave','Cincinnati','OH','45226');
+INSERT INTO restaurant_location (restaurant_id,street_address,city,region,zip_code) VALUES ('6','311 Delta Ave','Cincinnati','OH','45226');
+INSERT INTO restaurant_location (restaurant_id,street_address,city,region,zip_code) VALUES ('7','5980 West Chester Rd','West Chester Township','OH','45069');
+INSERT INTO restaurant_location (restaurant_id,street_address,city,region,zip_code) VALUES ('8','8655 Mason Montgomery Rd','Mason','OH','45040');
+INSERT INTO restaurant_location (restaurant_id,street_address,city,region,zip_code) VALUES ('9','7706 Voice of America Centre Dr','West Chester Township','OH','45069');
+INSERT INTO restaurant_location (restaurant_id,street_address,city,region,zip_code) VALUES ('10','6691 Reading Rd','Mason','OH','45040');
+INSERT INTO restaurant_location (restaurant_id,street_address,city,region,zip_code) VALUES ('11','1061 Reading Rd','Mason','OH','45040');
+INSERT INTO restaurant_location (restaurant_id,street_address,city,region,zip_code) VALUES ('12','6011 Tylersville Rd','Mason','OH','45040');
+INSERT INTO restaurant_location (restaurant_id,street_address,city,region,zip_code) VALUES ('13','7691 Voice of America Centre Dr','West Chester Township','OH','45069');
+INSERT INTO restaurant_location (restaurant_id,street_address,city,region,zip_code) VALUES ('14','7655 Voice of America Centre Dr','West Chester Township','OH','45069');
+INSERT INTO restaurant_location (restaurant_id,street_address,city,region,zip_code) VALUES ('15','7701 Voice of America Centre Dr','West Chester Township','OH','45069');
+INSERT INTO restaurant_location (restaurant_id,street_address,address_2,city,region,zip_code) VALUES ('16','6876 Cincinnati Dayton Rd','#106','Liberty Township','OH','45044');
+
 
 -- DAY_TABLE AND DATA
 CREATE TABLE day_table (
@@ -149,5 +166,153 @@ CREATE TABLE restaurant_hours (
 	CONSTRAINT FK_restaurant_hours_references_restaurant FOREIGN KEY (restaurant_id) REFERENCES restaurant(restaurant_id),
 	CONSTRAINT FK_restaurant_hours_references_day_table FOREIGN KEY (day_id) REFERENCES day_table(day_id)
 );
+-- MAD MONKS PIZZA HOURS
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('1','1','1200','2000','480');
+-- CLOSED MONDAY
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('1','3','1600','2100','300');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('1','4','1600','2100','300');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('1','5','1600','2100','300');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('1','6','1600','2200','360');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('1','7','1200','2200','600');
+
+-- FRATELLI'S PIZZERIA HOURS
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('2','1','1200','800','480');
+-- CLOSED MONDAY
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('2','3','1600','2000','240');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('2','4','1600','2000','240');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('2','5','1600','2000','240');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('2','6','1100','2100','600');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('2','7','1100','2100','600');
+
+-- PIES & PINTS HOURS
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('3','1','1100','2100','600');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('3','2','1100','2100','600');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('3','3','1100','2100','600');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('3','4','1100','2100','600');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('3','5','1100','2100','600');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('3','6','1100','2300','720');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('3','7','1100','2300','720');
+
+-- ZIP'S CAFE HOURS
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('4','1','1100','2100','600');
+-- CLOSED MONDAY
+-- CLOSED TUESDAY
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('4','4','1600','2100','300');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('4','5','1600','2100','300');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('4','6','1100','2100','600');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('4','7','1100','2100','600');
+
+-- THE TURF CLUB HOURS
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('5','1','1100','2000','540');
+-- CLOSED MONDAY
+-- CLOSED TUESDAY
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('5','4','1600','2100','300');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('5','5','1600','2100','300');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('5','6','1100','2100','600');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('5','7','1100','2100','600');
+
+-- JEFF RUBY'S PRECINCT HOURS
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('6','1','1630','2100','270');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('6','2','1700','2200','300');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('6','3','1700','2200','300');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('6','4','1700','2200','300');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('6','5','1700','2200','300');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('6','6','1700','2300','360');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('6','7','1630','2300','390');
+
+-- JAG'S STEAK & SEAFOOD HOURS
+-- CLOSED SUNDAY
+-- CLOSED MONDAY
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('7','3','1700','2030','210');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('7','4','1700','2030','210');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('7','5','1700','2030','210');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('7','6','1700','2030','210');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('7','7','1600','2030','270');
+
+-- MISSION BBQ HOURS
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('8','1','1130','2000','510');
+-- CLOSED MONDAY
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('8','3','1100','2100','600');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('8','4','1100','2100','600');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('8','5','1100','2100','600');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('8','6','1100','2100','600');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('8','7','1100','2100','600');
+
+-- CITY BARBEQUE AND CATERING HOURS
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('9','1','1100','2000','540');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('9','2','1100','2100','600');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('9','3','1100','2100','600');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('9','4','1100','2100','600');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('9','5','1100','2100','600');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('9','6','1100','2200','660');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('9','7','1100','2200','660');
+
+-- ACAPULCO HOURS
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('10','1','1100','2100','600');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('10','2','1100','2200','660');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('10','3','1100','2200','660');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('10','4','1100','2200','660');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('10','5','1100','2200','600');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('10','6','1100','2230','690');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('10','7','1100','2230','690');
+
+-- EL VAQUERO HOURS
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('11','1','1100','2100','600');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('11','2','1100','2200','660');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('11','3','1100','2200','660');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('11','4','1100','2200','660');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('11','5','1100','2200','660');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('11','6','1100','2300','720');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('11','7','1100','2300','720');
+
+-- EL CAPORAL HOURS
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('12','1','1200','2100','540');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('12','2','1100','2200','660');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('12','3','1100','2200','660');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('12','4','1100','2200','660');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('12','5','1100','2200','660');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('12','6','1100','2200','660');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('12','7','1200','2300','660');
+
+-- MIYAKO SUSHI & GRILL HOURS
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('13','1','1200','2200','600');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('13','2','1100','1430','210');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('13','2','1630','2200','330');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('13','3','1100','1430','210');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('13','3','1630','2200','330');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('13','4','1100','1430','210');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('13','4','1630','2200','330');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('13','5','1100','1430','210');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('13','5','1630','2200','330');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('13','6','1100','1430','210');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('13','6','1630','2300','390');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('13','7','1200','2300','660');
+
+-- SOHO JAPANESE BISTRO HOURS
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('14','1','1100','2100','600');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('14','2','1100','2100','600');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('14','3','1100','2100','600');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('14','4','1100','2100','600');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('14','5','1100','2100','600');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('14','6','1100','2300','720');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('14','7','1100','2300','720');
+
+-- ANOTHER BROKEN EGG CAFE HOURS
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('15','1','0700','1400','420');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('15','2','0700','1400','420');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('15','3','0700','1400','420');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('15','4','0700','1400','420');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('15','5','0700','1400','420');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('15','6','0700','1400','420');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('15','7','0700','1400','420');
+
+-- FIRST WATCH HOURS
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('16','1','0700','1430','450');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('16','2','0700','1430','450');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('16','3','0700','1430','450');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('16','4','0700','1430','450');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('16','5','0700','1430','450');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('16','6','0700','1430','450');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('16','7','0700','1430','450');
 
 COMMIT TRANSACTION;
