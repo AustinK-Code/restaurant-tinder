@@ -21,6 +21,7 @@ CREATE TABLE users (
 INSERT INTO users (username,password_hash,role) VALUES ('user','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_USER');
 INSERT INTO users (username,password_hash,role) VALUES ('admin','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_ADMIN');
 
+
 -- THIS IS THE BEGINNING OF THE RESTAURANT DATA
 DROP TABLE IF EXISTS restaurant_hours;
 DROP TABLE IF EXISTS day_table;
@@ -50,7 +51,7 @@ CREATE TABLE restaurant (
 	restaurant_id SERIAL NOT NULL,
 	restaurant_name varchar(100) NOT NULL,
 	cuisine_id int NOT NULL,
-	phone_number varchar(10) NOT NULL,
+	phone_number char(10) NOT NULL,
 	star_rating varchar(3) NOT NULL,
 	thumbnail_img varchar(500) NOT NULL,
 	CONSTRAINT PK_restaurant PRIMARY KEY (restaurant_id),
@@ -115,7 +116,7 @@ CREATE TABLE restaurant_location (
 	address_2 varchar(20),
 	city varchar(50) NOT NULL,
 	region varchar(20) NOT NULL,
-	zip_code varchar(5) NOT NULL,
+	zip_code char(5) NOT NULL,
 	CONSTRAINT PK_location PRIMARY KEY (location_id),
 	CONSTRAINT FK_location_references_restaurant FOREIGN KEY (restaurant_id) REFERENCES restaurant(restaurant_id)
 );
@@ -166,6 +167,7 @@ CREATE TABLE restaurant_hours (
 	CONSTRAINT FK_restaurant_hours_references_restaurant FOREIGN KEY (restaurant_id) REFERENCES restaurant(restaurant_id),
 	CONSTRAINT FK_restaurant_hours_references_day_table FOREIGN KEY (day_id) REFERENCES day_table(day_id)
 );
+
 -- MAD MONKS PIZZA HOURS
 INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('1','1','1200','2000','480');
 -- CLOSED MONDAY
