@@ -1,3 +1,4 @@
+
 <template>
   <div id="login" class="text-center">
     <form class="form-signin" @submit.prevent="login">
@@ -38,6 +39,8 @@
 </template>
 
 <script>
+
+
 import authService from "../services/AuthService";
 
 export default {
@@ -74,3 +77,35 @@ export default {
   }
 };
 </script>
+<style scoped>
+#login{
+  text-align: center;
+  display:flex;
+  width: 100%;
+  align-items: center;
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+form{
+  display:flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  align-items: center;
+}
+input{
+  margin-bottom: 1em;
+  padding-top: 15px;
+  padding-bottom: 10px;
+  border-radius: 3px;
+  width: 60%;
+}
+label{
+  padding-bottom: 15px;
+  padding-top: 5px;
+}
+.flex-container {
+  display: flex;
+  flex-direction: row;
+}
+</style>
+
