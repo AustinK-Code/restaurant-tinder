@@ -9,17 +9,25 @@
       <input
       type="text"
       id="location"
+      v-bind="search.searchInput"
       required
       autofocus
       />
-      <a href="searchbtn"> Search </a>
+      <router-link :to="{name: 'searchresult'}" > Search </router-link>
       </form>
   </div>
 </template>
 
 <script>
 export default {
-  name: "home"
+  name: "home",
+  data() {
+    return {
+    search: {
+      searchInput : ""
+    }
+    }
+  }
 };
 </script>
 <style scoped>
