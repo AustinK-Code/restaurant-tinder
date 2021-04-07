@@ -17,8 +17,8 @@
 </template>
 
 <script>
-import individualService from `@/services/BaseServices`
-export default {
+import individualService from "@/services/BaseService"
+export default{
   data() {
     return {
       restaurant: {

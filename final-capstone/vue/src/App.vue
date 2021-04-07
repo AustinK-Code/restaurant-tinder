@@ -9,7 +9,24 @@
   </div>
 </template>
 
-<style scoped>
+<style>
+html, body {
+    width: 100vw;
+    height: 100vh;
+    }
+    body {
+        margin: 0;
+        padding: 0;
+        }
+#app{
+  background-color: rgba(63, 57, 57, 0.473);
+  background-size: cover;
+  margin: 0;
+  border: 0%;
+  padding: 0%;
+  height: 100vh;
+  width: 100vw;
+}
 #nav{
   text-align: center;
   flex-direction: column;
@@ -18,13 +35,8 @@
   width: 100%;
   font-family: sans-serif;
   background-color: gray;
+
 }
-#app{
-  background-color: rgba(63, 57, 57, 0.473);
-  background-size: cover;
-  margin: 0%;
-  border: 0%;
-  padding: 0%;
-}
+
 
 </style>

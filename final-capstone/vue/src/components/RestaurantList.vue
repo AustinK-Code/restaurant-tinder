@@ -14,7 +14,8 @@
 </template>
 
 <script>
-import services from "@/services/BaseServices";
+import services from "@/services/BaseService";
+import search from "@/views/Home.vue"
 export default {
   name: "restaurant-list",
   data() {
@@ -23,7 +24,7 @@ export default {
     };
   },
   created() {
-    services.getSearch().then((response) => {
+    services.searchLocation(search.searchLocation).then((response) => {
       this.restaurants = response.data;
     });
   },
