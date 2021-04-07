@@ -32,12 +32,16 @@ export default {
 </script>
 <style scoped>
 .home{
+  background-image: url("/public/pics/bbq2.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  width: 100vw;
   text-align: center;
   flex-direction: column;
   flex-wrap: wrap;
   display:flex;
-  width: 100%;
+
   font-family: sans-serif;
-  background-color: gray;
 }
 </style>

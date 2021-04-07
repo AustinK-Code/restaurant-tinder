@@ -79,9 +79,12 @@ export default {
 </script>
 <style scoped>
 #login{
+  background-image: url("/pics/bbq2.png");
+  background-size: cover;
   text-align: center;
   display:flex;
-  width: 100%;
+    height: 100vh;
+  width: 100vw;
   align-items: center;
   font-family: sans-serif;
   box-sizing: border-box;
@@ -107,37 +110,6 @@ label{
   display: flex;
   flex-direction: row;
 }
-/* button {
-    display: inline-block;
-    border: none;
-    padding: 1rem 2rem;
-    margin: 0;
-    text-decoration: none;
-    background: #740808;
-    color: #ffffff;
-    font-family: sans-serif;
-    font-size: 1rem;
-    cursor: pointer;
-    text-align: center;
-    transition: background 250ms ease-in-out, 
-                transform 150ms ease;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-}
-
-button:hover,
-button:focus {
-    background: #0053ba;
-}
-
-button:focus {
-    outline: 1px solid #fff;
-    outline-offset: -4px;
-}
-
-button:active {
-    transform: scale(0.99);
-} */
 .myButton {
 color: rgb(255, 255, 255); 
 font-size: 20px; 

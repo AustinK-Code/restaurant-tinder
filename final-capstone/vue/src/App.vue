@@ -19,11 +19,6 @@ html, body {
         padding: 0;
         }
 #app{
-  background-color: rgba(63, 57, 57, 0.473);
-  background-size: cover;
-  margin: 0;
-  border: 0%;
-  padding: 0%;
   height: 100vh;
   width: 100vw;
 }
@@ -35,6 +30,7 @@ html, body {
   width: 100%;
   font-family: sans-serif;
   background-color: gray;
+  
 
 }
 
