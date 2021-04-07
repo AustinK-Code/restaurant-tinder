@@ -3,11 +3,12 @@ package com.techelevator.dao;
 import com.techelevator.model.Restaurant;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
+
 
 import java.util.ArrayList;
 import java.util.List;
-@Service
+@Component
 public class RestaurantSqlDAO implements RestaurantDAO {
     private JdbcTemplate jdbcTemplate;
 
@@ -40,7 +41,7 @@ public class RestaurantSqlDAO implements RestaurantDAO {
 
     @Override
     public Restaurant getRestaurantById(long id) {
-         String sql = restaurantSql + " WHERE restaurant_id = ?";
+         String sql = restaurantSql + " WHERE r.restaurant_id = ?";
          SqlRowSet results = jdbcTemplate.queryForRowSet(sql,id);
          if(results.next()){
              return mapRowToRestaurant(results);
@@ -49,23 +50,35 @@ public class RestaurantSqlDAO implements RestaurantDAO {
          }
     }
 
+    @Override
+    public List<Restaurant> getRestaurantsByZip(String zipCode) {
+        List<Restaurant> list = new ArrayList<>();
+        String sql = restaurantSql + " WHERE restaurant_location.zip_code = ?";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql,zipCode);
+        if(results.next()){
+            Restaurant r = mapRowToRestaurant(results);
+            list.add(r);
+        }
+        return list;
+    }
+
     private Restaurant mapRowToRestaurant(SqlRowSet results){
         Restaurant r = new Restaurant();
         r.setName(results.getString("restaurant_name"));
         r.setRestaurantId(results.getLong("restaurant_id"));
-        r.setAddress(results.getString("address"));
+        r.setAddress(results.getString("street_address"));
         r.setAddress2(results.getString("address_2"));
         r.setCity(results.getString("city"));
         r.setCuisine(results.getString("restaurant_type"));
-        r.setOpenTime(results.getLong("open_time"));
-        r.setCloseTime(results.getLong("close_time"));
+        r.setOpenTime(results.getString("open_time"));
+        r.setCloseTime(results.getString("close_time"));
         r.setDayOfWeek(results.getString("day_of_week"));
-        r.setMinutesOpen(results.getLong("duration_in_minutes"));
-        r.setZipCode(results.getLong("zip_code"));
+        r.setMinutesOpen(results.getString("duration_in_minutes"));
+        r.setZipCode(results.getString("zip_code"));
         r.setRegion(results.getString("region"));
-        r.setStarRating(results.getLong("star_rating"));
+        r.setStarRating(results.getString("star_rating"));
         r.setThumbnailImg(results.getString("thumbnail_img"));
-        r.setPhoneNumber(results.getLong("phone_number"));
+        r.setPhoneNumber(results.getString("phone_number"));
         return r;
     }
 

@@ -10,5 +10,7 @@ public interface RestaurantDAO {
 
     Restaurant getRestaurantById(long id);
 
+    List<Restaurant> getRestaurantsByZip(String ZipCode);
+
 
 }

@@ -9,17 +9,17 @@ public class Restaurant {
     private String address2;
     private String city;
     private String region;
-    private Long zipCode;
-    private Long starRating;
+    private String  zipCode;
+    private String starRating;
     private String thumbnailImg;
-    private Long phoneNumber;
-    private Long openTime;
-    private Long closeTime;
+    private String phoneNumber;
+    private String openTime;
+    private String closeTime;
     private String dayOfWeek;
-    private Long minutesOpen;
+    private String minutesOpen;
 
 
-    public Restaurant(String name, Long id, String cuisine, String address, String address2, String city, String region, Long zipCode, Long starRating, String thumbnailImg, Long phoneNumber, Long openTime, Long closeTime, String dayOfWeek, Long minutesOpen) {
+    public Restaurant(String name, Long id, String cuisine, String address, String address2, String city, String region, String zipCode, String starRating, String thumbnailImg, String phoneNumber, String openTime, String closeTime, String dayOfWeek, String minutesOpen) {
         this.name = name;
         this.restaurantId = id;
         this.cuisine = cuisine;
@@ -95,19 +95,19 @@ public class Restaurant {
         this.region = region;
     }
 
-    public Long getZipCode() {
+    public String getZipCode() {
         return zipCode;
     }
 
-    public void setZipCode(Long zipCode) {
+    public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
     }
 
-    public Long getStarRating() {
+    public String getStarRating() {
         return starRating;
     }
 
-    public void setStarRating(Long starRating) {
+    public void setStarRating(String starRating) {
         this.starRating = starRating;
     }
 
@@ -119,27 +119,27 @@ public class Restaurant {
         this.thumbnailImg = thumbnailImg;
     }
 
-    public Long getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(Long phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
-    public Long getOpenTime() {
+    public String getOpenTime() {
         return openTime;
     }
 
-    public void setOpenTime(Long openTime) {
+    public void setOpenTime(String openTime) {
         this.openTime = openTime;
     }
 
-    public Long getCloseTime() {
+    public String getCloseTime() {
         return closeTime;
     }
 
-    public void setCloseTime(Long closeTime) {
+    public void setCloseTime(String closeTime) {
         this.closeTime = closeTime;
     }
 
@@ -151,11 +151,11 @@ public class Restaurant {
         this.dayOfWeek = dayOfWeek;
     }
 
-    public Long getMinutesOpen() {
+    public String getMinutesOpen() {
         return minutesOpen;
     }
 
-    public void setMinutesOpen(Long minutesOpen) {
+    public void setMinutesOpen(String minutesOpen) {
         this.minutesOpen = minutesOpen;
     }
 }

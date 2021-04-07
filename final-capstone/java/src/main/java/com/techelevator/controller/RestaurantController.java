@@ -2,10 +2,7 @@ package com.techelevator.controller;
 
 import com.techelevator.dao.RestaurantDAO;
 import com.techelevator.model.Restaurant;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -13,22 +10,26 @@ import java.util.List;
 public class RestaurantController {
     private RestaurantDAO restaurantDAO;
 
-    public RestaurantController(RestaurantDAO dao){
+    public RestaurantController(RestaurantDAO dao) {
         restaurantDAO = dao;
     }
 
-    @RequestMapping(path="/restaurants", method = RequestMethod.GET)
-        public List<Restaurant> getAllRestaurants(){
-            return restaurantDAO.listAllRestaurants();
-        }
+    @RequestMapping(path = "/restaurants", method = RequestMethod.GET)
+    public List<Restaurant> getAllRestaurants() {
+        return restaurantDAO.listAllRestaurants();
+    }
 
-        @RequestMapping(path= "/restaurants/{id}", method = RequestMethod.GET)
-    public Restaurant getRestaurantById(@PathVariable long id){
+
+    @RequestMapping(path = "/restaurant/{id}", method = RequestMethod.GET)
+    public Restaurant getRestaurantById(@PathVariable long id) {
         return restaurantDAO.getRestaurantById(id);
-        }
+    }
 
 
-
+    @RequestMapping(path = "/search/{zipCode}", method = RequestMethod.GET)
+    public List<Restaurant> getRestaurantsByZip(@PathVariable String zipCode) {
+        return restaurantDAO.getRestaurantsByZip(zipCode);
+    }
 
 
 }
