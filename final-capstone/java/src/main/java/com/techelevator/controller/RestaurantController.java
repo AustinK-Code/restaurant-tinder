@@ -8,11 +8,14 @@ import java.util.List;
 
 @RestController
 public class RestaurantController {
-    private RestaurantDAO restaurantDAO;
 
-    public RestaurantController(RestaurantDAO dao) {
-        restaurantDAO = dao;
-    }
+  private RestaurantDAO restaurantDAO;
+
+  public RestaurantController(RestaurantDAO restaurantDAO){
+      this.restaurantDAO = restaurantDAO;
+  }
+
+
 
     @RequestMapping(path = "/restaurants", method = RequestMethod.GET)
     public List<Restaurant> getAllRestaurants() {
@@ -29,6 +32,12 @@ public class RestaurantController {
     @RequestMapping(path = "/search/{zipCode}", method = RequestMethod.GET)
     public List<Restaurant> getRestaurantsByZip(@PathVariable String zipCode) {
         return restaurantDAO.getRestaurantsByZip(zipCode);
+    }
+
+
+    @RequestMapping(path = "/search/", method = RequestMethod.GET)
+    public List<Restaurant> getRestaurantByCity(@RequestParam("city") String city){
+        return restaurantDAO.getRestaurantByCity(city);
     }
 
 

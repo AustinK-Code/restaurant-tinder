@@ -9,7 +9,7 @@ public class Restaurant {
     private String address2;
     private String city;
     private String region;
-    private String  zipCode;
+    private String zipCode;
     private String starRating;
     private String thumbnailImg;
     private String phoneNumber;

@@ -28,6 +28,14 @@ public class RestaurantSqlDAO implements RestaurantDAO {
             "INNER JOIN day_table ON restaurant_hours.day_id = day_table.day_id\n" +
             "INNER JOIN cuisine_type ON r.cuisine_id = cuisine_type.cuisine_id";
 
+    String limitedSql = "SELECT r.restaurant_name, r.restaurant_id,\n" +
+            "r.phone_number,r.star_rating, r.thumbnail_img, \n" +
+            "restaurant_location.street_address, restaurant_location.address_2,\n" +
+            "restaurant_location.city, restaurant_location.region,restaurant_location.zip_code\n" +
+            "FROM restaurant r\n" +
+            "INNER JOIN restaurant_location ON r.restaurant_id = restaurant_location.restaurant_id";
+
+
     @Override
     public List<Restaurant> listAllRestaurants() {
         List<Restaurant> list = new ArrayList<>();
@@ -53,10 +61,21 @@ public class RestaurantSqlDAO implements RestaurantDAO {
     @Override
     public List<Restaurant> getRestaurantsByZip(String zipCode) {
         List<Restaurant> list = new ArrayList<>();
-        String sql = restaurantSql + " WHERE restaurant_location.zip_code = ?";
+        String sql = limitedSql + " WHERE restaurant_location.zip_code = ?";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql,zipCode);
-        if(results.next()){
-            Restaurant r = mapRowToRestaurant(results);
+        while(results.next()){
+            Restaurant r = limitedMapRowToRestaurant(results);
+            list.add(r);
+        }
+        return list;
+    }
+    @Override
+    public List<Restaurant> getRestaurantByCity(String city) {
+        List<Restaurant> list = new ArrayList<>();
+        String sql = limitedSql + " WHERE restaurant_location.city ILIKE ?";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, "%"+city+"%");
+        while(results.next()){
+            Restaurant r = limitedMapRowToRestaurant(results);
             list.add(r);
         }
         return list;
@@ -74,6 +93,21 @@ public class RestaurantSqlDAO implements RestaurantDAO {
         r.setCloseTime(results.getString("close_time"));
         r.setDayOfWeek(results.getString("day_of_week"));
         r.setMinutesOpen(results.getString("duration_in_minutes"));
+        r.setZipCode(results.getString("zip_code"));
+        r.setRegion(results.getString("region"));
+        r.setStarRating(results.getString("star_rating"));
+        r.setThumbnailImg(results.getString("thumbnail_img"));
+        r.setPhoneNumber(results.getString("phone_number"));
+        return r;
+    }
+
+    private Restaurant limitedMapRowToRestaurant(SqlRowSet results){
+        Restaurant r = new Restaurant();
+        r.setName(results.getString("restaurant_name"));
+        r.setRestaurantId(results.getLong("restaurant_id"));
+        r.setAddress(results.getString("street_address"));
+        r.setAddress2(results.getString("address_2"));
+        r.setCity(results.getString("city"));
         r.setZipCode(results.getString("zip_code"));
         r.setRegion(results.getString("region"));
         r.setStarRating(results.getString("star_rating"));

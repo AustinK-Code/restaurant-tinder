@@ -12,5 +12,7 @@ public interface RestaurantDAO {
 
     List<Restaurant> getRestaurantsByZip(String ZipCode);
 
+    List<Restaurant> getRestaurantByCity(String city);
+
 
 }
