@@ -5,7 +5,7 @@ import Login from '../views/Login.vue'
 import Logout from '../views/Logout.vue'
 import Register from '../views/Register.vue'
 import store from '../store/index'
-import Search from '@/views/SearchResults'
+import List from '@/components/RestaurantList'
 
 
 
@@ -56,14 +56,14 @@ const router = new Router({
         requiresAuth: false
       }
     },
-    {//this path is mainly for testing out search results
-      path: "/searchresult",
-      name: "searchresult",
-      component: Search,
-      meta: {
-        requiresAuth: false //change this to true before final
-      }
-    }
+        {
+          path: "/list",
+          name: "list",
+          component: List,
+          meta: {
+            requiresAuth: false
+          }
+        }
   ]
 })
 

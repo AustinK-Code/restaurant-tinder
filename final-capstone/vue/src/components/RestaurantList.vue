@@ -1,21 +1,25 @@
 <template>
-<!-- This component is used to get the list of restaurants from the back en API. -->
+<!-- This component is used to get the list of restaurants from the back end API. -->
   <div class="restaurant-list">
     <div
       v-for="restaurant in restaurants"
       v-bind:key="restaurant.id"
       class="restaurant"
     >
-      <router-link v-bind="{ name: 'Name', params: { id: restaurant.id } }">
-        {{ restaurant.name }}
-      </router-link>
+        {{ restaurant.name }},
+        {{restaurant.cuisine}},
+        {{restaurant.address}},
+        {{restaurant.address2}},
+        time not available
+        <button>Call to order</button>
+        <img v-bind:src = restaurant.thumbnailImg alt="thumbnail not available">
     </div>
   </div>
 </template>
 
 <script>
 import services from "@/services/BaseService";
-import search from "@/views/Home.vue"
+
 export default {
   name: "restaurant-list",
   data() {
@@ -23,12 +27,21 @@ export default {
       restaurants: [],
     };
   },
-  created() {
-    services.searchLocation(search.searchLocation).then((response) => {
-      this.restaurants = response.data;
-    });
+  methods:{
+  filterInput(input){
+    if(this.hasLetters(input)){
+      services.searchLocationZip(input).then((response) => {
+      this.restaurants = response.data})
+  }else{services.searchLocationZip(input).then((response) => {
+      this.restaurants = response.data})}
   },
-};
+  hasLetters(string){
+    return /^[a-zA-z]+$/.test(string)}
+  },
+  created(){
+    this.filterInput(this.$store.state.searchInput)
+  }
+}
 </script>
 
 <style>

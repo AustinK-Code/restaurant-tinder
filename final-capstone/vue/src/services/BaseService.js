@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Base services used to do anything that would need to talk to Java API
 export default {
-    searchLocation(location) {
+    searchLocationZip(location) {
         return axios.get(`/search/${location}`)
       },
     getDetails(id) {
@@ -10,6 +10,10 @@ export default {
     },
     getAllRestaurants(){
         return axios.get(`/restaurants`)
+    },
+    //this needs wired up properly
+    searchLocationCity(city){
+        return axios.get(`/search/${city}`)
     }
         
 }

@@ -18,7 +18,8 @@ if(currentToken != null) {
 export default new Vuex.Store({
   state: {
     token: currentToken || '',
-    user: currentUser || {}
+    user: currentUser || {},
+    searchInput: ""
   },
   mutations: {
     SET_AUTH_TOKEN(state, token) {
@@ -36,6 +37,9 @@ export default new Vuex.Store({
       state.token = '';
       state.user = {};
       axios.defaults.headers.common = {};
+    },
+    LOAD_SEARCH_INPUT(state,load){
+      state.searchInput = load
     }
   }
 })

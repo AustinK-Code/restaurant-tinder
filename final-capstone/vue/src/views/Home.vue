@@ -9,25 +9,34 @@
       <input
       type="text"
       id="location"
-      v-bind="search.searchInput"
+      v-model="search.searchInput"
       required
       autofocus
       />
-      <router-link :to="{name: 'searchresult'}" > Search </router-link>
+      <button v-on:click="transferInput()"> Search </button>
       </form>
   </div>
 </template>
 
 <script>
+
 export default {
   name: "home",
+  
   data() {
     return {
     search: {
       searchInput : ""
-    }
-    }
-  }
+    }}
+
+  },    
+   methods:{
+     transferInput(){
+       this.$store.commit("LOAD_SEARCH_INPUT",this.search.searchInput)
+       this.$router.push({name:'list'})
+     }
+     
+   }
 };
 </script>
 <style scoped>
@@ -41,7 +50,7 @@ export default {
   flex-direction: column;
   flex-wrap: wrap;
   display:flex;
-
+  color: red;
   font-family: sans-serif;
 }
 </style>
