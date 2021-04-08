@@ -61,10 +61,10 @@ public class RestaurantSqlDAO implements RestaurantDAO {
     @Override
     public List<Restaurant> getRestaurantsByZip(String zipCode) {
         List<Restaurant> list = new ArrayList<>();
-        String sql = limitedSql + " WHERE restaurant_location.zip_code = ?";
+        String sql = restaurantSql + " WHERE restaurant_location.zip_code = ?";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql,zipCode);
         while(results.next()){
-            Restaurant r = limitedMapRowToRestaurant(results);
+            Restaurant r = mapRowToRestaurant(results);
             list.add(r);
         }
         return list;
@@ -72,10 +72,10 @@ public class RestaurantSqlDAO implements RestaurantDAO {
     @Override
     public List<Restaurant> getRestaurantByCity(String city) {
         List<Restaurant> list = new ArrayList<>();
-        String sql = limitedSql + " WHERE restaurant_location.city ILIKE ?";
+        String sql = restaurantSql + " WHERE restaurant_location.city ILIKE ?";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, "%"+city+"%");
         while(results.next()){
-            Restaurant r = limitedMapRowToRestaurant(results);
+            Restaurant r = mapRowToRestaurant(results);
             list.add(r);
         }
         return list;
