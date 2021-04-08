@@ -147,22 +147,27 @@ export default {
 };
 </script>
 
-<style>
+<style >
 #meter{
   width: 50vw;
 }
 #register{
   background-image: url("../pics/cookingpizza.jpg");
   background-size: cover;
-    height: 100vh;
+  display: flex;
+  height: 100vh;
   width: 100vw;
+  color: rgb(0, 0, 0);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 form{
+  background-color: rgba(212, 211, 211, 0.404);
   display:flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: white;
   width: 50vw;
 }
 input{

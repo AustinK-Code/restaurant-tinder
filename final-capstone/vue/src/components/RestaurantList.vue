@@ -78,6 +78,6 @@ export default {
   box-sizing: border-box;
 }
 .restaurant{
-  background-color: rgb(128, 128, 128,.5);
+  background-color: rgba(212, 211, 211, 0.404);
 }
 </style>
