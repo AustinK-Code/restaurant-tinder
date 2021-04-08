@@ -54,6 +54,7 @@ export default {
       todayDay,
       time,
       restaurants: [],
+      restaurants2: []
     };
   },
   methods: {
@@ -101,8 +102,8 @@ export default {
     },
   },
   computed:{
-    restaurantsOpenToday(){ return this.restaurants.filter(restraunt => restraunt.dayOfWeek == todayDay)}
-  },
+    restaurantsOpenToday(){ return this.restaurants.filter(restraunt => restraunt.dayOfWeek == todayDay)},
+},
   created() {
     this.filterInput(this.$store.state.searchInput);
   },
