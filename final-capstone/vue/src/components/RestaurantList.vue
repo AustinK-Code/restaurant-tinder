@@ -36,7 +36,7 @@ export default {
   methods:{
   filterInput(input){
     if(this.hasLetters(input)){
-      services.searchLocationZip(input).then((response) => {
+      services.searchLocationCity(input).then((response) => {
       this.restaurants = response.data})
       return
   }else{services.searchLocationZip(input).then((response) => {

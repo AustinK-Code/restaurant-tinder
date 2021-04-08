@@ -13,7 +13,7 @@ export default {
     },
     //this needs wired up properly
     searchLocationCity(city){
-        return axios.get(`/search/${city}`)
+        return axios.get(`/search/?city=${city}`)
     }
         
 }
