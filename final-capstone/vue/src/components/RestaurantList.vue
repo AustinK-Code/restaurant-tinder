@@ -14,8 +14,8 @@
         <button v-if="restaurant.phoneNumber" id="myButton">
           Call to order
         </button>
-        <img
-          v-bind:src="restaurant.thumbnailImg"
+        <img class="thumbnail"
+          v-bind:src="'../pics/'+ restaurant.thumbnailImg"
           alt="thumbnail not available"
         />,
         <span v-if="isOpen(time, restaurant.openTime, restaurant.closeTime)"
@@ -139,4 +139,13 @@ export default {
   border: 2px solid rgb(255, 255, 255);
   display: inline-block;
 }
+
+.thumbnail{
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+  width: 150px;
+}
+
+
 </style>
