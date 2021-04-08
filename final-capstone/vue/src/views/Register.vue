@@ -147,22 +147,27 @@ export default {
 };
 </script>
 
-<style>
+<style >
 #meter{
   width: 50vw;
 }
 #register{
   background-image: url("../pics/cookingpizza.jpg");
   background-size: cover;
-    height: 100vh;
+  display: flex;
+  height: 100vh;
   width: 100vw;
+  color: rgb(0, 0, 0);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 form{
+  background-color: rgba(212, 211, 211, 0.404);
   display:flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: white;
   width: 50vw;
 }
 input{
@@ -192,14 +197,14 @@ text-decoration: none;
 font-style: normal; 
 font-variant: normal; 
 text-transform: none; 
-background-image: linear-gradient(to right, rgb(28, 110, 164) 0%, rgb(35, 136, 203) 50%, rgb(20, 78, 117) 100%); 
+background-image: linear-gradient(to right, rgb(255, 88, 100) 0%, rgb(255, 88, 100) 50%, rgb(255, 88, 100) 100%); 
 
- border: 2px solid rgb(28, 110, 164); 
+ border: 2px solid rgb(255, 255, 255); 
  display: inline-block;}
 .myButton:hover {
-background: #1C6EA4; }
+background: #ff5864; }
 .myButton:active {
-background: #144E75; }
+background: #ff5864; }
 
 /* this is for password color bar */
 

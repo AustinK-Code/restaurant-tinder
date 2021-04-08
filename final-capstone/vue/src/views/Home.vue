@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-    <h1></h1>
     <form id="search-form">
       <h1>
         Search
@@ -43,16 +42,15 @@ export default {
 .home{
   background-image: url("../pics/steakhouse2.jpg");
   background-size: cover;
-  text-align: center;
   display:flex;
   height: 100vh;
   width: 100vw;
   color: rgb(0, 0, 0);
   align-items: center;
-  font-family: sans-serif;
-  box-sizing: border-box;
+  justify-content: center;
 }
 #search-form{
-  background-color: rgb(128, 128, 128, .5);
+  background-color: rgba(212, 211, 211, 0.404);
+  
 }
 </style>
