@@ -10,18 +10,24 @@
         {{restaurant.cuisine}},
         {{restaurant.address}},
         {{restaurant.address2}},
-        time not available
-        <button>Call to order</button>
-        <img v-bind:src = restaurant.thumbnailImg alt="thumbnail not available">
+        {{restaurant.openTime}}-{{restaurant.closeTime}}
+        <button v-if="restaurant.phoneNumber">Call to order</button>
+        <img v-bind:src = restaurant.thumbnailImg alt="thumbnail not available">,
+        <span v-if="isOpen(time, restaurant.openTime, restaurant.closeTime)">We are open</span>
+        <span v-else>We are closed</span>
+
     </div>
   </div>
 </template>
 
 <script>
 import services from "@/services/BaseService";
+let today = new Date()
+let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds()
 
 export default {
   name: "restaurant-list",
+  time,
   data() {
     return {
       restaurants: [],
@@ -32,12 +38,24 @@ export default {
     if(this.hasLetters(input)){
       services.searchLocationZip(input).then((response) => {
       this.restaurants = response.data})
+      return
   }else{services.searchLocationZip(input).then((response) => {
       this.restaurants = response.data})}
   },
+
   hasLetters(string){
-    return /^[a-zA-z]+$/.test(string)}
+    return /^[a-zA-z]+$/.test(string)},
+
+  isOpen(current, open, closed){
+    if (current > open && current < closed){
+      return true
+    }
+    else return false
+  }
   },
+  
+
+
   created(){
     this.filterInput(this.$store.state.searchInput)
   }
@@ -45,4 +63,23 @@ export default {
 </script>
 
 <style>
+.restaurant-list{
+    background-image: url("../pics/happytable.jpg");
+  background-size: cover;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 100vh;
+  width: 100vw;
+  color: rgb(0, 0, 0);
+  align-items: center;
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+.restaurant{
+  background-color: gray;
+  opacity: .5;
+  
+}
 </style>

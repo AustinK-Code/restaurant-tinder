@@ -91,7 +91,7 @@ form.form-signin{
   display:flex;
   height: 100vh;
   width: 100vw;
-  color: rgb(9, 133, 241);
+  color: rgb(0, 0, 0);
   align-items: center;
   font-family: sans-serif;
   box-sizing: border-box;

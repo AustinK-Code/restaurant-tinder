@@ -1,7 +1,7 @@
 <template>
   <div class="home">
-    <h1>Home</h1>
-    <form>
+    <h1></h1>
+    <form id="search-form">
       <h1>
         Search
       </h1>
@@ -41,16 +41,19 @@ export default {
 </script>
 <style scoped>
 .home{
-  background-image: url("/public/pics/bbq2.png");
-  background-repeat: no-repeat;
+  background-image: url("../pics/steakhouse2.jpg");
   background-size: cover;
+  text-align: center;
+  display:flex;
   height: 100vh;
   width: 100vw;
-  text-align: center;
-  flex-direction: column;
-  flex-wrap: wrap;
-  display:flex;
-  color: red;
+  color: rgb(0, 0, 0);
+  align-items: center;
   font-family: sans-serif;
+  box-sizing: border-box;
+}
+#search-form{
+  background-color: gray;
+  opacity: .5;
 }
 </style>

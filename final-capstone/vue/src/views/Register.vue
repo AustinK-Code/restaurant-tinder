@@ -148,12 +148,19 @@ export default {
 </script>
 
 <style>
-
+#register{
+  background-image: url("../pics/cookingpizza.jpg");
+  background-size: cover;
+    height: 100vh;
+  width: 100vw;
+}
 form{
   display:flex;
   flex-direction: column;
-  flex-basis: 100%;
+  justify-content: center;
   align-items: center;
+  background-color: white;
+  width: 50vw;
 }
 input{
   margin-bottom: 1em;
