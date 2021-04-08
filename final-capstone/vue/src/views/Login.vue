@@ -102,41 +102,17 @@ form{
   flex-basis: 100%;
   align-items: center;
 }
-input{
-  margin-bottom: 1em;
-  padding-top: 15px;
-  padding-bottom: 10px;
-  border-radius: 3px;
-  width: 60%;
-}
-label{
-  padding-bottom: 15px;
-  padding-top: 5px;
-}
-.flex-container {
-  display: flex;
-  flex-direction: row;
-}
 .myButton {
 color: rgb(255, 255, 255); 
 font-size: 20px; 
 line-height: 10px; 
 padding: 9px; 
 border-radius: 45px; 
-font-family: Georgia, serif; 
-font-weight: normal; 
-text-decoration: none; 
-font-style: normal; 
-font-variant: normal; 
-text-transform: none; 
-background-image: linear-gradient(to right, rgb(255, 88, 100) 0%, rgb(255, 88, 100) 50%, rgb(255, 88, 100) 100%); 
+font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+background-image: rgb(255, 88, 100);
+border: 2px solid rgb(255, 255, 255); 
+display: inline-block;}
 
- border: 2px solid rgb(255, 255, 255); 
- display: inline-block;}
-.myButton:hover {
-background: #ff5864; }
-.myButton:active {
-background: #ff5864; }
 
 </style>
 

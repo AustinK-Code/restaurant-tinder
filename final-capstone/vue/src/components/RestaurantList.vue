@@ -11,7 +11,7 @@
         {{restaurant.address}},
         {{restaurant.address2}},
         {{restaurant.openTime}}-{{restaurant.closeTime}}
-        <button v-if="restaurant.phoneNumber">Call to order</button>
+        <button v-if="restaurant.phoneNumber" id="myButton">Call to order</button>
         <img v-bind:src = restaurant.thumbnailImg alt="thumbnail not available">,
         <span v-if="isOpen(time, restaurant.openTime, restaurant.closeTime)">We are open</span>
         <span v-else>We are closed</span>
@@ -80,4 +80,14 @@ export default {
 .restaurant{
   background-color: rgba(212, 211, 211, 0.404);
 }
+#myButton{
+color: rgb(255, 255, 255); 
+font-size: 20px; 
+line-height: 10px; 
+padding: 9px; 
+border-radius: 45px; 
+font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+background-color: rgb(255, 88, 100);
+border: 2px solid rgb(255, 255, 255); 
+display: inline-block;}
 </style>
