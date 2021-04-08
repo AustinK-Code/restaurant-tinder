@@ -81,8 +81,7 @@ export default {
 </script>
 <style scoped>
 form.form-signin{
-  background-color: gray;
-  opacity: .5;
+  background-color: rgb(128, 128, 128, .5);
 }
 #login{
   background-image: url("/pics/bbq2.png");

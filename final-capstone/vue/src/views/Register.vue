@@ -38,7 +38,7 @@
         Create Account
       </button>
     </form>
-    <password-meter :password="user.password" />
+    <password-meter :password="user.password" id="meter" />
   </div>
 </template>
 
@@ -113,7 +113,7 @@ export default {
     if (this.checkIfSecure(passwordToCheck) != 4) {
       this.registrationErrors = true; 
       this.registrationErrorMsg =
-        "Password is not secure. Password must contain: At least 8 characters, No repeated characters, 1 uppercase and 1 lowercase character, 1 special character, and 1 number.";
+        "Password is not secure. Password must contain: At least 8 characters, 1 uppercase, 1 lowercase character, 1 special character, and 1 number.";
       return
     }
     if (this.user.password != this.user.confirmPassword) {
@@ -148,6 +148,9 @@ export default {
 </script>
 
 <style>
+#meter{
+  width: 50vw;
+}
 #register{
   background-image: url("../pics/cookingpizza.jpg");
   background-size: cover;
