@@ -11,9 +11,12 @@
         {{ restaurant.address2 }}, 
         {{ convertTime(restaurant.openTime) }} -
         {{ convertTime(restaurant.closeTime) }}
-        <button v-if="restaurant.phoneNumber" id="myButton">
-          Call to order
-        </button>
+        <vs-button @click="popupActivo=true" v-if="restaurant.phoneNumber" id="myButton" color="primary" type="border">Call to order</vs-button>
+          <vs-popup class="holamundo"  title="phone number" :active.sync="popupActivo">
+            <p>
+                Phone number goes here
+            </p>
+          </vs-popup>
         <img class="thumbnail"
           v-bind:src="'../pics/'+ restaurant.thumbnailImg"
           alt="thumbnail not available"
@@ -51,6 +54,7 @@ export default {
   name: "restaurant-list",
   data() {
     return {
+      popupActivo:false,
       todayDay,
       time,
       restaurants: [],
