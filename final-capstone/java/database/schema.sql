@@ -325,13 +325,14 @@ CREATE TABLE invitation_choices (
 	restaurant_choice_3 int,
 	restaurant_choice_4 int,
 	restaurant_choice_5 int,
-	vote_1 boolean NOT NULL,
-	vote_2 boolean NOT NULL,
+	vote_1 boolean,
+	vote_2 boolean,
 	vote_3 boolean,
 	vote_4 boolean,
 	vote_5 boolean,
 	CONSTRAINT PK_invitation_choices PRIMARY KEY (invitation_id),
 	CONSTRAINT FK_invitation_choices_references_events FOREIGN KEY(event_id) REFERENCES events(event_id),
+	CONSTRAINT FK_invitation_choices_references_users FOREIGN KEY(event_guest_id) REFERENCES users(user_id),
 	CONSTRAINT FK_invitation_choice1_references_restaurant FOREIGN KEY(restaurant_choice_1) REFERENCES restaurant(restaurant_id),
 	CONSTRAINT FK_invitation_choice2_references_restaurant FOREIGN KEY(restaurant_choice_2) REFERENCES restaurant(restaurant_id),
 	CONSTRAINT FK_invitation_choice3_references_restaurant FOREIGN KEY(restaurant_choice_3) REFERENCES restaurant(restaurant_id),
@@ -343,8 +344,8 @@ CREATE TABLE invitation_choices (
 CREATE TABLE event_choices_results (
 	result_id SERIAL NOT NULL,
 	event_id int NOT NULL,
-	choice_1_result decimal NOT NULL, -- COMPUTED VALUES, UPVOTES / TOTAL VOTES
-	choice_2_result decimal NOT NULL,
+	choice_1_result decimal, -- COMPUTED VALUES, UPVOTES / TOTAL VOTES
+	choice_2_result decimal,
 	choice_3_result decimal,
 	choice_4_result decimal,
 	choice_5_result decimal,
