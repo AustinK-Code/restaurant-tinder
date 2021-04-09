@@ -303,7 +303,7 @@ INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration
 -- THIS IS THE BEGINNING OF THE EVENTS DATA
 DROP TABLE IF EXISTS events;
 
--- EVENTS TABLE AND DATA
+-- EVENTS TABLE
 CREATE TABLE events (
 	event_id SERIAL NOT NULL,
 	event_host_id int NOT NULL,
@@ -315,17 +315,17 @@ CREATE TABLE events (
 	CONSTRAINT FK_events_references_users FOREIGN KEY(event_host_id) REFERENCES users(user_id)
 );
 
--- EVENT_INVITATION_CHOICES
+-- EVENT_INVITATION_CHOICES TABLE
 CREATE TABLE invitation_choices (
 	invitation_id SERIAL NOT NULL,
 	event_id int NOT NULL,
 	event_guest_id int NOT NULL,
-	restaurant_choice_1 int NOT NULL,
+	restaurant_choice_1 int NOT NULL, -- PER PRODUCT OWNER REQUEST, MIN 2 MAX 5 CHOICES FOR INVITE
 	restaurant_choice_2 int NOT NULL,
 	restaurant_choice_3 int,
 	restaurant_choice_4 int,
 	restaurant_choice_5 int,
-	vote_1 boolean,
+	vote_1 boolean, -- THUMBS UP = TRUE, THUMBS DOWN = FALSE
 	vote_2 boolean,
 	vote_3 boolean,
 	vote_4 boolean,
@@ -340,11 +340,11 @@ CREATE TABLE invitation_choices (
 	CONSTRAINT FK_invitation_choice5_references_restaurant FOREIGN KEY(restaurant_choice_5) REFERENCES restaurant(restaurant_id)
 );
 
--- EVENT_CHOICES_RESULTS
+-- EVENT_CHOICES_RESULTS TABLE
 CREATE TABLE event_choices_results (
 	result_id SERIAL NOT NULL,
 	event_id int NOT NULL,
-	choice_1_result decimal, -- COMPUTED VALUES, UPVOTES / TOTAL VOTES
+	choice_1_result decimal, -- COMPUTED VALUES, COUNT(VOTES) WHERE VOTE = TRUE / COUNT(VOTES)
 	choice_2_result decimal,
 	choice_3_result decimal,
 	choice_4_result decimal,
@@ -355,7 +355,7 @@ CREATE TABLE event_choices_results (
 
 -- TO DO
 -- EVENT_RSVP
---CREATE TABLE event_rsvp ();
+-- CREATE TABLE event_rsvp ();
 
 
 COMMIT TRANSACTION;
