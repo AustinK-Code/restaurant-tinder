@@ -6,7 +6,8 @@ import Logout from '../views/Logout.vue'
 import Register from '../views/Register.vue'
 import store from '../store/index'
 import List from '@/components/RestaurantList'
-
+import Events from '@/views/Events.vue'
+import MakeEvent from '@/components/CreateEvent'
 
 
 Vue.use(Router)
@@ -56,14 +57,30 @@ const router = new Router({
         requiresAuth: false
       }
     },
-        {
-          path: "/list",
-          name: "list",
-          component: List,
-          meta: {
-            requiresAuth: false
-          }
-        }
+    {
+      path: "/list",
+      name: "list",
+      component: List,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/events",
+      name: "events",
+      component: Events,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/makeevent",
+      name: "make-event",
+      component: MakeEvent,
+      meta: {
+        requiresAuth: true
+      }
+    }
   ]
 })
 

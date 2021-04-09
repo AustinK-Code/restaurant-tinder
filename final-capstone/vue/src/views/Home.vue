@@ -1,65 +1,40 @@
 <template>
   <div class="home">
-    <form id="search-form">
-      <h1>
-        Search
-      </h1>
-      <label for ="location">City/ZipCode</label>
-      <input
-      type="text"
-      id="location"
-      v-model="search.searchInput"
-      required
-      autofocus
-      />
-      <button v-on:click="transferInput()" id="myButton"> Search </button>
+    <form>
+      <h1>Make New Event</h1>
+      <button v-on:click="makeEvent()">Event</button>
       </form>
+    <form id="search-form">
+      <h1>Search</h1>
+      <locationSearch />
+    </form>
   </div>
 </template>
 
 <script>
-
+import locationSearch from "@/components/SearchLocation.vue"
 export default {
   name: "home",
-  
-  data() {
-    return {
-    search: {
-      searchInput : ""
-    }}
+components:{
+  locationSearch
+},
 
-  },    
-   methods:{
-     transferInput(){
-       this.$store.commit("LOAD_SEARCH_INPUT",this.search.searchInput)
-       this.$router.push({name:'list'})
-     }
-     
-   }
+  methods: {
+    makeEvent() {
+      this.$router.push({ name: "make-event" });
+    },
+  },
 };
 </script>
 <style scoped>
-.home{
+.home {
   background-image: url("../pics/steakhouse2.jpg");
   background-size: cover;
-  display:flex;
+  display: flex;
   height: 100vh;
   width: 100vw;
   color: rgb(0, 0, 0);
   align-items: center;
   justify-content: center;
 }
-#search-form{
-  background-color: rgba(212, 211, 211, 0.404);
-  }
-  #myButton {
-color: rgb(255, 255, 255); 
-font-size: 20px; 
-line-height: 10px; 
-padding: 9px; 
-border-radius: 45px; 
-font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-background-color: rgb(255, 88, 100);
-border: 2px solid rgb(255, 255, 255); 
-display: inline-block;}
 </style>
