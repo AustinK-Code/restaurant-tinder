@@ -96,7 +96,7 @@ export default {
     },
     //checks to see if feild contains letters
     hasLetters(string) {
-      return /^[a-zA-z]+$/.test(string);
+      return /^[a-z A-z]+$/.test(string);
     },
     //checks if restraunt is open
     isOpen(current, open, closed) {

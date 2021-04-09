@@ -1,7 +1,32 @@
+-- TABLE ORDER HAS BEEN CHANGED TO ACCOMMODATE DEPENDENCIES
+-- USE CTRL + F WITH THE FOLLOWING KEYWORDS TO FIND THE TABLE THAT YOU ARE LOOKING FOR
+
+-- USERS TABLE
+-- EVENTS TABLE
+-- EVENT_INVITATION_CHOICES TABLE
+-- EVENT_CHOICES_RESULTS TABLE
+-- EVENT_RSVP TABLE
+-- RESTAURANT TABLE
+-- CUISINE_TYPE TABLE
+-- RESTAURANT_LOCATION TABLE
+-- RESTAURANT_HOURS TABLE
+-- DAY_TABLE
+
+
+
+
 BEGIN TRANSACTION;
 
+DROP TABLE IF EXISTS event_choices_results;
+DROP TABLE IF EXISTS invitation_choices;
+DROP TABLE IF EXISTS events;
 DROP TABLE IF EXISTS users;
 DROP SEQUENCE IF EXISTS seq_user_id;
+DROP TABLE IF EXISTS restaurant_hours;
+DROP TABLE IF EXISTS day_table;
+DROP TABLE IF EXISTS restaurant_location;
+DROP TABLE IF EXISTS restaurant;
+DROP TABLE IF EXISTS cuisine_type;
 
 CREATE SEQUENCE seq_user_id
   INCREMENT BY 1
@@ -9,7 +34,7 @@ CREATE SEQUENCE seq_user_id
   NO MINVALUE
   CACHE 1;
 
-
+-- USERS TABLE
 CREATE TABLE users (
 	user_id int DEFAULT nextval('seq_user_id'::regclass) NOT NULL,
 	username varchar(50) NOT NULL,
@@ -22,12 +47,35 @@ INSERT INTO users (username,password_hash,role) VALUES ('user','$2a$08$UkVvwpULi
 INSERT INTO users (username,password_hash,role) VALUES ('admin','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_ADMIN');
 
 
--- THIS IS THE BEGINNING OF THE RESTAURANT DATA
-DROP TABLE IF EXISTS restaurant_hours;
-DROP TABLE IF EXISTS day_table;
-DROP TABLE IF EXISTS restaurant_location;
-DROP TABLE IF EXISTS restaurant;
-DROP TABLE IF EXISTS cuisine_type;
+-- EVENTS TABLE
+CREATE TABLE events (
+	event_id SERIAL NOT NULL,
+	event_host_id int NOT NULL,
+	event_date date NOT NULL,
+	event_time time NOT NULL,
+	respond_by_date date NOT NULL,
+	respond_by_time time NOT NULL,
+	CONSTRAINT PK_events PRIMARY KEY (event_id),
+	CONSTRAINT FK_events_references_users FOREIGN KEY(event_host_id) REFERENCES users(user_id)
+);
+
+-- EVENT_CHOICES_RESULTS TABLE
+CREATE TABLE event_choices_results (
+	result_id SERIAL NOT NULL,
+	event_id int NOT NULL,
+	choice_1_result decimal, -- COMPUTED VALUES, COUNT(VOTES) WHERE VOTE = TRUE / COUNT(VOTES)
+	choice_2_result decimal,
+	choice_3_result decimal,
+	choice_4_result decimal,
+	choice_5_result decimal,
+	CONSTRAINT PK_event_choices_results PRIMARY KEY (result_id),
+	CONSTRAINT FK_event_choices_results_references_events FOREIGN KEY(event_id) REFERENCES events(event_id)
+);
+
+-- TO DO
+-- EVENT_RSVP TABLE
+-- CREATE TABLE event_rsvp ();
+
 
 
 -- CUISINE_TYPE TABLE AND DATA
@@ -92,6 +140,32 @@ INSERT INTO restaurant (restaurant_name,cuisine_id,phone_number,star_rating,thum
 	'First Watch','7','5138471445','4.5','first_watch.jpg');
 
 
+-- EVENT_INVITATION_CHOICES TABLE
+CREATE TABLE invitation_choices (
+	invitation_id SERIAL NOT NULL,
+	event_id int NOT NULL,
+	event_guest_id int NOT NULL,
+	restaurant_choice_1 int NOT NULL, -- PER PRODUCT OWNER REQUEST, MIN 2 MAX 5 CHOICES FOR INVITE
+	restaurant_choice_2 int NOT NULL,
+	restaurant_choice_3 int,
+	restaurant_choice_4 int,
+	restaurant_choice_5 int,
+	vote_1 boolean, -- THUMBS UP = TRUE, THUMBS DOWN = FALSE
+	vote_2 boolean,
+	vote_3 boolean,
+	vote_4 boolean,
+	vote_5 boolean,
+	CONSTRAINT PK_invitation_choices PRIMARY KEY (invitation_id),
+	CONSTRAINT FK_invitation_choices_references_events FOREIGN KEY(event_id) REFERENCES events(event_id),
+	CONSTRAINT FK_invitation_choices_references_users FOREIGN KEY(event_guest_id) REFERENCES users(user_id),
+	CONSTRAINT FK_invitation_choice1_references_restaurant FOREIGN KEY(restaurant_choice_1) REFERENCES restaurant(restaurant_id),
+	CONSTRAINT FK_invitation_choice2_references_restaurant FOREIGN KEY(restaurant_choice_2) REFERENCES restaurant(restaurant_id),
+	CONSTRAINT FK_invitation_choice3_references_restaurant FOREIGN KEY(restaurant_choice_3) REFERENCES restaurant(restaurant_id),
+	CONSTRAINT FK_invitation_choice4_references_restaurant FOREIGN KEY(restaurant_choice_4) REFERENCES restaurant(restaurant_id),
+	CONSTRAINT FK_invitation_choice5_references_restaurant FOREIGN KEY(restaurant_choice_5) REFERENCES restaurant(restaurant_id)
+);
+
+
 -- RESTAURANT_LOCATION TABLE AND DATA
 CREATE TABLE restaurant_location (
 	location_id SERIAL NOT NULL,
@@ -146,15 +220,17 @@ CREATE TABLE restaurant_hours (
 	day_id int NOT NULL,
 	open_time time,
 	close_time time,
-	duration_in_minutes varchar(4) NOT NULL,
+	duration_in_minutes varchar(4),
 	CONSTRAINT PK_restaurant_hours PRIMARY KEY (id),
 	CONSTRAINT FK_restaurant_hours_references_restaurant FOREIGN KEY (restaurant_id) REFERENCES restaurant(restaurant_id),
 	CONSTRAINT FK_restaurant_hours_references_day_table FOREIGN KEY (day_id) REFERENCES day_table(day_id)
 );
 
+-- IF A RESTAURANT IS CLOSED ON A CERTAIN DAY, duration_in_minutes WILL BE NULL, USE THIS WHEN CHECKING IF OPEN
+
 -- MAD MONKS PIZZA HOURS
 INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('1','0','12:00:00','20:00:00','480');
--- CLOSED MONDAY
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time) VALUES ('1','1','00:00:00','00:00:00');
 INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('1','2','16:00:00','21:00:00','300');
 INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('1','3','16:00:00','21:00:00','300');
 INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('1','4','16:00:00','21:00:00','300');
@@ -163,7 +239,7 @@ INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration
 
 -- FRATELLI'S PIZZERIA HOURS
 INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('2','0','12:00:00','20:00:00','480');
--- CLOSED MONDAY
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time) VALUES ('2','1','00:00:00','00:00:00');
 INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('2','2','16:00:00','20:00:00','240');
 INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('2','3','16:00:00','20:00:00','240');
 INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('2','4','16:00:00','20:00:00','240');
@@ -180,8 +256,8 @@ INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration
 INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('3','6','11:00:00','23:00:00','720');
 -- ZIP'S CAFE HOURS
 INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('4','0','11:00:00','21:00:00','600');
--- CLOSED MONDAY
--- CLOSED TUESDAY
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time) VALUES ('4','1','00:00:00','00:00:00');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time) VALUES ('4','2','00:00:00','00:00:00');
 INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('4','3','16:0000','21:00:00','300');
 INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('4','4','16:00:00','21:00:00','300');
 INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('4','5','11:00:00','21:00:00','600');
@@ -189,8 +265,8 @@ INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration
 
 -- THE TURF CLUB HOURS
 INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('5','0','11:00:00','20:00:00','540');
--- CLOSED MONDAY
--- CLOSED TUESDAY
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time) VALUES ('5','1','00:00:00','00:00:00');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time) VALUES ('5','2','00:00:00','00:00:00');
 INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('5','3','16:00:00','21:00:00','300');
 INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('5','4','16:00:00','21:00:00','300');
 INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('5','5','11:00:00','21:00:00','600');
@@ -206,8 +282,8 @@ INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration
 INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('6','6','16:30:00','23:00:00','390');
 
 -- JAG'S STEAK & SEAFOOD HOURS
--- CLOSED SUNDAY
--- CLOSED MONDAY
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time) VALUES ('7','0','00:00:00','00:00:00');
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time) VALUES ('7','1','00:00:00','00:00:00');
 INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('7','2','17:00:00','20:30:00','210');
 INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('7','3','17:00:00','20:30:00','210');
 INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('7','4','17:00:00','20:30:00','210');
@@ -216,7 +292,7 @@ INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration
 
 -- MISSION BBQ HOURS
 INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('8','0','11:30:00','20:00:00','510');
--- CLOSED MONDAY
+INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time) VALUES ('8','1','00:00:00','00:00:00');
 INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('8','2','11:00:00','21:00:00','600');
 INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('8','3','11:00:00','21:00:00','600');
 INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('8','4','11:00:00','21:00:00','600');
@@ -299,4 +375,6 @@ INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration
 INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('16','5','07:00:00','14:30:00','450');
 INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('16','6','07:00:00','14:30:00','450');
 
+
 COMMIT TRANSACTION;
+
