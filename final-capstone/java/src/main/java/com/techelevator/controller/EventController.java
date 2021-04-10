@@ -27,13 +27,13 @@ public class EventController {
 
     //create event
     @ResponseStatus(HttpStatus.CREATED)
-    @RequestMapping(path = "event", method = RequestMethod.POST)
+    @RequestMapping(path = "/event", method = RequestMethod.POST)
     public void createEvent(@RequestBody Event event){
         eventDAO.createEvent(event);
     }
     //create Invite
     @ResponseStatus(HttpStatus.CREATED)
-    @RequestMapping(path = "event/invite", method = RequestMethod.POST)
+    @RequestMapping(path = "/event/invite", method = RequestMethod.POST)
     public void createInvite(@RequestBody Invitation invite){
         invitationDAO.createInvitation(invite);
     }
