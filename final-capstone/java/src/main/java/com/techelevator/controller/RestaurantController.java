@@ -41,5 +41,4 @@ public class RestaurantController {
         return restaurantDAO.getRestaurantByCity(city);
     }
 
-
 }
