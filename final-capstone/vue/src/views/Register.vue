@@ -147,7 +147,7 @@ export default {
 };
 </script>
 
-<style >
+<style scoped>
 #meter{
   width: 50vw;
 }

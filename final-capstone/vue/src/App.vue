@@ -2,38 +2,69 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link v-bind:to="{ name: 'home' }" style: vertical-align: middle >Home</router-link>&nbsp;&nbsp;
-      <router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''">Logout</router-link>
-      <router-link v-bind:to="{ name: 'events' }" v-if="$store.state.token != ''">My Events</router-link>
+      <ul id="navlist">
+      <li><router-link v-bind:to="{ name: 'home' }"  active-class="link" ></router-link></li>
+      <li><router-link v-bind:to="{ name: 'home' }"  active-class="link" v-if="$store.state.token != ''"
+      style="  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  margin: 5px;
+  text-decoration: none;">Home</router-link></li>
+      <li><router-link v-bind:to="{ name: 'logout' }" active-class="link2" v-if="$store.state.token != ''" 
+      style="  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  margin: 5px;
+  text-decoration: none;">Logout</router-link></li>
+      <li><router-link v-bind:to="{ name: 'events' }" active-class="link" v-if="$store.state.token != ''" 
+      style="  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  margin: 5px;
+  text-decoration: none;">My Events</router-link></li>
+      </ul>
     </div>
     <router-view />
   </div>
 </template>
 
 <style>
-html, body {
-    width: 100vw;
-    height: 100vh;
-    }
-    body {
-        margin: 0;
-        padding: 0;
-        }
-#app{
+html,
+body {
+  width: 100vw;
+  height: 100vh;
+}
+body {
+  margin: 0;
+  padding: 0;
+}
+#app {
   height: 100vh;
   width: 100vw;
 }
-#nav{
-  text-align: center;
-  flex-direction: column;
-  flex-wrap: wrap;
-  display:flex;
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+  position: fixed;
+  top: 0;
   width: 100%;
-  font-family: sans-serif;
-  background-color: gray;
-  
-
 }
 
-
+li {
+  float: left;
+  border-right: 1px solid #bbb;
+}
+li.link:hover{
+  background-color: #111;
+}
+li:last-child{
+  border-right: none;
+}
 </style>
+

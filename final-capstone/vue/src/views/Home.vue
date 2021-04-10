@@ -27,6 +27,7 @@ components:{
 };
 </script>
 <style scoped>
+
 .home {
   background-image: url("../pics/steakhouse2.jpg");
   background-size: cover;
@@ -36,5 +37,16 @@ components:{
   color: rgb(0, 0, 0);
   align-items: center;
   justify-content: center;
+}
+form{
+  background-color: rgba(212, 211, 211, 0.404);
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 40vw;
+  height: 45vh;
+  margin: 1vw
+
 }
 </style>

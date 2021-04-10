@@ -129,14 +129,14 @@ form {
   flex-basis: 100%;
   align-items: center;
 }
-.myButton {
+button {
   color: rgb(255, 255, 255);
   font-size: 20px;
   line-height: 10px;
   padding: 9px;
   border-radius: 45px;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-  background-image: rgb(255, 88, 100);
+  background-color: rgb(255, 88, 100);
   border: 2px solid rgb(255, 255, 255);
   display: inline-block;
 }

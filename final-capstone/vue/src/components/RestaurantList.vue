@@ -1,33 +1,38 @@
 <template>
   <!-- This component is used to get the list of restaurants from the back end API. -->
   <div class="restaurant-list">
-    <button id="event-button" class="notEvent" >Make an event</button>
-    <div
-      v-for="restaurant in restaurantsOpenToday"
-      v-bind:key="restaurant.id"
-      class="restaurant">
-      <span >
-        {{ restaurant.name }}, {{ restaurant.cuisine }},
-        {{ restaurant.address }}
-        {{ restaurant.address2 }}, 
-        {{ convertTime(restaurant.openTime) }} -
-        {{ convertTime(restaurant.closeTime) }}
-        <!-- <vs-button @click="popupActivo=true" v-if="restaurant.phoneNumber" id="myButton" color="primary" type="border">Call to order</vs-button>
+    <button id="event-button" class="notEvent">Make an event</button>
+    <span id="restaurant-list-container">
+      <div
+        v-for="restaurant in restaurantsOpenToday"
+        v-bind:key="restaurant.id"
+        class="restaurant"
+      >
+        <span>
+          {{ restaurant.name }}<div>{{ restaurant.cuisine }}</div>
+          <div>{{ restaurant.address }}
+          {{ restaurant.address2 }}</div> <div>{{ convertTime(restaurant.openTime) }} -
+          {{ convertTime(restaurant.closeTime) }}</div>
+          <div
+            class="responsive"
+            v-if="isOpen(time, restaurant.openTime, restaurant.closeTime)"
+            >We are open</div
+          >
+          <div v-else>We are closed</div>
+          <!-- <vs-button @click="popupActivo=true" v-if="restaurant.phoneNumber" id="myButton" color="primary" type="border">Call to order</vs-button>
           <vs-popup class="holamundo"  title="phone number" :active.sync="popupActivo">
             <p>
                 {{restaurant.phoneNumber}}
             </p>
           </vs-popup> -->
-        <img class="thumbnail"
-          v-bind:src="'../pics/'+ restaurant.thumbnailImg"
-          alt="thumbnail not available"
-        />,
-        <span class='responsive' v-if="isOpen(time, restaurant.openTime, restaurant.closeTime)"
-          >We are open</span
-        >
-        <span v-else>We are closed</span>
-      </span>
-    </div>
+          <img
+            class="thumbnail"
+            v-bind:src="'../pics/' + restaurant.thumbnailImg"
+            alt="thumbnail not available"
+          />
+        </span>
+      </div>
+    </span>
   </div>
 </template>
 
@@ -55,11 +60,11 @@ export default {
   name: "restaurant-list",
   data() {
     return {
-      popupActivo:false,
+      popupActivo: false,
       todayDay,
       time,
       restaurants: [],
-      restaurants2: []
+      restaurants2: [],
     };
   },
   methods: {
@@ -106,9 +111,13 @@ export default {
       } else return false;
     },
   },
-  computed:{
-    restaurantsOpenToday(){ return this.restaurants.filter(restraunt => restraunt.dayOfWeek == todayDay)},
-},
+  computed: {
+    restaurantsOpenToday() {
+      return this.restaurants.filter(
+        (restraunt) => restraunt.dayOfWeek == todayDay
+      );
+    },
+  },
   created() {
     this.filterInput(this.$store.state.searchInput);
   },
@@ -116,28 +125,37 @@ export default {
 </script>
 
 <style>
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 .restaurant-list {
+  margin-top: 55px;
   background-image: url("../pics/happytable.jpg");
   background-size: cover;
+  background-attachment: fixed;
   text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
+  display: block;
   height: 100vh;
   width: 100vw;
-  color: rgb(0, 0, 0);
-  align-items: center;
   font-family: sans-serif;
   box-sizing: border-box;
-  flex-shrink: 2;
+  
 }
 .restaurant {
   background-color: rgba(212, 211, 211, 0.404);
-    display: flex;
-  flex-direction: row;
+  background-size: 50%;
+  margin: 5vw 5vh;
+
+}
+#restaurant-list-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+    background-image: url("../pics/happytable.jpg");
+  background-size: cover;
+  background-attachment: fixed;
 }
 #myButton {
   color: rgb(255, 255, 255);
@@ -151,16 +169,15 @@ export default {
   display: inline-block;
 }
 
-.thumbnail{
+.thumbnail {
   border: 1px solid #ddd;
   border-radius: 4px;
   padding: 5px;
-  width: 150px;
+  width: 50px;
+  height: 50px;
 }
 .responsive {
   max-width: 100%;
   height: auto;
 }
-
-
 </style>
