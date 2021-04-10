@@ -52,6 +52,17 @@ export default {
     //update invite with votes
     updateVotes(invite){
         return axios.put(`/event/invite/${invite.inviteId}`, invite)
+    },
+
+    //calculate votes
+    calculateResults(event){
+        return axios.post(`/event/results`, event)
+    },
+
+    //get voting results
+    getVotingResults(eventId){
+        return axios.get(`/event/${eventId}/results`)
     }
+
         
 }
