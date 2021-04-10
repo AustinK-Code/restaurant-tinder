@@ -1,6 +1,7 @@
 <template>
   <!-- This component is used to get the list of restaurants from the back end API. -->
   <div class="restaurant-list">
+    <button id="event-button" class="notEvent" >Make an event</button>
     <div
       v-for="restaurant in restaurantsOpenToday"
       v-bind:key="restaurant.id"
@@ -11,14 +12,17 @@
         {{ restaurant.address2 }}, 
         {{ convertTime(restaurant.openTime) }} -
         {{ convertTime(restaurant.closeTime) }}
-        <button v-if="restaurant.phoneNumber" id="myButton">
-          Call to order
-        </button>
+        <!-- <vs-button @click="popupActivo=true" v-if="restaurant.phoneNumber" id="myButton" color="primary" type="border">Call to order</vs-button>
+          <vs-popup class="holamundo"  title="phone number" :active.sync="popupActivo">
+            <p>
+                {{restaurant.phoneNumber}}
+            </p>
+          </vs-popup> -->
         <img class="thumbnail"
           v-bind:src="'../pics/'+ restaurant.thumbnailImg"
           alt="thumbnail not available"
         />,
-        <span v-if="isOpen(time, restaurant.openTime, restaurant.closeTime)"
+        <span class='responsive' v-if="isOpen(time, restaurant.openTime, restaurant.closeTime)"
           >We are open</span
         >
         <span v-else>We are closed</span>
@@ -51,6 +55,7 @@ export default {
   name: "restaurant-list",
   data() {
     return {
+      popupActivo:false,
       todayDay,
       time,
       restaurants: [],
@@ -92,7 +97,7 @@ export default {
     },
     //checks to see if feild contains letters
     hasLetters(string) {
-      return /^[a-zA-z]+$/.test(string);
+      return /^[a-z A-z]+$/.test(string);
     },
     //checks if restraunt is open
     isOpen(current, open, closed) {
@@ -111,6 +116,9 @@ export default {
 </script>
 
 <style>
+*, *::before, *::after {
+  box-sizing: border-box;
+}
 .restaurant-list {
   background-image: url("../pics/happytable.jpg");
   background-size: cover;
@@ -124,9 +132,12 @@ export default {
   align-items: center;
   font-family: sans-serif;
   box-sizing: border-box;
+  flex-shrink: 2;
 }
 .restaurant {
   background-color: rgba(212, 211, 211, 0.404);
+    display: flex;
+  flex-direction: row;
 }
 #myButton {
   color: rgb(255, 255, 255);
@@ -145,6 +156,10 @@ export default {
   border-radius: 4px;
   padding: 5px;
   width: 150px;
+}
+.responsive {
+  max-width: 100%;
+  height: auto;
 }
 
 

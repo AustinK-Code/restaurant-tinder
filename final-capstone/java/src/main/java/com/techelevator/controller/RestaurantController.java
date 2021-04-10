@@ -36,10 +36,9 @@ public class RestaurantController {
     }
 
 
-    @RequestMapping(path = "/search/", method = RequestMethod.GET)
+    @RequestMapping(path = "/search", method = RequestMethod.GET)
     public List<Restaurant> getRestaurantByCity(@RequestParam("city") String city){
         return restaurantDAO.getRestaurantByCity(city);
     }
-
 
 }
