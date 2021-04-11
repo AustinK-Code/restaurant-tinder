@@ -8,6 +8,7 @@ import store from '../store/index'
 import List from '@/components/RestaurantList'
 import Events from '@/views/Events.vue'
 import MakeEvent from '@/components/CreateEvent'
+import Invite from '@/views/Invite'
 
 
 Vue.use(Router)
@@ -69,6 +70,14 @@ const router = new Router({
       path: "/events",
       name: "events",
       component: Events,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/invite",
+      name: "invite",
+      component: Invite,
       meta: {
         requiresAuth: true
       }

@@ -1,6 +1,7 @@
 package com.techelevator.model;
 
 import java.sql.Time;
+import java.time.LocalTime;
 import java.util.Date;
 
 
@@ -10,15 +11,15 @@ public class Event {
     private Long hostId;
     private String hostUsername;
     private Date eventDate;
-    private Time eventTime;
+    private LocalTime eventTime;
     private Date respondByDate;
-    private Time respondByTime;
+    private LocalTime respondByTime;
 
 
     public Event(){}
 
-    public Event(Long eventId, Long hostId, String hostUsername, Date eventDate, Time eventTime, Date respondByDate,
-                 Time respondByTime) {
+    public Event(Long eventId, Long hostId, String hostUsername, Date eventDate, LocalTime eventTime, Date respondByDate,
+                 LocalTime respondByTime) {
         this.eventId = eventId;
         this.hostId = hostId;
         this.hostUsername = hostUsername;
@@ -61,11 +62,11 @@ public class Event {
         this.eventDate = eventDate;
     }
 
-    public Time getEventTime() {
+    public LocalTime getEventTime() {
         return eventTime;
     }
 
-    public void setEventTime(Time eventTime) {
+    public void setEventTime(LocalTime eventTime) {
         this.eventTime = eventTime;
     }
 
@@ -77,11 +78,11 @@ public class Event {
         this.respondByDate = respondByDate;
     }
 
-    public Time getRespondByTime() {
+    public LocalTime getRespondByTime() {
         return respondByTime;
     }
 
-    public void setRespondByTime(Time respondByTime) {
+    public void setRespondByTime(LocalTime respondByTime) {
         this.respondByTime = respondByTime;
     }
 

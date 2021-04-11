@@ -6,10 +6,13 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalTime;
+
 @Component
 public class EventSqlDAO implements EventDAO{
 
     private JdbcTemplate jdbcTemplate;
+
 
 
     public EventSqlDAO(JdbcTemplate jdbcTemplate) {
@@ -62,11 +65,11 @@ public class EventSqlDAO implements EventDAO{
         Event event = new Event();
         event.setEventId(results.getLong("event_id"));
         event.setEventDate(results.getDate("event_date"));
-        event.setEventTime(results.getTime("event_time"));
+        event.setEventTime(results.getTime("event_time").toLocalTime());
         event.setHostId(results.getLong("event_host_id"));
         event.setHostUsername(results.getString("username"));
         event.setRespondByDate(results.getDate("respond_by_date"));
-        event.setRespondByTime(results.getTime("respond_by_time"));
+        event.setRespondByTime(results.getTime("respond_by_time").toLocalTime());
         return event;
     }
 
