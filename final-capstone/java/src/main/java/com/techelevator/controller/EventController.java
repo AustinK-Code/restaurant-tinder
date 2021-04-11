@@ -4,6 +4,7 @@ import com.techelevator.dao.EventDAO;
 import com.techelevator.dao.InvitationDAO;
 import com.techelevator.dao.UserDAO;
 import com.techelevator.model.Event;
+import com.techelevator.model.EventResult;
 import com.techelevator.model.Invitation;
 import com.techelevator.model.User;
 import org.springframework.http.HttpStatus;
@@ -62,7 +63,17 @@ public class EventController {
     public List<Invitation> getInvitesByUserId(@PathVariable("id") long userId){
         return invitationDAO.getInvitesByUserId(userId);
     }
-
+    //calculate votes
+    @ResponseStatus(HttpStatus.CREATED)
+    @RequestMapping(path = "/event/results", method = RequestMethod.POST)
+    public void calculateResults(@RequestBody Event event){
+        eventDAO.calculateResults(event);
+    }
+    //get results by eventId
+    @RequestMapping(path = "/event/{id}/results", method = RequestMethod.GET)
+        public EventResult getResultsById(@PathVariable("id") long eventId){
+        return eventDAO.getResultsById(eventId);
+    }
     //get all users
     @RequestMapping(path = "/users/list", method = RequestMethod.GET)
     public List<User> getAllUsers(){
