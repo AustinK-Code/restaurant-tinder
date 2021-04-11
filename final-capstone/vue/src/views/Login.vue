@@ -122,6 +122,7 @@ form.form-signin {
   align-items: center;
   font-family: sans-serif;
   box-sizing: border-box;
+  background-attachment: fixed;
 }
 form {
   display: flex;

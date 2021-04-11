@@ -6,8 +6,7 @@
       <div
         v-for="restaurant in restaurantsOpenToday"
         v-bind:key="restaurant.id"
-        class="restaurant"
-      >
+        class="restaurant">
         <span>
           {{ restaurant.name }}<div>{{ restaurant.cuisine }}</div>
           <div>{{ restaurant.address }}
@@ -28,8 +27,8 @@
           <img
             class="thumbnail"
             v-bind:src="'../pics/' + restaurant.thumbnailImg"
-            alt="thumbnail not available"
-          />
+            alt="thumbnail not available"/>
+          <div><button v-on:click= addToEvent(restraunt)>Save to event</button></div>
         </span>
       </div>
     </span>
@@ -64,7 +63,7 @@ export default {
       todayDay,
       time,
       restaurants: [],
-      restaurants2: [],
+      event: []
     };
   },
   methods: {
@@ -73,7 +72,7 @@ export default {
       let newTime = "";
       const hours = time.substr(0, 2);
       const minutes = time.substr(3, 5);
-      if (hours >= 12) {
+      if (hours > 12) {
         newTime = hours - 12 + " PM";
         if (minutes > 0) {
           newTime = hours + ":" + minutes + "AM";
@@ -84,6 +83,9 @@ export default {
         if (minutes > 0) {
           newTime = hours + ":" + minutes + "AM";
         }
+      }
+      if (hours == 12){
+        newTime = "Noon"
       }
       return newTime;
     },
@@ -110,6 +112,9 @@ export default {
         return true;
       } else return false;
     },
+    addToEvent(restaurant){
+      event.push(restaurant)
+    }
   },
   computed: {
     restaurantsOpenToday() {
@@ -179,5 +184,17 @@ export default {
 .responsive {
   max-width: 100%;
   height: auto;
+}
+button {
+  color: rgb(255, 255, 255);
+  font-size: 20px;
+  line-height: 10px;
+  padding: 9px;
+  border-radius: 45px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  background-color: rgb(255, 88, 100);
+  border: 2px solid rgb(255, 255, 255);
+  display: inline-block;
+  margin: 1vw;
 }
 </style>

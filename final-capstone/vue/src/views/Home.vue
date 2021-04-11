@@ -37,6 +37,7 @@ components:{
   color: rgb(0, 0, 0);
   align-items: center;
   justify-content: center;
+   background-attachment: fixed;
 }
 form{
   background-color: rgba(212, 211, 211, 0.404);

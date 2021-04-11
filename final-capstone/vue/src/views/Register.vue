@@ -161,6 +161,7 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+   background-attachment: fixed;
 }
 form{
   background-color: rgba(212, 211, 211, 0.404);
