@@ -15,9 +15,9 @@
           <div
             class="responsive"
             v-if="isOpen(time, restaurant.openTime, restaurant.closeTime)"
-            >We are open</div
+            >We are Open!</div
           >
-          <div v-else>We are closed</div>
+          <div v-else>Currently Closed</div>
 
           <div id="phoneNumber-alert-message">
             <button v-on:click="say(restaurant.name + ' phone number is ' + restaurant.phoneNumber)">Call to order</button>
@@ -182,8 +182,7 @@ export default {
   border: 1px solid #ddd;
   border-radius: 4px;
   padding: 5px;
-  width: 50px;
-  height: 50px;
+  width: 300px;
 }
 .responsive {
   max-width: 100%;
