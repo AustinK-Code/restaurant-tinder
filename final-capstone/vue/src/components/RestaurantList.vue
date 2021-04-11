@@ -28,7 +28,7 @@
             class="thumbnail"
             v-bind:src="'../pics/' + restaurant.thumbnailImg"
             alt="thumbnail not available"/>
-          <div><button type="button" v-on:click='addToEvent(restraunt)'>Save to event</button></div>
+          <div><input type="checkbox" id="checkbox"  v-model="checkedRestaurant" v-on:click='addToEvent(restaurant)'>Save</div>
         </span>
       </div>
     </span>
@@ -59,6 +59,7 @@ export default {
   name: "restaurant-list",
   data() {
     return {
+      checkedRestaurant: [],
       popupActivo: false,
       todayDay,
       time,
