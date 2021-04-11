@@ -28,7 +28,7 @@
             class="thumbnail"
             v-bind:src="'../pics/' + restaurant.thumbnailImg"
             alt="thumbnail not available"/>
-          <div><button v-on:click= addToEvent(restraunt)>Save to event</button></div>
+          <div><button type="button" v-on:click='addToEvent(restraunt)'>Save to event</button></div>
         </span>
       </div>
     </span>
@@ -113,7 +113,7 @@ export default {
       } else return false;
     },
     addToEvent(restaurant){
-      event.push(restaurant)
+      this.event.push(restaurant.name)
     }
   },
   computed: {
