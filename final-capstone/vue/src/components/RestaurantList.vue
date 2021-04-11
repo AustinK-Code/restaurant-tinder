@@ -15,9 +15,9 @@
           <div
             class="responsive"
             v-if="isOpen(time, restaurant.openTime, restaurant.closeTime)"
-            >We are open</div
-          >
-          <div v-else>We are closed</div>
+            >We are Open!</div>
+          <div v-else>Closed</div>
+          
           <!-- <vs-button @click="popupActivo=true" v-if="restaurant.phoneNumber" id="myButton" color="primary" type="border">Call to order</vs-button>
           <vs-popup class="holamundo"  title="phone number" :active.sync="popupActivo">
             <p>
