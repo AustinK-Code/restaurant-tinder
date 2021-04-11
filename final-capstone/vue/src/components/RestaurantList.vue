@@ -15,15 +15,14 @@
           <div
             class="responsive"
             v-if="isOpen(time, restaurant.openTime, restaurant.closeTime)"
-            >We are open</div
+            >We are Open!</div
           >
-          <div v-else>We are closed</div>
-          <!-- <vs-button @click="popupActivo=true" v-if="restaurant.phoneNumber" id="myButton" color="primary" type="border">Call to order</vs-button>
-          <vs-popup class="holamundo"  title="phone number" :active.sync="popupActivo">
-            <p>
-                {{restaurant.phoneNumber}}
-            </p>
-          </vs-popup> -->
+          <div v-else>Currently Closed</div>
+
+          <div id="phoneNumber-alert-message">
+            <button v-on:click="say(restaurant.name + ' phone number is ' + restaurant.phoneNumber)">Call to order</button>
+          </div>
+
           <img
             class="thumbnail"
             v-bind:src="'../pics/' + restaurant.thumbnailImg"
@@ -64,7 +63,7 @@ export default {
       todayDay,
       time,
       restaurants: [],
-      event: []
+      event: [],
     };
   },
   methods: {
@@ -115,6 +114,10 @@ export default {
     },
     addToEvent(restaurant){
       this.event.push(restaurant.name)
+    },
+    //this method can be called to create an alert that prints a message
+    say: function (message) {
+      alert(message)
     }
   },
   computed: {
@@ -179,8 +182,7 @@ export default {
   border: 1px solid #ddd;
   border-radius: 4px;
   padding: 5px;
-  width: 50px;
-  height: 50px;
+  width: 300px;
 }
 .responsive {
   max-width: 100%;
