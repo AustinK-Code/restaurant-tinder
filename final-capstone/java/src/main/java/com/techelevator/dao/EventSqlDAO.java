@@ -33,10 +33,12 @@ public class EventSqlDAO implements EventDAO{
 
     @Override
     public void createEvent(Event event) {
-        String sql= "INSERT INTO events (event_host_id, event_date, event_time, respond_by_date, respond_by_time)\n" +
-                "VALUES(?,?,?,?,?)";
+        String sql= "INSERT INTO events (event_host_id, event_date, event_time, respond_by_date, respond_by_time, restaurant_choice_1, restaurant_choice_2,\n" +
+                "restaurant_choice_3, restaurant_choice_4, restaurant_choice_5)\n" +
+                "VALUES(?,?,?,?,?,?,?,?,?,?)";
         jdbcTemplate.update(sql,event.getHostId(),event.getEventDate(),
-                event.getEventTime(),event.getRespondByDate(),event.getRespondByTime());
+                event.getEventTime(),event.getRespondByDate(),event.getRespondByTime(), event.getRestaurantChoice1(), event.getRestaurantChoice2(),
+                event.getRestaurantChoice3(), event.getRestaurantChoice4(), event.getRestaurantChoice5());
     }
 
     @Override
@@ -70,6 +72,11 @@ public class EventSqlDAO implements EventDAO{
         event.setHostUsername(results.getString("username"));
         event.setRespondByDate(results.getDate("respond_by_date"));
         event.setRespondByTime(results.getTime("respond_by_time").toLocalTime());
+        event.setRestaurantChoice1(results.getLong("restaurant_choice_1"));
+        event.setRestaurantChoice2(results.getLong("restaurant_choice_2"));
+        event.setRestaurantChoice3(results.getLong("restaurant_choice_3"));
+        event.setRestaurantChoice4(results.getLong("restaurant_choice_4"));
+        event.setRestaurantChoice5(results.getLong("restaurant_choice_5"));
         return event;
     }
 

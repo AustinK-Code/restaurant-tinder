@@ -47,31 +47,6 @@ INSERT INTO users (username,password_hash,role) VALUES ('user','$2a$08$UkVvwpULi
 INSERT INTO users (username,password_hash,role) VALUES ('admin','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_ADMIN');
 
 
--- EVENTS TABLE
-CREATE TABLE events (
-	event_id SERIAL NOT NULL,
-	event_host_id int NOT NULL,
-	event_date date NOT NULL,
-	event_time time NOT NULL,
-	respond_by_date date NOT NULL,
-	respond_by_time time NOT NULL,
-	CONSTRAINT PK_events PRIMARY KEY (event_id),
-	CONSTRAINT FK_events_references_users FOREIGN KEY(event_host_id) REFERENCES users(user_id)
-);
-
--- EVENT_CHOICES_RESULTS TABLE
-CREATE TABLE event_choices_results (
-	result_id SERIAL NOT NULL,
-	event_id int NOT NULL,
-	choice_1_result decimal, -- COMPUTED VALUES, COUNT(VOTES) WHERE VOTE = TRUE / COUNT(VOTES)
-	choice_2_result decimal,
-	choice_3_result decimal,
-	choice_4_result decimal,
-	choice_5_result decimal,
-	CONSTRAINT PK_event_choices_results PRIMARY KEY (result_id),
-	CONSTRAINT FK_event_choices_results_references_events FOREIGN KEY(event_id) REFERENCES events(event_id)
-);
-
 -- TO DO
 -- EVENT_RSVP TABLE
 -- CREATE TABLE event_rsvp ();
@@ -138,32 +113,6 @@ INSERT INTO restaurant (restaurant_name,cuisine_id,phone_number,star_rating,thum
 	'Another Broken Egg Cafe','7','5138471961','4.6','another_broken_egg_cafe.jpg');
 INSERT INTO restaurant (restaurant_name,cuisine_id,phone_number,star_rating,thumbnail_img) VALUES (
 	'First Watch','7','5138471445','4.5','first_watch.jpg');
-
-
--- EVENT_INVITATION_CHOICES TABLE
-CREATE TABLE invitation_choices (
-	invitation_id SERIAL NOT NULL,
-	event_id int NOT NULL,
-	event_guest_id int NOT NULL,
-	restaurant_choice_1 int NOT NULL, -- PER PRODUCT OWNER REQUEST, MIN 2 MAX 5 CHOICES FOR INVITE
-	restaurant_choice_2 int NOT NULL,
-	restaurant_choice_3 int,
-	restaurant_choice_4 int,
-	restaurant_choice_5 int,
-	vote_1 boolean, -- THUMBS UP = TRUE, THUMBS DOWN = FALSE
-	vote_2 boolean,
-	vote_3 boolean,
-	vote_4 boolean,
-	vote_5 boolean,
-	CONSTRAINT PK_invitation_choices PRIMARY KEY (invitation_id),
-	CONSTRAINT FK_invitation_choices_references_events FOREIGN KEY(event_id) REFERENCES events(event_id),
-	CONSTRAINT FK_invitation_choices_references_users FOREIGN KEY(event_guest_id) REFERENCES users(user_id),
-	CONSTRAINT FK_invitation_choice1_references_restaurant FOREIGN KEY(restaurant_choice_1) REFERENCES restaurant(restaurant_id),
-	CONSTRAINT FK_invitation_choice2_references_restaurant FOREIGN KEY(restaurant_choice_2) REFERENCES restaurant(restaurant_id),
-	CONSTRAINT FK_invitation_choice3_references_restaurant FOREIGN KEY(restaurant_choice_3) REFERENCES restaurant(restaurant_id),
-	CONSTRAINT FK_invitation_choice4_references_restaurant FOREIGN KEY(restaurant_choice_4) REFERENCES restaurant(restaurant_id),
-	CONSTRAINT FK_invitation_choice5_references_restaurant FOREIGN KEY(restaurant_choice_5) REFERENCES restaurant(restaurant_id)
-);
 
 
 -- RESTAURANT_LOCATION TABLE AND DATA
@@ -374,6 +323,59 @@ INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration
 INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('16','4','07:00:00','14:30:00','450');
 INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('16','5','07:00:00','14:30:00','450');
 INSERT INTO restaurant_hours (restaurant_id,day_id,open_time,close_time,duration_in_minutes) VALUES ('16','6','07:00:00','14:30:00','450');
+
+
+
+-- EVENTS TABLE
+CREATE TABLE events (
+	event_id SERIAL NOT NULL,
+	event_host_id int NOT NULL,
+	event_date date NOT NULL,
+	event_time time NOT NULL,
+	respond_by_date date NOT NULL,
+	respond_by_time time NOT NULL,
+	restaurant_choice_1 int NOT NULL, -- PER PRODUCT OWNER REQUEST, MIN 2 MAX 5 CHOICES FOR INVITE
+	restaurant_choice_2 int NOT NULL,
+	restaurant_choice_3 int,
+	restaurant_choice_4 int,
+	restaurant_choice_5 int,
+	CONSTRAINT PK_events PRIMARY KEY (event_id),
+	CONSTRAINT FK_events_references_users FOREIGN KEY(event_host_id) REFERENCES users(user_id),
+	CONSTRAINT FK_invitation_choice1_references_restaurant FOREIGN KEY(restaurant_choice_1) REFERENCES restaurant(restaurant_id),
+	CONSTRAINT FK_invitation_choice2_references_restaurant FOREIGN KEY(restaurant_choice_2) REFERENCES restaurant(restaurant_id),
+	CONSTRAINT FK_invitation_choice3_references_restaurant FOREIGN KEY(restaurant_choice_3) REFERENCES restaurant(restaurant_id),
+	CONSTRAINT FK_invitation_choice4_references_restaurant FOREIGN KEY(restaurant_choice_4) REFERENCES restaurant(restaurant_id),
+	CONSTRAINT FK_invitation_choice5_references_restaurant FOREIGN KEY(restaurant_choice_5) REFERENCES restaurant(restaurant_id)
+);
+
+-- EVENT_INVITATION_CHOICES TABLE
+CREATE TABLE invitation_choices (
+	invitation_id SERIAL NOT NULL,
+	event_id int NOT NULL,
+	event_guest_id int NOT NULL,
+	vote_1 boolean, -- THUMBS UP = TRUE, THUMBS DOWN = FALSE
+	vote_2 boolean,
+	vote_3 boolean,
+	vote_4 boolean,
+	vote_5 boolean,
+	CONSTRAINT PK_invitation_choices PRIMARY KEY (invitation_id),
+	CONSTRAINT FK_invitation_choices_references_events FOREIGN KEY(event_id) REFERENCES events(event_id),
+	CONSTRAINT FK_invitation_choices_references_users FOREIGN KEY(event_guest_id) REFERENCES users(user_id)
+	
+);
+
+-- EVENT_CHOICES_RESULTS TABLE
+CREATE TABLE event_choices_results (
+	result_id SERIAL NOT NULL,
+	event_id int NOT NULL,
+	choice_1_result decimal, -- COMPUTED VALUES, COUNT(VOTES) WHERE VOTE = TRUE / COUNT(VOTES)
+	choice_2_result decimal,
+	choice_3_result decimal,
+	choice_4_result decimal,
+	choice_5_result decimal,
+	CONSTRAINT PK_event_choices_results PRIMARY KEY (result_id),
+	CONSTRAINT FK_event_choices_results_references_events FOREIGN KEY(event_id) REFERENCES events(event_id)
+);
 
 
 COMMIT TRANSACTION;

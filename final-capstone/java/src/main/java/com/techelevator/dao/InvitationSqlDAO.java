@@ -21,11 +21,9 @@ public class InvitationSqlDAO implements InvitationDAO {
 
     @Override
     public void createInvitation(Invitation invite) {
-        String sql = "INSERT INTO invitation_choices(event_id, event_guest_id, restaurant_choice_1, restaurant_choice_2,\n" +
-                "restaurant_choice_3, restaurant_choice_4, restaurant_choice_5)\n" +
+        String sql = "INSERT INTO invitation_choices(event_id, event_guest_id,)\n" +
                 "VALUES(?,?,?,?,?,?,?)";
-        jdbcTemplate.update(sql, invite.getEventId(), invite.getGuestId(), invite.getRestaurantChoice1(),
-                invite.getRestaurantChoice2(),invite.getRestaurantChoice3(), invite.getRestaurantChoice4(), invite.getRestaurantChoice5());
+        jdbcTemplate.update(sql, invite.getEventId(), invite.getGuestId());
     }
 
     @Override
@@ -75,11 +73,6 @@ public class InvitationSqlDAO implements InvitationDAO {
         invite.setEventId(results.getLong("event_id"));
         invite.setInvitationId(results.getLong("invitation_id"));
         invite.setGuestId(results.getLong("event_guest_id"));
-        invite.setRestaurantChoice1(results.getLong("restaurant_choice_1"));
-        invite.setRestaurantChoice2(results.getLong("restaurant_choice_2"));
-        invite.setRestaurantChoice3(results.getLong("restaurant_choice_3"));
-        invite.setRestaurantChoice4(results.getLong("restaurant_choice_4"));
-        invite.setRestaurantChoice5(results.getLong("restaurant_choice_5"));
         invite.setVote1(results.getBoolean("vote_1"));
         invite.setVote2(results.getBoolean("vote_2"));
         invite.setVote3(results.getBoolean("vote_3"));
