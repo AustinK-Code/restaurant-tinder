@@ -1,11 +1,13 @@
 <template>
   <div class="home">
+    <!--- Remove make event from home page and just integrate into search results?
     <form>
       <h1>Make New Event</h1>
       <button v-on:click="makeEvent()">Event</button>
       </form>
+     --->
     <form id="search-form">
-      <h1>Search</h1>
+      <h1>Search for Restaurants</h1>
       <locationSearch />
     </form>
   </div>

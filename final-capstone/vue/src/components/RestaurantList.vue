@@ -1,14 +1,18 @@
 <template>
   <!-- This component is used to get the list of restaurants from the back end API. -->
   <div class="restaurant-list">
-    <button id="event-button" class="notEvent">Make an event</button>
+    <h2>Search Again</h2>
+    <search-location> </search-location>
+        <button id="event-button" class="notEvent" v-on:click="showEventForm=true">Make an event</button>
+  <div v-if="showEventForm"><create-event/></div>
     <span id="restaurant-list-container">
       <div
         v-for="restaurant in restaurantsOpenToday"
         v-bind:key="restaurant.id"
         class="restaurant">
         <span>
-          {{ restaurant.name }}<div>{{ restaurant.cuisine }}</div>
+         <h2> {{ restaurant.name }}</h2>
+         <div>{{ restaurant.cuisine }}</div>
           <div>{{ restaurant.address }}
           {{ restaurant.address2 }}</div> <div>{{ convertTime(restaurant.openTime) }} -
           {{ convertTime(restaurant.closeTime) }}</div>
@@ -36,6 +40,8 @@
 
 <script>
 import services from "@/services/BaseService";
+import SearchLocation from './SearchLocation.vue';
+import CreateEvent from './CreateEvent.vue';
 let today = new Date();
 
 //get time right now
@@ -43,8 +49,8 @@ let time =
   today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
 
 //get today's day as a word
-var dayOfWeek = today;
-var weekday = Array(7);
+let dayOfWeek = today;
+let weekday = Array(7);
 weekday[0] = "Sunday";
 weekday[1] = "Monday";
 weekday[2] = "Tuesday";
@@ -55,6 +61,7 @@ weekday[6] = "Saturday";
 var todayDay = weekday[dayOfWeek.getDay()];
 
 export default {
+  components: { SearchLocation, CreateEvent },
   name: "restaurant-list",
   data() {
     return {
@@ -64,6 +71,8 @@ export default {
       time,
       restaurants: [],
       event: [],
+      showEventForm: false,
+      
     };
   },
   methods: {
@@ -123,7 +132,7 @@ export default {
   computed: {
     restaurantsOpenToday() {
       return this.restaurants.filter(
-        (restraunt) => restraunt.dayOfWeek == todayDay
+        (restaurant) => restaurant.dayOfWeek == todayDay
       );
     },
   },

@@ -1,13 +1,13 @@
 <template>
   <form id="search-form">
     <label for="location">City/ZipCode</label>
-    <input
+    <div><input
       type="text"
       id="location"
       v-model="search.searchInput"
       required
       autofocus
-    />
+    /></div>
     <button v-on:click="transferInput()" id="myButton">Search</button>
   </form>
 </template>

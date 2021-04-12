@@ -1,13 +1,21 @@
 <template>
-<form id="InviteForm">
-    <h2>Search for restaurants:</h2>
-  <restaurant-list></restaurant-list>
+<div>
+  <br> <!--- need to add css to replace br -->
+  <br>
+  <br>
+    <h2>Select Friends to Invite:</h2>
+    <div v-for="user in users" v-bind:key="user.userid">
+     <h3> {{user.username}}</h3>
+<!---add checkboxes --->
+    </div>
+  
+</div>
 </template>
 
 <script>
-import RestaurantList from './RestaurantList.vue'
+
+import BaseService from "../services/BaseService"
 export default {
-  components: { RestaurantList },
     data(){
         return{
             newInvite:{
@@ -17,11 +25,16 @@ export default {
                 restaurant3: "",
                 restaurant4: "",
                 restaurant5: ""       
-            }
+            },
+            users:[]
         }
+    },
+    created(){
+        BaseService.getAllUsers().then((response) =>{
+          this.users = response.data;
+        });
+      }
     }
-
-}
 </script>
 
 <style>

@@ -13,7 +13,7 @@
       <button class=" myButton" type="submit">
         Create Event
       </button>
-      <search-location></search-location>
+      
 
     </form>
   </div>
@@ -21,7 +21,7 @@
 
 <script>
 import services from "@/services/BaseService.js";
-import SearchLocation from './SearchLocation.vue';
+
 export default {
   data() {
     return {
@@ -46,7 +46,7 @@ export default {
    }
   },
   components: {
-    SearchLocation
+    
   },
   created() {
     services.getAllUsers().then((response) => {
