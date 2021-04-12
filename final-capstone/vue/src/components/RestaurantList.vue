@@ -12,7 +12,7 @@
       Make an event
     </button>
     <div v-else>Please save 2-5 restaurants</div>
-    <div v-if="showEventForm"><create-event v-bind:formEvent="event"/></div>
+    <div v-show="showEventForm"><create-event v-bind:formEvent="event"/></div>
     <span id="restaurant-list-container">
       <div
         v-for="restaurant in restaurantsOpenToday"
@@ -93,7 +93,7 @@ weekday[3] = "Wednesday";
 weekday[4] = "Thursday";
 weekday[5] = "Friday";
 weekday[6] = "Saturday";
-var todayDay = weekday[dayOfWeek.getDay()];
+let todayDay = weekday[dayOfWeek.getDay()];
 
 export default {
   components: { SearchLocation, CreateEvent },

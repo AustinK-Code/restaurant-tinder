@@ -21,6 +21,7 @@
 
 <script>
 import services from "@/services/BaseService.js";
+import authService from "@/services/AuthService.js";
 
 export default {
   props:{
@@ -33,7 +34,7 @@ export default {
         eventTime: "",
         respondByDate: "",
         respondByTime: "",
-        hostId: "1",
+        hostId: "",
         restaurantChoice1: this.formEvent[0],
         restaurantChoice2: this.formEvent[1],
         restaurantChoice3: this.formEvent[2],
@@ -56,13 +57,18 @@ export default {
      })
    }
   },
+
+
   components: {
     
   },
   created() {
     services.getAllUsers().then((response) => {
-      this.users = response.data;
-    });
+     this.users = response.data;
+   });
+    authService.getLoggedInUserId().then((response) => {
+        this.newEvent.hostId = response.data;
+      });
   },
 };
 </script>
