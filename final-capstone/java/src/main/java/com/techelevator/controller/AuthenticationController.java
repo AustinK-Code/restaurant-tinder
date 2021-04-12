@@ -21,6 +21,8 @@ import com.techelevator.model.UserAlreadyExistsException;
 import com.techelevator.security.jwt.JWTFilter;
 import com.techelevator.security.jwt.TokenProvider;
 
+import java.security.Principal;
+
 @RestController
 @CrossOrigin
 public class AuthenticationController {
@@ -51,6 +53,14 @@ public class AuthenticationController {
         httpHeaders.add(JWTFilter.AUTHORIZATION_HEADER, "Bearer " + jwt);
         return new ResponseEntity<>(new LoginResponse(jwt, user), httpHeaders, HttpStatus.OK);
     }
+
+    @RequestMapping(path = "/user", method = RequestMethod.GET)
+    public Long getCurrentUserId(Principal principal){
+         return userDAO.findIdByUsername(principal.getName());
+
+    }
+
+
 
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(value = "/register", method = RequestMethod.POST)
