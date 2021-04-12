@@ -96,6 +96,9 @@ export default {
       if (hours == 12){
         newTime = "Noon"
       }
+      if (time == null){
+        newTime = " "
+      }
       return newTime;
     },
     //Filters input for the search and pulls the array of locations

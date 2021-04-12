@@ -5,7 +5,9 @@
   <br>
     <h2>Select Friends to Invite:</h2>
     <div v-for="user in users" v-bind:key="user.userid">
-     <h3> {{user.username}}</h3>
+     
+     <input type="checkbox" v-bind:value="user.userid" v-model="invited" />
+     <label for="checkbox"> {{user.username}}</label>
 <!---add checkboxes --->
     </div>
   
@@ -26,7 +28,8 @@ export default {
                 restaurant4: "",
                 restaurant5: ""       
             },
-            users:[]
+            users:[],
+            invited:[]
         }
     },
     created(){
