@@ -62,6 +62,13 @@ public class EventSqlDAO implements EventDAO{
         }else throw new RuntimeException("Event "+id+ " was not found");
     }
 
+    public Long getCurrentEventId(Long userId){
+        String sql = "SELECT MAX(event_id) AS current_event_id\n" +
+                "FROM events\n" +
+                "WHERE event_host_id = ? ";
+        return jdbcTemplate.queryForObject(sql,new Object[]{userId}, Long.class);
+    }
+
 
     private Event mapRowToEvent(SqlRowSet results){
         Event event = new Event();
