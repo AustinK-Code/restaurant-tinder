@@ -7,9 +7,11 @@
       id="event-button"
       class="notEvent"
       v-on:click="showEventForm = true"
+      v-if="event.length > 1 && event.length <6"
     >
       Make an event
     </button>
+    <div v-else>Please save 2-5 restaurants</div>
     <div v-if="showEventForm"><create-event v-bind:formEvent="event"/></div>
     <span id="restaurant-list-container">
       <div
