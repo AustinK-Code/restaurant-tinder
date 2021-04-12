@@ -78,6 +78,9 @@ export default {
   methods: {
     //converts time from HH MM SS to 12 hour format
     convertTime(time) {
+      if (time === null){
+        return " "
+      }
       let newTime = "";
       const hours = time.substr(0, 2);
       const minutes = time.substr(3, 5);
@@ -96,9 +99,7 @@ export default {
       if (hours == 12){
         newTime = "Noon"
       }
-      if (time == null){
-        newTime = " "
-      }
+      
       return newTime;
     },
     //Filters input for the search and pulls the array of locations
