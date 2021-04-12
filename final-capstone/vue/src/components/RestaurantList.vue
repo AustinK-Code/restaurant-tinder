@@ -27,6 +27,10 @@
             <button v-on:click="say(restaurant.name + ' phone number is ' + restaurant.phoneNumber)">Call to order</button>
           </div>
 
+          <div id="directions">
+            <button @click="webFunction()">Find Directions</button>
+          </div>
+
           <img
             class="thumbnail"
             v-bind:src="'../pics/' + restaurant.thumbnailImg"
@@ -131,6 +135,9 @@ export default {
     //this method can be called to create an alert that prints a message
     say: function (message) {
       alert(message)
+    },
+    webFunction: function() {
+      window.open("https://www.google.com/maps/", "_blank");
     }
   },
   computed: {
