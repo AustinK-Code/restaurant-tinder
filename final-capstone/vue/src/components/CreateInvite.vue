@@ -6,10 +6,10 @@
     <h2>Select Friends to Invite:</h2>
     <div v-for="user in users" v-bind:key="user.userid">
      
-     <input type="checkbox" v-bind:value="user.userid" v-model="invited" />
+     <input type="checkbox" v-bind:value="user.id" v-bind:id="user.id" v-model="invited"/>
      <label for="checkbox"> {{user.username}}</label>
-<!---add checkboxes --->
     </div>
+    <button v-on:click="loadInvitedUsers()">ADD</button>
   
 </div>
 </template>
@@ -28,9 +28,14 @@ export default {
                 restaurant4: "",
                 restaurant5: ""       
             },
-            users:[],
-            invited:[]
+            users: [],
+            invited: []
         }
+    },
+    methods:{
+      loadInvitedUsers(){
+        this.$store.commit("LOAD_INVITED_USERS",this.invited)
+      }
     },
     created(){
         BaseService.getAllUsers().then((response) =>{

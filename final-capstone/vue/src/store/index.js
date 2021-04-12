@@ -20,7 +20,8 @@ export default new Vuex.Store({
     token: currentToken || '',
     user: currentUser || {},
     searchInput: "",
-    events:[]
+    events:[],
+    invitedUsers:[]
   },
   mutations: {
     SET_AUTH_TOKEN(state, token) {
@@ -43,7 +44,10 @@ export default new Vuex.Store({
       state.searchInput = load
     },
     LOAD_EVENT_ARRAY(state, load){
-      state.searchInput = load
+      state.events = load
+    },
+    LOAD_INVITED_USERS(state,load){
+      state.invitedUsers = load
     }
   }
 })

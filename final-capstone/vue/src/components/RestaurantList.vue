@@ -3,35 +3,61 @@
   <div class="restaurant-list">
     <h2>Search Again</h2>
     <search-location> </search-location>
-        <button id="event-button" class="notEvent" v-on:click="showEventForm=true">Make an event</button>
-  <div v-if="showEventForm"><create-event/></div>
+    <button
+      id="event-button"
+      class="notEvent"
+      v-on:click="showEventForm = true"
+    >
+      Make an event
+    </button>
+    <div v-if="showEventForm"><create-event v-bind:formEvent="event"/></div>
     <span id="restaurant-list-container">
       <div
         v-for="restaurant in restaurantsOpenToday"
         v-bind:key="restaurant.id"
-        class="restaurant">
+        class="restaurant"
+      >
         <span>
-         <h2> {{ restaurant.name }}</h2>
-         <div>{{ restaurant.cuisine }}</div>
-          <div>{{ restaurant.address }}
-          {{ restaurant.address2 }}</div> <div>{{ convertTime(restaurant.openTime) }} -
-          {{ convertTime(restaurant.closeTime) }}</div>
+          <h2>{{ restaurant.name }}</h2>
+          <div>{{ restaurant.cuisine }}</div>
+          <div>{{ restaurant.address }} {{ restaurant.address2 }}</div>
+          <div>
+            {{ convertTime(restaurant.openTime) }} -
+            {{ convertTime(restaurant.closeTime) }}
+          </div>
           <div
             class="responsive"
             v-if="isOpen(time, restaurant.openTime, restaurant.closeTime)"
-            >We are Open!</div
           >
+            We are Open!
+          </div>
           <div v-else>Currently Closed</div>
 
           <div id="phoneNumber-alert-message">
-            <button v-on:click="say(restaurant.name + ' phone number is ' + restaurant.phoneNumber)">Call to order</button>
+            <button
+              v-on:click="
+                say(
+                  restaurant.name + ' phone number is ' + restaurant.phoneNumber
+                )
+              "
+            >
+              Call to order
+            </button>
           </div>
 
           <img
             class="thumbnail"
             v-bind:src="'../pics/' + restaurant.thumbnailImg"
-            alt="thumbnail not available"/>
-          <div><input type="checkbox" v-bind:value="restaurant.restaurantId" v-bind:id="restaurant.restaurantId"  v-model="event">Save</div>
+            alt="thumbnail not available"
+          />
+          <div>
+            <input
+              type="checkbox"
+              v-bind:value="restaurant.restaurantId"
+              v-bind:id="restaurant.restaurantId"
+              v-model="event"
+            />Save
+          </div>
         </span>
       </div>
     </span>
@@ -43,6 +69,9 @@ import services from "@/services/BaseService";
 import SearchLocation from './SearchLocation.vue';
 import CreateEvent from './CreateEvent.vue';
 let today = new Date();
+
+
+
 
 //get time right now
 let time =
@@ -65,7 +94,6 @@ export default {
   name: "restaurant-list",
   data() {
     return {
-      checkedRestaurant: [],
       popupActivo: false,
       todayDay,
       time,
@@ -76,6 +104,7 @@ export default {
     };
   },
   methods: {
+
     //converts time from HH MM SS to 12 hour format
     convertTime(time) {
       if (time === null){
@@ -140,6 +169,7 @@ export default {
       );
     },
   },
+
   created() {
     this.filterInput(this.$store.state.searchInput);
   },
@@ -163,19 +193,17 @@ export default {
   width: 100vw;
   font-family: sans-serif;
   box-sizing: border-box;
-  
 }
 .restaurant {
   background-color: rgba(212, 211, 211, 0.404);
   background-size: 50%;
   margin: 5vw 5vh;
-
 }
 #restaurant-list-container {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-    background-image: url("../pics/happytable.jpg");
+  background-image: url("../pics/happytable.jpg");
   background-size: cover;
   background-attachment: fixed;
 }
