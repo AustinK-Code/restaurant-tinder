@@ -10,7 +10,7 @@
       <label for="dateOfPoll">Poll end date and time</label>
       <input type= "date" v-model="newEvent.respondByDate"/>
       <input type="time" v-model="newEvent.respondByTime"/>
-      <button class=" myButton" type="submit">
+      <button class=" myButton" type="submit" v-on:click="commitEventToStore()">
         Create Event
       </button>
       
@@ -23,6 +23,9 @@
 import services from "@/services/BaseService.js";
 
 export default {
+  props:{
+    formEvent:null
+  },
   data() {
     return {
       newEvent:{
@@ -35,6 +38,9 @@ export default {
     };
   },
   methods:{
+    commitEventToStore(){
+      this.$store.commit("LOAD_EVENT_ARRAY", this.formEvent)
+    },
    addNewEvent(){
      services.createEvent(this.newEvent).then((response) => {
        if(response.status == 201){
