@@ -31,7 +31,7 @@
             class="thumbnail"
             v-bind:src="'../pics/' + restaurant.thumbnailImg"
             alt="thumbnail not available"/>
-          <div><input type="checkbox" id="checkbox"  v-model="checkedRestaurant" v-on:click='addToEvent(restaurant)'>Save</div>
+          <div><input type="checkbox" v-bind:value="restaurant.restaurantId" v-bind:id="restaurant.restaurantId"  v-model="event">Save</div>
         </span>
       </div>
     </span>
