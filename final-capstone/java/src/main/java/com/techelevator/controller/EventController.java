@@ -8,12 +8,16 @@ import com.techelevator.model.EventResult;
 import com.techelevator.model.Invitation;
 import com.techelevator.model.User;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController
 @CrossOrigin
+@PreAuthorize("isAuthenticated()")
+
 public class EventController {
 
     private EventDAO eventDAO;
@@ -29,7 +33,7 @@ public class EventController {
     //create event
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path = "/event", method = RequestMethod.POST)
-    public void createEvent(@RequestBody Event event){
+    public void createEvent(@RequestBody Event event, Principal principal){
         eventDAO.createEvent(event);
     }
     //create Invite
