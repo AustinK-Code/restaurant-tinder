@@ -62,6 +62,10 @@ export default {
     //get voting results
     getVotingResults(eventId){
         return axios.get(`/event/${eventId}/results`)
+    },
+
+    getCurrentEventId(userId){
+        return axios.get(`/event/${userId}/current`)
     }
 
         

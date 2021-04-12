@@ -9,5 +9,6 @@ public interface EventDAO {
     void createEvent(Event event);
     void calculateResults(Event event);
     public EventResult getResultsById(Long id);
+    public Long getCurrentEventId(Long userId);
 
 }

@@ -57,7 +57,6 @@ public class AuthenticationController {
     @RequestMapping(path = "/user", method = RequestMethod.GET)
     public Long getCurrentUserId(Principal principal){
          return userDAO.findIdByUsername(principal.getName());
-
     }
 
 

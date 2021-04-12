@@ -61,7 +61,7 @@ public class EventSqlDAO implements EventDAO{
             return mapRowToResult(results);
         }else throw new RuntimeException("Event "+id+ " was not found");
     }
-
+    @Override
     public Long getCurrentEventId(Long userId){
         String sql = "SELECT MAX(event_id) AS current_event_id\n" +
                 "FROM events\n" +
