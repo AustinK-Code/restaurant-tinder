@@ -12,7 +12,7 @@
       Make an event
     </button>
     <div v-else>Please save 2-5 restaurants</div>
-    <div v-show="showEventForm"><create-event v-bind:formEvent="event"/></div>
+    <div v-if="showEventForm"><create-event v-bind:formEvent="event"/></div>
     <span id="restaurant-list-container">
       <div
         v-for="restaurant in restaurantsOpenToday"
