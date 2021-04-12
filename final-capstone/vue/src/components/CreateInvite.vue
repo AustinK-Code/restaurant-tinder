@@ -16,34 +16,47 @@
 
 <script>
 
-import BaseService from "../services/BaseService"
+import BaseService from "../services/BaseService";
+import authService from "@/services/AuthService.js";
 export default {
     data(){
         return{
             newInvite:{
-                eventId: "",
-                guestId: ""
+                eventId: "12",
+                guestId: ""    
             },
             users: [],
-            invited: []
+            invited: [],
+            LoggedInUserId:"",
+            currentEventId:""
         }
     },
     methods:{
       loadInvitedUsers(){
         this.$store.commit("LOAD_INVITED_USERS",this.invited)
       },
+      
       sendInvites(){
-        for(this.user in this.invited){
-          this.newInvite.eventId = ""
-         this.newInvite.guestId = this.user.id
-        BaseService.createInvite(this.newInvite)
-      }
+        this.invited.forEach(user =>{
+          this.newInvite.guestId = user.id;
+          BaseService.createInvite(this.newInvite)
+        })
+      //   for(this.user in this.invited){
+      //   this.newInvite.eventId
+      //   this.newInvite.guestId = this.user.id
+      //   BaseService.createInvite(this.newInvite)
+      // }
     }
     },
+  
     created(){
         BaseService.getAllUsers().then((response) =>{
           this.users = response.data;
         });
+        authService.getLoggedInUserId().then((response) => {
+        this.LoggedInUserId = response.data;
+      });
+        
       }
     }
 </script>

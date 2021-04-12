@@ -21,8 +21,8 @@ public class InvitationSqlDAO implements InvitationDAO {
 
     @Override
     public void createInvitation(Invitation invite) {
-        String sql = "INSERT INTO invitation_choices(event_id, event_guest_id,)\n" +
-                "VALUES(?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO invitation_choices(event_id, event_guest_id)\n" +
+                "VALUES(?,?)";
         jdbcTemplate.update(sql, invite.getEventId(), invite.getGuestId());
     }
 

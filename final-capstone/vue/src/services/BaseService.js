@@ -65,7 +65,7 @@ export default {
     },
 
     getCurrentEventId(userId){
-        return axios.get(`/event/${userId}/current`)
+        return axios.get(`/event/current/${userId}`)
     }
 
         
