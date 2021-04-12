@@ -28,13 +28,18 @@ export default {
   },
   data() {
     return {
-      newEvent:{
-      eventDate: "",
-      eventTime: "",
-      respondByDate: "",
-      respondByTime: "",
-      hostId: "1"
-      }
+      newEvent: {
+        eventDate: "",
+        eventTime: "",
+        respondByDate: "",
+        respondByTime: "",
+        hostId: "1",
+        restaurantChoice1: this.formEvent[0],
+        restaurantChoice2: this.formEvent[1],
+        restaurantChoice3: this.formEvent[2],
+        restaurantChoice4: this.formEvent[3],
+        restaurantChoice5: this.formEvent[4]
+      },
     };
   },
   methods:{
