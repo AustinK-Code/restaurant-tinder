@@ -6,7 +6,7 @@
     <h2>Select Friends to Invite:</h2>
     <div v-for="user in users" v-bind:key="user.userid">
      
-     <input type="checkbox" v-bind:value="user.username" v-bind:id="user.id" v-model="invited"/>
+     <input type="checkbox" v-bind:value="user.user.id" v-bind:id="user.id" v-model="invited"/>
      <label for="checkbox"> {{user.username}}</label>
     </div>
     <button v-on:click="loadInvitedUsers()">ADD</button>

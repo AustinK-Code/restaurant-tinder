@@ -32,11 +32,11 @@ export default {
         respondByDate: "",
         respondByTime: "",
         hostId: "1",
-        restaurant1: this.formEvent[0],
-        restaurant2: this.formEvent[1],
-        restaurant3: this.formEvent[2],
-        restaurant4: this.formEvent[3],
-        restaurant5: this.formEvent[4]
+        restaurantChoice1: this.formEvent[0],
+        restaurantChoice2: this.formEvent[1],
+        restaurantChoice3: this.formEvent[2],
+        restaurantChoice4: this.formEvent[3],
+        restaurantChoice5: this.formEvent[4]
       },
     };
   },
