@@ -19,7 +19,8 @@ public class EventSqlDAO implements EventDAO{
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    private String eventSql= "SELECT event_id, event_host_id, event_date, event_time, respond_by_date, respond_by_time, u.username\n" +
+    private String eventSql= "SELECT event_id, event_host_id, event_date, event_time, respond_by_date, respond_by_time, restaurant_choice_1, " +
+            "restaurant_choice_2,restaurant_choice_3,restaurant_choice_4,restaurant_choice_5,u.username\n" +
             "FROM events\n" +
             "INNER JOIN users u ON event_host_id = user_id";
 
