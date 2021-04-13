@@ -9,6 +9,8 @@ import List from '@/components/RestaurantList'
 import Events from '@/views/MyEventsView.vue'
 import MakeEvent from '@/components/CreateEvent'
 import Invite from '@/views/Invite'
+import PendingInvites from '@/views/PendingInvites'
+
 
 
 Vue.use(Router)
@@ -89,7 +91,16 @@ const router = new Router({
       meta: {
         requiresAuth: true
       }
+    },
+    {
+      path: "/pendinginvites",
+      name: "pending-invites",
+      component: PendingInvites,
+      meta: {
+        requiresAuth: true
+      }
     }
+   
   ]
 })
 

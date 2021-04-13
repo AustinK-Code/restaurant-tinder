@@ -63,10 +63,11 @@ public class EventSqlDAO implements EventDAO{
     }
     @Override
     public Long getCurrentEventId(Long userId){
-        String sql = "SELECT MAX(event_id) AS current_event_id\n" +
-                "FROM events\n" +
-                "WHERE event_host_id = ? ";
-        return jdbcTemplate.queryForObject(sql,new Object[]{userId}, Long.class);
+        String sql = " SELECT event_id FROM events WHERE event_host_id = ?\n" +
+                "ORDER BY event_id desc\n" +
+                "LIMIT 1";
+        Long eventId = jdbcTemplate.queryForObject(sql,new Object[] {userId}, Long.class);
+      return eventId;
     }
 
 

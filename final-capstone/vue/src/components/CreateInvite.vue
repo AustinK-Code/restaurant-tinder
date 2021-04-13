@@ -9,53 +9,45 @@
      <input type="checkbox" v-bind:value="user.id" v-bind:id="user.id" v-model="invited"/>
      <label for="checkbox"> {{user.username}}</label>
     </div>
-    <button v-on:click="loadInvitedUsers()">ADD</button>
-    <button v-on:click="sendInvites()">Send</button>
+    <router-link to="/events">
+    <button v-on:click="sendInvites()">Send Invitations</button>
+    </router-link>
 </div>
 </template>
 
 <script>
 
 import BaseService from "../services/BaseService";
-import authService from "@/services/AuthService.js";
 export default {
     data(){
         return{
-            newInvite:{
-                eventId: "12",
-                guestId: ""    
-            },
             users: [],
             invited: [],
-            LoggedInUserId:"",
-            currentEventId:""
+            eventId: ""
         }
     },
     methods:{
-      loadInvitedUsers(){
-        this.$store.commit("LOAD_INVITED_USERS",this.invited)
+      addInvites(){
+        BaseService.createInvite(this.newInvite);
       },
       
       sendInvites(){
         this.invited.forEach(user =>{
-          this.newInvite.guestId = user.id;
-          BaseService.createInvite(this.newInvite)
+          const invite = {guestId:user,
+          eventId:this.eventId
+          }
+          BaseService.createInvite(invite);
         })
-      //   for(this.user in this.invited){
-      //   this.newInvite.eventId
-      //   this.newInvite.guestId = this.user.id
-      //   BaseService.createInvite(this.newInvite)
-      // }
     }
     },
-  
-    created(){
+    created() {
+       BaseService.getCurrentEventId(this.$store.state.user.id).then((response) =>{
+          this.eventId = response.data;
+        });
         BaseService.getAllUsers().then((response) =>{
           this.users = response.data;
         });
-        authService.getLoggedInUserId().then((response) => {
-        this.LoggedInUserId = response.data;
-      });
+       
         
       }
     }

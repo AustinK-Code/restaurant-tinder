@@ -1,28 +1,16 @@
 <template>
-  <div class="myEvents-page" id="page">
-    <form id="myEvents-form">
-      <h1>My Events</h1>
-      <my-events-list/>
-      <!-- need to implement event invites --->
-    </form>
-  </div>
+  <my-events-list/>
 </template>
 
 <script>
-import MyEventsList from "@/components/MyEventsList.vue"
+import MyEventsList from '../components/MyEventsList.vue'
 export default {
-  name: "events",
-components:{
-  MyEventsList
-},
+  components: { MyEventsList },
 
-  methods: {
-    retrieveEvent() {
-      this.$router.post({ name: "retrieve-event" });
-    },
-  },
-};
+}
 </script>
+
+
 <style scoped>
 
 #page {

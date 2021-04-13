@@ -4,9 +4,11 @@
   <br>
   <br>
     <h2>My Events:</h2>
-    <p>
-        {{user.myEvents}}
-    </p>
+    <router-link to="/pendinginvites">
+   <h2> Pending Invites </h2>
+    </router-link>
+   <h2> Upcoming Events </h2>
+
 <!---adding the user's events --->
   
 </div>
@@ -18,16 +20,20 @@ import BaseService from "../services/BaseService"
 export default {
     data(){
         return{
-            eventId: "",
-            users:[],
-            invited:[]
+            invites:[],
+            restaurants: []
         }
     },
     created(){
-      BaseService.getEventById(this.eventId).then((response) => {
-          this.users = response.data;
-      });
+     BaseService.getInvitesByUserId(this.$store.state.user.id).then((response) =>{
+          this.invites = response.data;
+        });
+        
+    },
+    methods: {
+    
     }
+    
 }
 </script>
 

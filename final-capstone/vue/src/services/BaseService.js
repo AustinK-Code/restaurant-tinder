@@ -65,7 +65,11 @@ export default {
     },
 
     getCurrentEventId(userId){
-        return axios.get(`/event/current/${userId}`)
+        return axios.get(`/currentevent/${userId}`)
+    },
+
+    getRestaurantById(id){
+        return axios.get(`/restaurant/${id}`)
     }
 
         
