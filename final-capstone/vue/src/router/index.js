@@ -6,7 +6,7 @@ import Logout from '../views/Logout.vue'
 import Register from '../views/Register.vue'
 import store from '../store/index'
 import List from '@/components/RestaurantList'
-import Events from '@/views/Events.vue'
+import Events from '@/views/MyEventsView.vue'
 import MakeEvent from '@/components/CreateEvent'
 import Invite from '@/views/Invite'
 

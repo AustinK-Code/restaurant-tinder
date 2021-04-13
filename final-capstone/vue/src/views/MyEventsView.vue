@@ -1,7 +1,8 @@
 <template>
-  <div class="myEvents-page">
+  <div class="myEvents-page" id="page">
     <form id="myEvents-form">
       <h1>My Events</h1>
+      <my-events-list/>
       <!-- need to implement event invites --->
     </form>
   </div>
@@ -24,8 +25,8 @@ components:{
 </script>
 <style scoped>
 
-.home {
-  background-image: url("../pics/Restaurant_Tinder.jpg");
+#page {
+  background-image: url("../pics/Restaurant_Tinder_final_png.png");
   background-size: cover;
   display: flex;
   height: 100vh;

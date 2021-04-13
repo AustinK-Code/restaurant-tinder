@@ -24,7 +24,7 @@ export default {
         }
     },
     created(){
-      BaseService.getEventById(eventId).then((response) => {
+      BaseService.getEventById(this.eventId).then((response) => {
           this.users = response.data;
       });
     }
