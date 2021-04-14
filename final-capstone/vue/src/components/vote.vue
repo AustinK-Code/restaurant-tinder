@@ -5,26 +5,25 @@
     <br />
 
     <div v-for="(invite, index) in invitation" v-bind:key="invite.id">
-      <button v-on:click="getRestaurants(index)">{{ index + 1 }}</button>
+      <button v-on:click="getRestaurants(index), temp=index" v-bind="temp" >{{ index + 1 }}</button>
     </div>
 
 
     <div
       v-for="(restaurant, index) in restaurantArr"
       v-bind:key="restaurant.name"
-      v-bind="vote(index)"
     >
       <h4>{{ restaurant.name }}</h4>
       <h3>{{ restaurant.cuisine }}</h3>
       <p>{{ restaurant.address }}</p>
       <input
-        v-on:click="restaurantVoteIndex = true"
+        v-on:click="vote(true,index,temp)"
         type="image"
         src="../pics/Thumbs_Up_Sign.svg"
         alt="fuck you"
       />
       <input
-        v-on:click="restaurantVoteIndex = false"
+        v-on:click="vote(false,index,temp)"
         type="image"
         src="../pics/Thumbs_Down_Sign.svg"
         alt="fuck you"
@@ -48,6 +47,7 @@ export default {
   components: {},
   data() {
     return {
+      temp: "",
       restaurantVoteIndex: "",
       invitation: [],
       event: {},
@@ -99,24 +99,22 @@ export default {
     resetArray() {
       this.restaurantArr.length = 0;
     },
-        vote(index) {
-      let putIn = "";
+        vote(value,index,arrPos) {
       if (index == 0) {
-        putIn = this.invite.restaurantChoice1;
+        this.invitation[arrPos].vote1 = value;
       }
       if (index == 1) {
-        putIn = this.invite.restaurantChoice2;
+        this.invitation[arrPos].vote2 = value;
       }
       if (index == 1) {
-        putIn = this.invite.restaurantChoice3;
+        this.invitation[arrPos].vote3 = value;
       }
       if (index == 1) {
-        putIn = this.invite.restaurantChoice4;
+        this.invitation[arrPos].vote4 = value;
       }
       if (index == 1) {
-        putIn = this.invite.restaurantChoice5;
+        this.invitation[arrPos].vote5 = value;
       }
-      this.restaurantVoteIndex = putIn;
     },
   },
   computed: {
