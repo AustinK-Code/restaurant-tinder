@@ -1,7 +1,7 @@
 <template>
   <!-- This component is used to get the list of restaurants from the back end API. -->
   <div class="restaurant-list">
-    <h2>Search Again</h2>
+    <h1>Search Again</h1>
     <search-location> </search-location>
     <button
       id="event-button"
@@ -11,8 +11,16 @@
     >
       Make an event
     </button>
+<<<<<<< HEAD
     <div v-else>Please save 2-5 restaurants</div>
     <div v-if="showEventForm"><create-event v-bind:formEvent="event" /></div>
+=======
+    <div id ="invite-instructions">
+      <h2>Feeling hungry and want to invite some friends along?</h2>
+      <h3>Check the boxes below 2 or more restaurants and then click Make an Event to get the party started!</h3>
+      </div>
+    <div v-if="showEventForm"><create-event v-bind:formEvent="event"/></div>
+>>>>>>> 5fbeadaba87787f6e864147469efd5e6d8fdc21f
     <span id="restaurant-list-container">
       <div
         v-for="restaurant in restaurantsOpenToday"
@@ -78,7 +86,7 @@
               v-bind:value="restaurant.restaurantId"
               v-bind:id="restaurant.restaurantId"
               v-model="event"
-            />Save
+            />Add to event invitation
           </div>
         </span>
       </div>
@@ -218,6 +226,11 @@ export default {
   background-color: rgba(212, 211, 211, 0.404);
   background-size: 50%;
   margin: 5vw 5vh;
+}
+#invite-instructions {
+  background-color: rgba(212, 211, 211, 0.404);
+  background-size: 50%;
+  margin: 1vw 5vh;
 }
 #restaurant-list-container {
   display: flex;
