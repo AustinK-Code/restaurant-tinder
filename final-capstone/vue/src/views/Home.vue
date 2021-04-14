@@ -37,7 +37,9 @@ components:{
    background-attachment: fixed;
 }
 form{
-  background-color: rgba(212, 211, 211, 0.404);
+  background-color: rgba(236, 235, 235, 0.801);
+  border-radius: 10px;
+  padding: 5%;
   display:flex;
   flex-direction: column;
   justify-content: center;
