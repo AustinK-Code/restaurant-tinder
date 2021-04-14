@@ -12,14 +12,11 @@
       Make an event
     </button>
     <div v-else>Please save 2-5 restaurants</div>
-<<<<<<< HEAD
-=======
     <div v-if="showEventForm"><create-event v-bind:formEvent="event" /></div>
     <div id ="invite-instructions">
       <h2>Feeling hungry and want to invite some friends along?</h2>
       <h3>Check the boxes below 2 or more restaurants and then click Make an Event to get the party started!</h3>
       </div>
->>>>>>> 54d3ae69793dcd776cc313a7df7aa94d2d198951
     <div v-if="showEventForm"><create-event v-bind:formEvent="event"/></div>
     <span id="restaurant-list-container">
       <div
@@ -188,9 +185,7 @@ export default {
     say: function (message) {
       alert(message)
     },
-    webFunction: function() {
-      window.open("https://www.google.com/maps/", "_blank");
-    webFunction: function(name, nameTwo) {
+     webFunction: function(name, nameTwo) {
       window.open("https://www.google.com/maps/place/" + name + ", " + nameTwo, "_blank");
     }
   },
