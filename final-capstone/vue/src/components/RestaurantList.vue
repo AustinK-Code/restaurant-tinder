@@ -1,13 +1,13 @@
 <template>
   <!-- This component is used to get the list of restaurants from the back end API. -->
   <div class="restaurant-list">
-    <h1>Search Again</h1>
+    <h2>Search Again</h2>
     <search-location> </search-location>
     <button
       id="event-button"
       class="notEvent"
       v-on:click="showEventForm = true"
-      v-if="event.length > 1 && event.length < 6"
+      v-if="event.length > 1 && event.length <6"
     >
       Make an event
     </button>
@@ -34,25 +34,22 @@
             class="responsive"
             v-if="isOpen(time, restaurant.openTime, restaurant.closeTime)"
           >
-            We are Open!
-            <div class="image-cropper">
-              <img
-                src="/pics/Open_Sign.svg"
-                style="width: 100px; height: 100px"
-              />
-            </div>
+           <!-- We are Open! -->
+<div class="image-cropper">
+   <img src="/pics/New Open.svg"  style="width:150px;height:150px;"  />
+        </div>
+
+          </div>
+          
+          
+          <div v-else> <!--Currently Closed-->
+            
+             <div class="image-cropper">
+   <img src="/pics/New Closed.svg" style="width:150px;height:150px;" />
+</div>
+
           </div>
 
-          <div v-else>
-            Currently Closed
-
-            <div class="image-cropper">
-              <img
-                src="/pics/Closed_Sign.svg"
-                style="width: 100px; height: 100px"
-              />
-            </div>
-          </div>
 
           <div id="phoneNumber-alert-message">
             <button
@@ -67,7 +64,7 @@
           </div>
 
           <div id="directions">
-            <button @click="webFunction()">Find Directions</button>
+            <button @click="webFunction(restaurant.name, restaurant.address)">Find Directions</button>
           </div>
 
           <img
@@ -81,7 +78,7 @@
               v-bind:value="restaurant.restaurantId"
               v-bind:id="restaurant.restaurantId"
               v-model="event"
-            />Add to event invitation
+            />Save
           </div>
         </span>
       </div>
@@ -91,9 +88,12 @@
 
 <script>
 import services from "@/services/BaseService";
-import SearchLocation from "./SearchLocation.vue";
-import CreateEvent from "./CreateEvent.vue";
+import SearchLocation from './SearchLocation.vue';
+import CreateEvent from './CreateEvent.vue';
 let today = new Date();
+
+
+
 
 //get time right now
 let time =
@@ -122,13 +122,15 @@ export default {
       restaurants: [],
       event: [],
       showEventForm: false,
+      
     };
   },
   methods: {
+
     //converts time from HH MM SS to 12 hour format
     convertTime(time) {
-      if (time === null) {
-        return " ";
+      if (time === null){
+        return " "
       }
       let newTime = "";
       const hours = time.substr(0, 2);
@@ -145,10 +147,10 @@ export default {
           newTime = hours + ":" + minutes + "AM";
         }
       }
-      if (hours == 12) {
-        newTime = "Noon";
+      if (hours == 12){
+        newTime = "Noon"
       }
-
+      
       return newTime;
     },
     //Filters input for the search and pulls the array of locations
@@ -174,16 +176,16 @@ export default {
         return true;
       } else return false;
     },
-    addToEvent(restaurant) {
-      this.event.push(restaurant.name);
+    addToEvent(restaurant){
+      this.event.push(restaurant.name)
     },
     //this method can be called to create an alert that prints a message
     say: function (message) {
-      alert(message);
+      alert(message)
     },
-    webFunction: function () {
-      window.open("https://www.google.com/maps/", "_blank");
-    },
+     webFunction: function(name, nameTwo) {
+      window.open("https://www.google.com/maps/place/" + name + ", " + nameTwo, "_blank");
+    }
   },
   computed: {
     restaurantsOpenToday() {
@@ -223,11 +225,6 @@ export default {
   background-color: rgba(212, 211, 211, 0.404);
   background-size: 50%;
   margin: 5vw 5vh;
-}
-#invite-instructions {
-  background-color: rgba(212, 211, 211, 0.404);
-  background-size: 50%;
-  margin: 1vw 5vh;
 }
 #restaurant-list-container {
   display: flex;
@@ -271,4 +268,8 @@ button {
   display: inline-block;
   margin: 1vw;
 }
+
+
+
+
 </style>
