@@ -7,8 +7,8 @@
         <img src="\pics\Restaurant_Tinder_Final.svg" width="300">
         <h1>Welcome to Restaurant Tinder</h1>
         
-         <h2> The only app designed to find the
-          perfect dining experience for any occasion.</h2> 
+         <h3> The only app designed to find the
+          perfect dining experience for any occasion.</h3> 
           <p>Our goal here is simple:
           to find the very best local restaurants with only the highest quality
           of ingredients, and an atmosphere to match. If you’re looking for
@@ -19,6 +19,7 @@
           experience will be a treat.
         </p>
       </div>
+     
       <h1 class="h3 mb-3 font-weight-normal">Please Sign In</h1>
       <div class="alert alert-danger" role="alert" v-if="invalidCredentials">
         Invalid username and password!
@@ -40,6 +41,7 @@
         required
         autofocus
       />
+      <br>
       <label for="password" class="sr-only">Password</label>
       <input
         type="password"
@@ -49,7 +51,9 @@
         v-model="user.password"
         required
       />
+      <br>
       <router-link :to="{ name: 'register' }">Need an account?</router-link>
+  
       <button type="submit" class="myButton">Sign in</button>
       
       <div class="reviews">
@@ -60,13 +64,13 @@
           Random lady we found on the street
         </p>
         <p>
-          "Found the best meal of my life on there" - Guy that looked like Gordon Ramsey
+          "Found the best meal of my life on there" - <i>Guy that looked like Gordon Ramsey</i>
         </p>
         <p>
-          "This app is so easy to use that even I figured it out!" - My Grandma
+          "This app is so easy to use that even I figured it out!" - <i>My Grandma</i>
         </p>
         <p>
-          "Never heard of it, how did you get inside my house?" - Elon Musk
+          "Never heard of it, how did you get inside my house?" - <i>Elon Musk</i>
         </p>
       </div>
     </form>
@@ -112,17 +116,20 @@ export default {
 </script>
 <style scoped>
 form.form-signin {
-  background-color: rgba(212, 211, 211, 0.6);
-  margin: 10%;
-  padding: 10%;
-  
+  background-color: rgba(212, 211, 211, 0.7);
+  /* margin: 10%; */
+  padding: 5%;
+}
+.reviews{
+  background-color: rgba(236, 235, 235, 0.801);
+  border-radius: 10px;
+  padding: 5%;
 }
 #login {
   background-image: url("/pics/bbq2.png");
   background-size: cover;
   text-align: center;
   display: flex;
-  height: 100vh;
   width: 100vw;
   color: rgb(0, 0, 0);
   align-items: center;
@@ -133,7 +140,7 @@ form.form-signin {
 .about{
   background-color: rgba(236, 235, 235, 0.801);
   border-radius: 10px;
-  margin-top: 30%;
+  padding: 5%;
 }
 form {
   display: flex;

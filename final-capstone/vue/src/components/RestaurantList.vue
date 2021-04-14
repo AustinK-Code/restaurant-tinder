@@ -1,8 +1,6 @@
 <template>
   <!-- This component is used to get the list of restaurants from the back end API. -->
   <div class="restaurant-list">
-    <h2>Search Again</h2>
-    <search-location> </search-location>
     <button
       id="event-button"
       class="notEvent"
@@ -96,7 +94,6 @@
 
 <script>
 import services from "@/services/BaseService";
-import SearchLocation from "./SearchLocation.vue";
 import CreateEvent from "./CreateEvent.vue";
 let today = new Date();
 
@@ -117,7 +114,7 @@ weekday[6] = "Saturday";
 let todayDay = weekday[dayOfWeek.getDay()];
 
 export default {
-  components: { SearchLocation, CreateEvent },
+  components: {CreateEvent},
   name: "restaurant-list",
   data() {
     return {
