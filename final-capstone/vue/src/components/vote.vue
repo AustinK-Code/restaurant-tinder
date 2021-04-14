@@ -7,12 +7,28 @@
     <div v-for="(invite, index) in invitation" v-bind:key="invite.id">
       <button v-on:click="getRestaurants(index)">{{ index + 1 }}</button>
     </div>
-    <div v-for="restaurant in restaurantArr" v-bind:key="restaurant.name">
+
+
+    <div
+      v-for="(restaurant, index) in restaurantArr"
+      v-bind:key="restaurant.name"
+      v-bind="vote(index)"
+    >
       <h4>{{ restaurant.name }}</h4>
       <h3>{{ restaurant.cuisine }}</h3>
       <p>{{ restaurant.address }}</p>
-      <input type="image" src="@./public/pics/Thumbs_Up_Sign.svg" alt="fuck you" />
-      <button></button>
+      <input
+        v-on:click="restaurantVoteIndex = true"
+        type="image"
+        src="../pics/Thumbs_Up_Sign.svg"
+        alt="fuck you"
+      />
+      <input
+        v-on:click="restaurantVoteIndex = false"
+        type="image"
+        src="../pics/Thumbs_Down_Sign.svg"
+        alt="fuck you"
+      />
 
       <img
         class="thumbnail"
@@ -32,6 +48,7 @@ export default {
   components: {},
   data() {
     return {
+      restaurantVoteIndex: "",
       invitation: [],
       event: {},
       restaurantArr: [],
@@ -49,7 +66,7 @@ export default {
       });
     },
     getRestaurants(index) {
-      this.resetArray()
+      this.resetArray();
       BaseService.getRestaurantById(
         this.invitation[index].restaurantChoice1
       ).then((results) => {
@@ -80,8 +97,29 @@ export default {
       this.invNum.push(this.invCount);
     },
     resetArray() {
-      this.restaurantArr.length = 0
+      this.restaurantArr.length = 0;
     },
+        vote(index) {
+      let putIn = "";
+      if (index == 0) {
+        putIn = this.invite.restaurantChoice1;
+      }
+      if (index == 1) {
+        putIn = this.invite.restaurantChoice2;
+      }
+      if (index == 1) {
+        putIn = this.invite.restaurantChoice3;
+      }
+      if (index == 1) {
+        putIn = this.invite.restaurantChoice4;
+      }
+      if (index == 1) {
+        putIn = this.invite.restaurantChoice5;
+      }
+      this.restaurantVoteIndex = putIn;
+    },
+  },
+  computed: {
   },
   created() {
     BaseService.getInvitesByUserId(this.$store.state.user.id).then(
