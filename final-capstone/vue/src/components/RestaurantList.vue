@@ -32,8 +32,20 @@
             v-if="isOpen(time, restaurant.openTime, restaurant.closeTime)"
           >
             We are Open!
+<div class="image-cropper">
+   <img src="/pics/Open_Sign.svg"  style="width:100px;height:100px;"  />
+        </div>
+
           </div>
-          <div v-else>Currently Closed</div>
+          
+          
+          <div v-else>Currently Closed
+            
+             <div class="image-cropper">
+   <img src="/pics/Closed_Sign.svg" style="width:100px;height:100px;" />
+</div>
+
+          </div>
 
           <div id="phoneNumber-alert-message">
             <button
@@ -250,4 +262,8 @@ button {
   display: inline-block;
   margin: 1vw;
 }
+
+
+
+
 </style>
