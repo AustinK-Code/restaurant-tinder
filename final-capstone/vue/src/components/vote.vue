@@ -8,13 +8,16 @@
       <button v-on:click="getRestaurants(index), temp=index" v-bind="temp" >{{ index + 1 }}</button>
       <!-- <button v-on:click="location.reload()">X</button> -->
       <button v-on:click="BaseService.updateVotes(this.invitation[index])">Submit</button>
+      <button v-on:click="showResults(this.invitation[index].eventId)">See Results</button>
     </div>
 
 
     <div
+      
       v-for="(restaurant, index) in restaurantArr"
       v-bind:key="restaurant.name"
     >
+      <h1>{{result}}</h1>
       <h4>{{ restaurant.name }}</h4>
       <h3>{{ restaurant.cuisine }}</h3>
       <p>{{ restaurant.address }}</p>
@@ -51,6 +54,7 @@ export default {
   components: {},
   data() {
     return {
+      result:{},
       temp: "",
       restaurantVoteIndex: "",
       invitation: [],
@@ -64,6 +68,13 @@ export default {
     };
   },
   methods: {
+    showResults(event){
+      this.resetArray();
+      BaseService.calculateResults(event).then(
+      BaseService.getVotingResults(event).then((response) =>{
+        this.result = response.data
+      }))
+    },
     getEvent(id) {
       BaseService.getEventById(id).then((response) => {
         this.event = response.data;
@@ -131,16 +142,14 @@ export default {
       }
     },
   },
-  computed: {
-  },
   created() {
     BaseService.getInvitesByUserId(this.$store.state.user.id).then(
       (response) => {
         this.invitation = response.data;
       }
     );
-  },
-};
+  }
+  };
 </script>
 
 <style>
