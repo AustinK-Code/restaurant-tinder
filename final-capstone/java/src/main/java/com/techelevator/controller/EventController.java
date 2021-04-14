@@ -88,4 +88,7 @@ public class EventController {
     public Long getCurrentEventId(@PathVariable long userId){
         return eventDAO.getCurrentEventId(userId);
     }
+
+    @RequestMapping(path = "/events/{userId}", method = RequestMethod.GET)
+    public List<Event> getEventsByHostId(@PathVariable long userId){ return eventDAO.getEventsByHostId(userId);}
 }

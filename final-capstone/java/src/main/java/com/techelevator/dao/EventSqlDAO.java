@@ -7,6 +7,8 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class EventSqlDAO implements EventDAO{
@@ -69,6 +71,15 @@ public class EventSqlDAO implements EventDAO{
                 "LIMIT 1";
         Long eventId = jdbcTemplate.queryForObject(sql,new Object[] {userId}, Long.class);
       return eventId;
+    }
+    @Override
+    public List<Event> getEventsByHostId(Long userId){
+        List<Event> events = new ArrayList<>();
+        String sql = eventSql + " WHERE event_host_id = ?";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
+        while(results.next()){
+            events.add(mapRowToEvent(results));
+        }return events;
     }
 
 

@@ -18,13 +18,18 @@ export default {
     data(){
         return{
             invites:[],
-            restaurants: []
+            restaurants: [],
+            hostedEvents:""
         }
     },
     created(){
      BaseService.getInvitesByUserId(this.$store.state.user.id).then((response) =>{
           this.invites = response.data;
-        });
+        }),
+
+    BaseService.getEventsByHostId(this.$store.state.user.id).then((response)=>{
+        this.hostedEvents = response.data;
+    });
         
     },
     methods: {

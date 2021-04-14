@@ -70,6 +70,10 @@ export default {
 
     getRestaurantById(id){
         return axios.get(`/restaurant/${id}`)
+    },
+    
+    getEventsByHostId(id){
+        return axios.get(`/events/${id}`)
     }
 
         

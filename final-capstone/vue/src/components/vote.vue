@@ -3,12 +3,12 @@
     <br />
     <br />
     <br />
-
+    <h2>My Invitations:</h2>
     <div v-for="(invite, index) in invitation" v-bind:key="invite.id">
-      <button v-on:click="getRestaurants(index), temp=index" v-bind="temp" >{{ index + 1 }}</button>
+      <button v-on:click="getRestaurants(index), temp=index" v-bind="temp" >Invitation #{{ index + 1 }}</button>
       <!-- <button v-on:click="location.reload()">X</button> -->
-      <button v-on:click="saveVotes(index)">Submit</button>
-      <button v-on:click="showResults(invitation[index].eventId)">See Results</button>
+      <button v-on:click="saveVotes(index)">Submit Votes for Invitation #{{index + 1}}</button>
+      
     </div>
 
 
@@ -17,7 +17,7 @@
       v-for="(restaurant, index) in restaurantArr"
       v-bind:key="restaurant.name"
     >
-      <h1>{{result}}</h1>
+      
       <h4>{{ restaurant.name }}</h4>
       <h3>{{ restaurant.cuisine }}</h3>
       <p>{{ restaurant.address }}</p>
@@ -25,13 +25,13 @@
         v-on:click="vote(true,index,temp)"
         type="image"
         src="../pics/Thumbs_Up_Sign.svg"
-        alt="fuck you"
+        alt="thumbs-up"
       />
       <input
         v-on:click="vote(false,index,temp)"
         type="image"
         src="../pics/Thumbs_Down_Sign.svg"
-        alt="fuck you"
+        alt="thumbs-down"
       />
 
       <img
@@ -41,6 +41,14 @@
       />
 
       <!--- <button v-on:click="getEvent(21)"></button>--->
+    </div>
+    <h2>Events I'm Hosting:</h2>
+    <div class="hostedEvents" v-for="event in hostedEvents" v-bind:key="event.id">
+     <button v-on:click="getResults(event)">See Results for event # {{event.eventId}}</button>
+     
+
+
+    
     </div>
      
   </div>
@@ -65,18 +73,21 @@ export default {
         cuisine: "",
         thumbnailImg: "",
       },
+      hostedEvents:"",
+      eventResults: ""
     };
   },
   methods: {
+    
     saveVotes(index){
       BaseService.updateVotes(this.invitation[index])
     },
-    showResults(eventID){
-      this.resetArray();
-      this.getEvent(eventID)
-      BaseService.calculateResults(this.event).then(
-      BaseService.getVotingResults(eventID).then((response) =>{
-        this.result = response.data
+    getResults(event){
+      BaseService.calculateResults(event)
+    },
+    showResults(eventId){
+      BaseService.getVotingResults(eventId).then((response =>{
+        this.eventResults = response.data;
       }))
     },
     getEvent(id) {
@@ -151,7 +162,10 @@ export default {
       (response) => {
         this.invitation = response.data;
       }
-    );
+    ),
+    BaseService.getEventsByHostId(this.$store.state.user.id).then((response)=>{
+        this.hostedEvents = response.data;
+    });
   }
   };
 </script>
