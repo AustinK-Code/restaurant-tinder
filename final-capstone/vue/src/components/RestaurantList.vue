@@ -7,12 +7,12 @@
       id="event-button"
       class="notEvent"
       v-on:click="showEventForm = true"
-      v-if="event.length > 1 && event.length <6"
+      v-if="event.length > 1 && event.length < 6"
     >
       Make an event
     </button>
     <div v-else>Please save 2-5 restaurants</div>
-    <div v-if="showEventForm"><create-event v-bind:formEvent="event"/></div>
+    <div v-if="showEventForm"><create-event v-bind:formEvent="event" /></div>
     <span id="restaurant-list-container">
       <div
         v-for="restaurant in restaurantsOpenToday"
@@ -32,19 +32,23 @@
             v-if="isOpen(time, restaurant.openTime, restaurant.closeTime)"
           >
             We are Open!
-<div class="image-cropper">
-   <img src="/pics/Open_Sign.svg"  style="width:100px;height:100px;"  />
-        </div>
-
+            <div class="image-cropper">
+              <img
+                src="/pics/Open_Sign.svg"
+                style="width: 100px; height: 100px"
+              />
+            </div>
           </div>
-          
-          
-          <div v-else>Currently Closed
-            
-             <div class="image-cropper">
-   <img src="/pics/Closed_Sign.svg" style="width:100px;height:100px;" />
-</div>
 
+          <div v-else>
+            Currently Closed
+
+            <div class="image-cropper">
+              <img
+                src="/pics/Closed_Sign.svg"
+                style="width: 100px; height: 100px"
+              />
+            </div>
           </div>
 
           <div id="phoneNumber-alert-message">
@@ -84,12 +88,9 @@
 
 <script>
 import services from "@/services/BaseService";
-import SearchLocation from './SearchLocation.vue';
-import CreateEvent from './CreateEvent.vue';
+import SearchLocation from "./SearchLocation.vue";
+import CreateEvent from "./CreateEvent.vue";
 let today = new Date();
-
-
-
 
 //get time right now
 let time =
@@ -118,15 +119,13 @@ export default {
       restaurants: [],
       event: [],
       showEventForm: false,
-      
     };
   },
   methods: {
-
     //converts time from HH MM SS to 12 hour format
     convertTime(time) {
-      if (time === null){
-        return " "
+      if (time === null) {
+        return " ";
       }
       let newTime = "";
       const hours = time.substr(0, 2);
@@ -143,10 +142,10 @@ export default {
           newTime = hours + ":" + minutes + "AM";
         }
       }
-      if (hours == 12){
-        newTime = "Noon"
+      if (hours == 12) {
+        newTime = "Noon";
       }
-      
+
       return newTime;
     },
     //Filters input for the search and pulls the array of locations
@@ -172,16 +171,16 @@ export default {
         return true;
       } else return false;
     },
-    addToEvent(restaurant){
-      this.event.push(restaurant.name)
+    addToEvent(restaurant) {
+      this.event.push(restaurant.name);
     },
     //this method can be called to create an alert that prints a message
     say: function (message) {
-      alert(message)
+      alert(message);
     },
-    webFunction: function() {
+    webFunction: function () {
       window.open("https://www.google.com/maps/", "_blank");
-    }
+    },
   },
   computed: {
     restaurantsOpenToday() {
@@ -262,8 +261,4 @@ button {
   display: inline-block;
   margin: 1vw;
 }
-
-
-
-
 </style>
