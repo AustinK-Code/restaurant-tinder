@@ -48,7 +48,7 @@
           </div>
 
           <div id="directions">
-            <button @click="webFunction()">Find Directions</button>
+            <button @click="webFunction(restaurant.name, restaurant.address)">Find Directions</button>
           </div>
 
           <img
@@ -167,8 +167,8 @@ export default {
     say: function (message) {
       alert(message)
     },
-    webFunction: function() {
-      window.open("https://www.google.com/maps/", "_blank");
+    webFunction: function(name, nameTwo) {
+      window.open("https://www.google.com/maps/place/" + name + ", " + nameTwo, "_blank");
     }
   },
   computed: {
