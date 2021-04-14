@@ -7,7 +7,7 @@
     <div v-for="(invite, index) in invitation" v-bind:key="invite.id">
       <button v-on:click="getRestaurants(index), temp=index" v-bind="temp" >{{ index + 1 }}</button>
       <!-- <button v-on:click="location.reload()">X</button> -->
-      <button v-on:click="saveVotes(invitation[index])">Submit</button>
+      <button v-on:click="saveVotes(index)">Submit</button>
       <button v-on:click="showResults(invitation[index].eventId)">See Results</button>
     </div>
 
@@ -68,13 +68,14 @@ export default {
     };
   },
   methods: {
-    saveVotes(invite){
-      BaseService.updateVotes(invite)
+    saveVotes(index){
+      BaseService.updateVotes(this.invitation[index])
     },
-    showResults(event){
+    showResults(eventID){
       this.resetArray();
-      BaseService.calculateResults(event).then(
-      BaseService.getVotingResults(event).then((response) =>{
+      this.getEvent(eventID)
+      BaseService.calculateResults(this.event).then(
+      BaseService.getVotingResults(eventID).then((response) =>{
         this.result = response.data
       }))
     },
