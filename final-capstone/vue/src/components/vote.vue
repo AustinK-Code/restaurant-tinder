@@ -6,6 +6,8 @@
 
     <div v-for="(invite, index) in invitation" v-bind:key="invite.id">
       <button v-on:click="getRestaurants(index), temp=index" v-bind="temp" >{{ index + 1 }}</button>
+      <!-- <button v-on:click="location.reload()">X</button> -->
+      <button v-on:click="BaseService.updateVotes(this.invitation[index])">Submit</button>
     </div>
 
 
@@ -37,7 +39,9 @@
 
       <!--- <button v-on:click="getEvent(21)"></button>--->
     </div>
+     
   </div>
+ 
 </template>
 
 <script>
@@ -67,31 +71,41 @@ export default {
     },
     getRestaurants(index) {
       this.resetArray();
+      if(this.invitation[index].restaurantChoice1 != 0){
       BaseService.getRestaurantById(
         this.invitation[index].restaurantChoice1
       ).then((results) => {
         this.restaurantArr.push(results.data);
-      });
+      })}
+      
+      if(this.invitation[index].restaurantChoice2 != 0){
       BaseService.getRestaurantById(
         this.invitation[index].restaurantChoice2
       ).then((results) => {
         this.restaurantArr.push(results.data);
-      });
+      })}
+
+      if(this.invitation[index].restaurantChoice3 != 0){
       BaseService.getRestaurantById(
         this.invitation[index].restaurantChoice3
       ).then((results) => {
         this.restaurantArr.push(results.data);
-      });
+      })}
+
+      if(this.invitation[index].restaurantChoice4 != 0){
       BaseService.getRestaurantById(
         this.invitation[index].restaurantChoice4
       ).then((results) => {
         this.restaurantArr.push(results.data);
-      });
+      })}
+
+      if(this.invitation[index].restaurantChoice5 != 0){
       BaseService.getRestaurantById(
         this.invitation[index].restaurantChoice5
       ).then((results) => {
         this.restaurantArr.push(results.data);
-      });
+      })}
+
     },
     pushNum() {
       this.invNum.push(this.invCount);
@@ -106,13 +120,13 @@ export default {
       if (index == 1) {
         this.invitation[arrPos].vote2 = value;
       }
-      if (index == 1) {
+      if (index == 2) {
         this.invitation[arrPos].vote3 = value;
       }
-      if (index == 1) {
+      if (index == 3) {
         this.invitation[arrPos].vote4 = value;
       }
-      if (index == 1) {
+      if (index == 4) {
         this.invitation[arrPos].vote5 = value;
       }
     },
