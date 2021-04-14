@@ -3,23 +3,24 @@
     <br />
     <br />
     <br />
-    
-    <div v-for="invite in invitation" v-bind:key="invite.id">
-      
-    <button v-on:click="getRestaurants()">Vote for Restaurants</button>
-    <div v-for="restaurant in restaurantArr"
-    v-bind:key="restaurant.name">
-     <h4>{{restaurant.name}}</h4>
-      <h3>{{restaurant.cuisine}}</h3>
-      <p>{{restaurant.address}}</p>
+
+    <div v-for="(invite, index) in invitation" v-bind:key="invite.id">
+      <button v-on:click="getRestaurants(index)">{{ index + 1 }}</button>
+    </div>
+    <div v-for="restaurant in restaurantArr" v-bind:key="restaurant.name">
+      <h4>{{ restaurant.name }}</h4>
+      <h3>{{ restaurant.cuisine }}</h3>
+      <p>{{ restaurant.address }}</p>
+      <input type="image" src="@./public/pics/Thumbs_Up_Sign.svg" alt="fuck you" />
+      <button></button>
 
       <img
-            class="thumbnail"
-            v-bind:src="'../pics/' + restaurant.thumbnailImg"
-            alt="thumbnail not available"
-          />
-    </div>
-     <!--- <button v-on:click="getEvent(21)"></button>--->
+        class="thumbnail"
+        v-bind:src="'../pics/' + restaurant.thumbnailImg"
+        alt="thumbnail not available"
+      />
+
+      <!--- <button v-on:click="getEvent(21)"></button>--->
     </div>
   </div>
 </template>
@@ -28,7 +29,7 @@
 import BaseService from "../services/BaseService";
 
 export default {
-  components: { },
+  components: {},
   data() {
     return {
       invitation: [],
@@ -38,7 +39,8 @@ export default {
         name: "",
         cuisine: "",
         thumbnailImg: "",
-      }}
+      },
+    };
   },
   methods: {
     getEvent(id) {
@@ -46,18 +48,39 @@ export default {
         this.event = response.data;
       });
     },
-    getRestaurants() {
-        BaseService.getRestaurantById(this.invitation[0].restaurantChoice1).then(
-          (results) => {this.restaurantArr.push(results.data);})
-                  BaseService.getRestaurantById(this.invitation[0].restaurantChoice2).then(
-          (results) => {this.restaurantArr.push(results.data);})
-                  BaseService.getRestaurantById(this.invitation[0].restaurantChoice3).then(
-          (results) => {this.restaurantArr.push(results.data);})
-                  BaseService.getRestaurantById(this.invitation[0].restaurantChoice4).then(
-          (results) => {this.restaurantArr.push(results.data);})
-                  BaseService.getRestaurantById(this.invitation[0].restaurantChoice5).then(
-          (results) => {this.restaurantArr.push(results.data);})
-      
+    getRestaurants(index) {
+      this.resetArray()
+      BaseService.getRestaurantById(
+        this.invitation[index].restaurantChoice1
+      ).then((results) => {
+        this.restaurantArr.push(results.data);
+      });
+      BaseService.getRestaurantById(
+        this.invitation[index].restaurantChoice2
+      ).then((results) => {
+        this.restaurantArr.push(results.data);
+      });
+      BaseService.getRestaurantById(
+        this.invitation[index].restaurantChoice3
+      ).then((results) => {
+        this.restaurantArr.push(results.data);
+      });
+      BaseService.getRestaurantById(
+        this.invitation[index].restaurantChoice4
+      ).then((results) => {
+        this.restaurantArr.push(results.data);
+      });
+      BaseService.getRestaurantById(
+        this.invitation[index].restaurantChoice5
+      ).then((results) => {
+        this.restaurantArr.push(results.data);
+      });
+    },
+    pushNum() {
+      this.invNum.push(this.invCount);
+    },
+    resetArray() {
+      this.restaurantArr.length = 0
     },
   },
   created() {

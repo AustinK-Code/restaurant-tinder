@@ -3,11 +3,7 @@
   <br> <!--- need to add css to replace br -->
   <br>
   <br>
-    <h2>My Events:</h2>
-    <router-link to="/pendinginvites">
-   <h2> Pending Invites </h2>
-    </router-link>
-   <h2> Upcoming Events </h2>
+    <vote/>
 
 <!---adding the user's events --->
   
@@ -15,9 +11,10 @@
 </template>
 
 <script>
-
+import vote from "../components/vote.vue"
 import BaseService from "../services/BaseService"
 export default {
+    components:{vote},
     data(){
         return{
             invites:[],

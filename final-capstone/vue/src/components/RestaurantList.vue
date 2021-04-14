@@ -11,16 +11,11 @@
     >
       Make an event
     </button>
-<<<<<<< HEAD
-    <div v-else>Please save 2-5 restaurants</div>
-    <div v-if="showEventForm"><create-event v-bind:formEvent="event" /></div>
-=======
     <div id ="invite-instructions">
       <h2>Feeling hungry and want to invite some friends along?</h2>
       <h3>Check the boxes below 2 or more restaurants and then click Make an Event to get the party started!</h3>
       </div>
     <div v-if="showEventForm"><create-event v-bind:formEvent="event"/></div>
->>>>>>> 5fbeadaba87787f6e864147469efd5e6d8fdc21f
     <span id="restaurant-list-container">
       <div
         v-for="restaurant in restaurantsOpenToday"
@@ -209,6 +204,8 @@ export default {
 *::before,
 *::after {
   box-sizing: border-box;
+}
+#img-cropper{
 }
 .restaurant-list {
   margin-top: 55px;
