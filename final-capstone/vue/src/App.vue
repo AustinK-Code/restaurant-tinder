@@ -7,6 +7,7 @@
       <li><router-link v-bind:to="{ name: 'home' }"  active-class="link" v-if="$store.state.token != ''"
       style="  display: block;
   color: white;
+  font-family:tahoma;
   text-align: center;
   padding: 14px 16px;
   margin: 5px;
@@ -14,6 +15,7 @@
       <li><router-link v-bind:to="{ name: 'logout' }" active-class="link2" v-if="$store.state.token != ''" 
       style="  display: block;
   color: white;
+  font-family:tahoma;
   text-align: center;
   padding: 14px 16px;
   margin: 5px;
@@ -21,6 +23,7 @@
       <li><router-link v-bind:to="{ name: 'events' }" active-class="link" v-if="$store.state.token != ''" 
       style="  display: block;
   color: white;
+  font-family:tahoma;
   text-align: center;
   padding: 14px 16px;
   margin: 5px;
@@ -42,6 +45,7 @@ body {
   padding: 0;
 }
 #app {
+  font-family:tahoma;
   height: 100vh;
   width: 100vw;
 }

@@ -1,11 +1,5 @@
 <template>
   <div class="home">
-    <!--- Remove make event from home page and just integrate into search results?
-    <form>
-      <h1>Make New Event</h1>
-      <button v-on:click="makeEvent()">Event</button>
-      </form>
-     --->
     <form id="search-form">
       <h1>Search for Restaurants</h1>
       <locationSearch />
@@ -31,6 +25,7 @@ components:{
 <style scoped>
 
 .home {
+  font: sans-Serif;
   background-image: url("../pics/steakhouse2.jpg");
   background-size: cover;
   display: flex;
