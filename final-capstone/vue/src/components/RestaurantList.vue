@@ -33,7 +33,7 @@
           >
            <!-- We are Open! -->
 <div class="image-cropper">
-   <img src="/pics/Open_Sign.svg"  style="width:150px;height:150px;"  />
+   <img src="/pics/New Open.svg"  style="width:150px;height:150px;"  />
         </div>
 
           </div>
@@ -42,10 +42,11 @@
           <div v-else> <!--Currently Closed-->
             
              <div class="image-cropper">
-   <img src="/pics/Closed_Sign.svg" style="width:150px;height:150px;" />
+   <img src="/pics/New Closed.svg" style="width:150px;height:150px;" />
 </div>
 
           </div>
+
 
           <div id="phoneNumber-alert-message">
             <button
