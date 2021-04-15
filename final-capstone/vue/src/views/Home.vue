@@ -2,26 +2,21 @@
   <div class="home">
     <form id="search-form">
       <h1>Search for Restaurants</h1>
-      <p>Input a City or Zip Code and search for restaurants. Invite your friends to pick thier favorites and plan the perfect meal! </p>
+      <p>
+        Input a City or Zip Code and search for restaurants. Invite your friends
+        to pick their favorites and plan the perfect meal!
+      </p>
       <locationSearch />
-
-       
     </form>
-
-</div>
-
-
-
+  </div>
 </template>
-
-
 <script>
-import locationSearch from "@/components/SearchLocation.vue"
+import locationSearch from "@/components/SearchLocation.vue";
 export default {
   name: "home",
-components:{
-  locationSearch
-},
+  components: {
+    locationSearch,
+  },
 
   methods: {
     makeEvent() {
@@ -31,7 +26,6 @@ components:{
 };
 </script>
 <style scoped>
-
 .home {
   font: sans-Serif;
   background-image: url("../pics/steakhouse2.jpg");
@@ -42,13 +36,13 @@ components:{
   color: rgb(0, 0, 0);
   align-items: center;
   justify-content: center;
-   background-attachment: fixed;
+  background-attachment: fixed;
 }
-#search-form{
+#search-form {
   background-color: rgba(236, 235, 235, 0.801);
   border-radius: 10px;
   padding: 5%;
-  display:flex;
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -56,6 +50,5 @@ components:{
   height: 45vh;
   margin: 1vw;
   text-align: center;
-
 }
 </style>
