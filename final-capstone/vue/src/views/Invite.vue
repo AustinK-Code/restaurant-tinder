@@ -3,10 +3,10 @@
 </template>
 
 <script>
-import CreateEvent from '../components/CreateEvent.vue'
+// import CreateEvent from '../components/CreateEvent.vue'
 import CreateInvite from '../components/CreateInvite.vue'
 export default {
-  components: { CreateEvent, CreateInvite },
+  components: { CreateInvite },
 
 }
 </script>

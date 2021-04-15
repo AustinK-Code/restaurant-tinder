@@ -58,7 +58,9 @@ public class EventSqlDAO implements EventDAO{
     public EventResult getResultsById(Long id){
         String sql = "SELECT result_id, event_id,choice_1_result, choice_2_result, choice_3_result, choice_4_result, choice_5_result\n" +
                 "FROM event_choices_results\n" +
-                "WHERE event_id = ?";
+                "WHERE event_id = ?" +
+                "ORDER BY result_id desc\n" +
+                "LIMIT 1";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
         if(results.next()){
             return mapRowToResult(results);

@@ -44,12 +44,14 @@
     </div>
     <h2>Events I'm Hosting:</h2>
     <div class="hostedEvents" v-for="event in hostedEvents" v-bind:key="event.id">
-     <button v-on:click="getResults(event)">See Results for event # {{event.eventId}}</button>
+     <button v-on:click="showResults(event,event.eventId)">See Results for event # {{event.eventId}}</button>
+     </div>
+     <div v-if="Object.keys(eventResults).length != 0">{{eventResults}}test</div>
      
 
 
     
-    </div>
+    
      
   </div>
  
@@ -74,7 +76,7 @@ export default {
         thumbnailImg: "",
       },
       hostedEvents:"",
-      eventResults: ""
+      eventResults: {}
     };
   },
   methods: {
@@ -82,13 +84,12 @@ export default {
     saveVotes(index){
       BaseService.updateVotes(this.invitation[index])
     },
-    getResults(event){
-      BaseService.calculateResults(event)
-    },
-    showResults(eventId){
+    showResults(event,eventId){
+      this.eventResults = {}
+      BaseService.calculateResults(event).then(
       BaseService.getVotingResults(eventId).then((response =>{
         this.eventResults = response.data;
-      }))
+      })))
     },
     getEvent(id) {
       BaseService.getEventById(id).then((response) => {
@@ -156,6 +157,11 @@ export default {
         this.invitation[arrPos].vote5 = value;
       }
     },
+  },
+  computed:{
+    findWinner(){
+      return this.findWinner
+    }
   },
   created() {
     BaseService.getInvitesByUserId(this.$store.state.user.id).then(
