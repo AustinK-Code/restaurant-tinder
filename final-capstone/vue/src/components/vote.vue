@@ -3,7 +3,7 @@
     <br />
     <br />
     <br />
-    <h2 id="invitations">My Invitations:</h2>
+    <h1 id="invitations-header">My Invitations:</h1>
     <div id="invited" v-for="(invite, index) in invitation" v-bind:key="invite.id">
       <button id="invite" v-on:click="getRestaurants(index), (temp = index)" v-bind="temp">
         Invitation #{{ invite.eventId }}
@@ -18,7 +18,7 @@
       v-for="(restaurant, index) in restaurantArr"
       v-bind:key="index"
     >
-      <h4>{{ restaurant.name }}</h4>
+      <h2 id='restaurant-name'>{{ restaurant.name }}</h2>
       <h3>{{ restaurant.cuisine }}</h3>
       <p>{{ restaurant.address }}</p>
       <input id="up"
@@ -42,7 +42,7 @@
 
       <!--- <button v-on:click="getEvent(21)"></button>--->
     </div>
-    <h2 id='invitations'>Events I'm Hosting:</h2>
+    <h2 id='invitations-header'>Events I'm Hosting:</h2>
     <h3 id='invitations'>Click once for score <br/> Click twice to reveal restaurant names</h3>
     <div
       class="hostedEvents"
@@ -322,12 +322,31 @@ export default {
   font-size: 16px;
   margin: 4px 2px;
 }
+
+#invitations-header {
+  background-color: rgba(236, 235, 235, 0.801);
+  border-radius: 10px;
+  background-size: 10%;
+  margin: 2vw 2vh;
+  padding: 1%;
+  width: 80vw;
+  height: 15%;
+  padding: 20px;
+  align-items: center;
+  display: inline-block;
+  font-size: 18px;
+  margin: 4px 2px;
+  font-weight: bold;
+}
+
 .my-events {
-  background-image: url("../pics/food_party.jpg");
+  margin-top: -40px;
   background-size: cover;
-  height: 100%;
   overflow: hidden;
   background-attachment: fixed;
+  background-image: url("../pics/food_party.jpg");
+  background-size: cover;
+  height: 125%;
 }
 
 #score {
@@ -345,4 +364,14 @@ export default {
   margin: 4px 2px;
   font-weight: bold;
 }
+
+#restaurant-name {
+  font-weight: bold;
+}
+
+#app {
+  background-size: cover;
+  background-image: url("../pics/food_party.jpg");
+}
+
 </style>
