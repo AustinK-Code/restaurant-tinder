@@ -85,13 +85,12 @@ export default {
     saveVotes(index) {
       BaseService.updateVotes(this.invitation[index]);
     },
-    getResults(event) {
-      BaseService.calculateResults(event);
-    },
-    showResults(eventId) {
-      BaseService.getVotingResults(eventId).then((response) => {
+    showResults(event,eventId){
+      this.eventResults = {}
+      BaseService.calculateResults(event).then(
+      BaseService.getVotingResults(eventId).then((response =>{
         this.eventResults = response.data;
-      });
+      })))
     },
     getEvent(id) {
       BaseService.getEventById(id).then((response) => {
