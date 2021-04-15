@@ -94,6 +94,8 @@ export default {
       BaseService.updateVotes(this.invitation[index]);
     },
     showResults(event, eventId) {
+      this.choiceResultArr.length = []
+      this.thingArr.length = []
       this.eventResults = {};
       BaseService.calculateResults(event).then(
         BaseService.getVotingResults(eventId).then((response) => {
@@ -175,8 +177,7 @@ export default {
       }
     },
     findWinner() {
-      this.choiceResultArr.length = 0
-      this.thingArr.length = 0
+
       this.choiceResultArr.push(this.eventResults.choice1Result);
       this.choiceResultArr.push(this.eventResults.choice2Result);
       this.choiceResultArr.push(this.eventResults.choice3Result);
