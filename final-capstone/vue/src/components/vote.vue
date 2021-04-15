@@ -5,30 +5,30 @@
     <br />
     <h2>My Invitations:</h2>
     <div v-for="(invite, index) in invitation" v-bind:key="invite.id">
-      <button v-on:click="getRestaurants(index), temp=index" v-bind="temp" >Invitation #{{ index + 1 }}</button>
+      <button v-on:click="getRestaurants(index), (temp = index)" v-bind="temp">
+        Invitation #{{ index + 1 }}
+      </button>
       <!-- <button v-on:click="location.reload()">X</button> -->
-      <button v-on:click="saveVotes(index)">Submit Votes for Invitation #{{index + 1}}</button>
-      
+      <button v-on:click="saveVotes(index)">
+        Submit Votes for Invitation #{{ index + 1 }}
+      </button>
     </div>
 
-
     <div
-      
       v-for="(restaurant, index) in restaurantArr"
       v-bind:key="restaurant.name"
     >
-      
       <h4>{{ restaurant.name }}</h4>
       <h3>{{ restaurant.cuisine }}</h3>
       <p>{{ restaurant.address }}</p>
       <input
-        v-on:click="vote(true,index,temp)"
+        v-on:click="vote(true, index, temp)"
         type="image"
         src="../pics/Thumbs_Up_Sign.svg"
         alt="thumbs-up"
       />
       <input
-        v-on:click="vote(false,index,temp)"
+        v-on:click="vote(false, index, temp)"
         type="image"
         src="../pics/Thumbs_Down_Sign.svg"
         alt="thumbs-down"
@@ -43,20 +43,21 @@
       <!--- <button v-on:click="getEvent(21)"></button>--->
     </div>
     <h2>Events I'm Hosting:</h2>
-    <div class="hostedEvents" v-for="event in hostedEvents" v-bind:key="event.id">
-     <button v-on:click="showResults(event,event.eventId)">See Results for event # {{event.eventId}}</button>
-     </div>
-     <div v-if="Object.keys(eventResults).length != 0">{{eventResults}}test
-       <div></div>
-     
-     
-
-
-    
+    <div
+      class="hostedEvents"
+      v-for="event in hostedEvents"
+      v-bind:key="event.id"
+    >
+      <button v-on:click="showResults(event, event.eventId)">
+        See Results for event # {{ event.eventId }}
+      </button>
     </div>
-     
+    <div v-if="Object.keys(eventResults).length != 0">
+      <div v-for="thing in thingArr" v-bind:key="thing.restaurantName">
+        {{thing.restaurantName}}{{thing.voteTotal}}
+      </div>
+    </div>
   </div>
- 
 </template>
 
 <script>
@@ -66,6 +67,8 @@ export default {
   components: {},
   data() {
     return {
+      choiceResultArr: [],
+      restaurantNameArr: [],
       result: {},
       temp: "",
       restaurantVoteIndex: "",
@@ -78,19 +81,28 @@ export default {
         thumbnailImg: "",
       },
       hostedEvents: "",
-      eventResults: "",
+      eventResults: {},
+      thing: {
+        voteTotal: 0,
+        restaurantName: "",
+      },
+      thingArr: [],
     };
   },
   methods: {
     saveVotes(index) {
       BaseService.updateVotes(this.invitation[index]);
     },
-    showResults(event,eventId){
-      this.eventResults = {}
+    showResults(event, eventId) {
+      this.eventResults = {};
       BaseService.calculateResults(event).then(
-      BaseService.getVotingResults(eventId).then((response =>{
-        this.eventResults = response.data;
-      })))
+        BaseService.getVotingResults(eventId).then((response) => {
+          this.eventResults = response.data;
+          this.findRestaurantName(eventId);
+          this.findWinner()
+        })
+      )
+      
     },
     getEvent(id) {
       BaseService.getEventById(id).then((response) => {
@@ -163,26 +175,51 @@ export default {
       }
     },
     findWinner() {
-      let arr = [];
-      arr.push(this.eventResults.choice1Results);
-      arr.push(this.eventResults.choice2Results);
-      arr.push(this.eventResults.choice3Results);
-      arr.push(this.eventResults.choice4Results);
-      arr.push(this.eventResults.choice5Results);
+      this.choiceResultArr.length = 0
+      this.thingArr.length = 0
+      this.choiceResultArr.push(this.eventResults.choice1Result);
+      this.choiceResultArr.push(this.eventResults.choice2Result);
+      this.choiceResultArr.push(this.eventResults.choice3Result);
+      this.choiceResultArr.push(this.eventResults.choice4Result);
+      this.choiceResultArr.push(this.eventResults.choice5Result);
+      for (let x = 0; x < this.choiceResultArr.length; x++) {
+        this.thing = {}
+        this.thing.voteTotal = this.choiceResultArr[x]
+        this.thing.restaurantName = this.restaurantNameArr[x];
+        this.thingArr.push(this.thing);
+      }
+      this.thingArr.reverse(function(a,b){return b.voteTotal - a.voteTotal})
+
     },
+
     findRestaurantName(id) {
       let eventt = {};
       let restaurantt = {};
-      BaseService.getEventById(id)
-        .then((response) => {
-          eventt = response.data;
-        })
-        .then(
-          BaseService.getDetails(eventt.restaurantId).then((response) => {
-            restaurantt = response.data;
-          })
-        );
-      return restaurantt.name;
+      BaseService.getEventById(id).then((response) => {
+        eventt = response.data;
+        BaseService.getDetails(eventt.restaurantChoice1).then((response) => {
+          restaurantt = response.data;
+          this.restaurantNameArr.push(restaurantt.name);
+        });
+        BaseService.getDetails(eventt.restaurantChoice2).then((response) => {
+          restaurantt = response.data;
+          this.restaurantNameArr.push(restaurantt.name);
+        });
+        BaseService.getDetails(eventt.restaurantChoice3).then((response) => {
+          restaurantt = response.data;
+          this.restaurantNameArr.push(restaurantt.name);
+        });
+        BaseService.getDetails(eventt.restaurantChoice4).then((response) => {
+          restaurantt = response.data;
+          this.restaurantNameArr.push(restaurantt.name);
+        });
+        BaseService.getDetails(eventt.restaurantChoice5).then((response) => {
+          restaurantt = response.data;
+          this.restaurantNameArr.push(restaurantt.name);
+        });
+      });
+
+      return eventt;
     },
   },
   created() {
