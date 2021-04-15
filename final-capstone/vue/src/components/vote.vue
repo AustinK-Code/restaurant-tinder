@@ -46,7 +46,9 @@
     <div class="hostedEvents" v-for="event in hostedEvents" v-bind:key="event.id">
      <button v-on:click="showResults(event,event.eventId)">See Results for event # {{event.eventId}}</button>
      </div>
-     <div v-if="Object.keys(eventResults).length != 0">{{eventResults}}test</div>
+     <div v-if="Object.keys(eventResults).length != 0">{{eventResults}}test
+       <div></div>
+     </div>
      
 
 
@@ -157,10 +159,23 @@ export default {
         this.invitation[arrPos].vote5 = value;
       }
     },
-  },
-  computed:{
-    findWinner(){
-      return this.findWinner
+      findWinner(){
+      let arr = []
+      arr.push(this.eventResults.choice1Results)
+      arr.push(this.eventResults.choice2Results)
+      arr.push(this.eventResults.choice3Results)
+      arr.push(this.eventResults.choice4Results)
+      arr.push(this.eventResults.choice5Results)
+    },
+    findRestaurantName(id){
+      let eventt = {}
+      let restaurantt = {}
+      BaseService.getEventById(id).then((response) => {
+        eventt = response.data
+      }).then(BaseService.getDetails(eventt.restaurantId).then((response) => {
+        restaurantt = response.data
+      }))
+      return restaurantt.name
     }
   },
   created() {
