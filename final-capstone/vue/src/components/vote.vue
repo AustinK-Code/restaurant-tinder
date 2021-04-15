@@ -45,10 +45,10 @@
     <h2>Events I'm Hosting:</h2>
     <div class="hostedEvents" v-for="event in hostedEvents" v-bind:key="event.id">
      <button v-on:click="showResults(event,event.eventId)">See Results for event # {{event.eventId}}</button>
-     
+     </div>
      <div v-if="Object.keys(eventResults).length != 0">{{eventResults}}test
        <div></div>
-     </div>
+     
      
 
 
