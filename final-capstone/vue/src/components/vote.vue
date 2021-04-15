@@ -42,8 +42,8 @@
 
       <!--- <button v-on:click="getEvent(21)"></button>--->
     </div>
-    <h2>Events I'm Hosting:</h2>
-    <h3>Click once for score <br/> Click twice to reveal restaurant names</h3>
+    <h2 id='invitations'>Events I'm Hosting:</h2>
+    <h3 id='invitations'>Click once for score <br/> Click twice to reveal restaurant names</h3>
     <div
       class="hostedEvents"
       v-for="event in hostedEvents"
