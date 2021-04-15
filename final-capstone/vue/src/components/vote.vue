@@ -1,40 +1,40 @@
 <template>
-  <div>
+  <div class="my-events">
     <br />
     <br />
     <br />
-    <h2>My Invitations:</h2>
-    <div v-for="(invite, index) in invitation" v-bind:key="invite.id">
-      <button v-on:click="getRestaurants(index), (temp = index)" v-bind="temp">
+    <h2 id="invitations">My Invitations:</h2>
+    <div id="invited" v-for="(invite, index) in invitation" v-bind:key="invite.id">
+      <button id="invite" v-on:click="getRestaurants(index), (temp = index)" v-bind="temp">
         Invitation #{{ invite.eventId }}
       </button>
       <!-- <button v-on:click="location.reload()">X</button> -->
-      <button v-on:click="saveVotes(index)">
+      <button id="invite" v-on:click="saveVotes(index)">
         Submit Votes for Invitation #{{ index + 1 }}
       </button>
     </div>
 
-    <div
+    <div id="array"
       v-for="(restaurant, index) in restaurantArr"
       v-bind:key="index"
     >
       <h4>{{ restaurant.name }}</h4>
       <h3>{{ restaurant.cuisine }}</h3>
       <p>{{ restaurant.address }}</p>
-      <input
+      <input id="up"
         v-on:click="vote(true, index, temp)"
         type="image"
         src="../pics/Thumbs_Up_Sign.svg"
         alt="thumbs-up"
       />
-      <input
+      <input id="up"
         v-on:click="vote(false, index, temp)"
         type="image"
         src="../pics/Thumbs_Down_Sign.svg"
         alt="thumbs-down"
       />
 
-      <img
+      <img id="restaurant-img"
         class="thumbnail"
         v-bind:src="'../pics/' + restaurant.thumbnailImg"
         alt="thumbnail not available"
@@ -49,7 +49,7 @@
       v-for="event in hostedEvents"
       v-bind:key="event.id"
     >
-      <button v-on:click="showResults(event, event.eventId)">
+      <button id="invite" v-on:click="showResults(event, event.eventId)">
         See Results for event # {{ event.eventId }}
       </button>
     </div>
@@ -249,4 +249,84 @@ export default {
 </script>
 
 <style>
+#invite {
+  color: rgb(255, 255, 255);
+  font-size: 20px;
+  line-height: 10px;
+  padding: 9px;
+  border-radius: 45px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  background-color: rgb(255, 88, 100);
+  border: 2px solid rgb(255, 255, 255);
+  display: inline-block;
+}
+#invite:hover {
+  color: rgb(82, 18, 124);
+  font-size: 20px;
+  line-height: 10px;
+  padding: 9px;
+  border-radius: 45px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  background-color: rgb(142, 247, 229);
+  border: 2px solid rgb(82, 18, 124);
+  display: inline-block;
+}
+#up {
+  width: 20%;
+  height: 20%;
+  padding: 10px;
+  align-items: center;
+  display: inline-flex;
+  background-color: rgba(236, 235, 235, 0.801);
+  border-radius: 50%;
+  background-size: 20%;
+  margin: 2vw 4vh;
+  padding: 1%;
+}
+#up:hover {
+  color: rgb(82, 18, 124);
+  font-size: 20px;
+  line-height: 10px;
+  padding: 9px;
+  border-radius: 45px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  background-color: rgb(142, 247, 229);
+  border: 2px solid rgb(82, 18, 124);
+  display: inline-block;
+}
+#array {
+  background-color: rgba(236, 235, 235, 0.801);
+  border-radius: 10px;
+  background-size: 50%;
+  margin: 5vw 5vh;
+  padding: 1%;
+  width: 40%;
+  height: 15%;
+  padding: 20px;
+  align-items: center;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+}
+#invitations {
+  background-color: rgba(236, 235, 235, 0.801);
+  border-radius: 10px;
+  background-size: 10%;
+  margin: 2vw 2vh;
+  padding: 1%;
+  width: 8.444%;
+  height: 15%;
+  padding: 20px;
+  align-items: center;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+}
+.my-events {
+  background-image: url("../pics/food_party.jpg");
+  background-size: cover;
+  height: 100%;
+  overflow: hidden;
+  background-attachment: fixed;
+}
 </style>
