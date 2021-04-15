@@ -314,7 +314,7 @@ export default {
   background-size: 10%;
   margin: 2vw 2vh;
   padding: 1%;
-  width: 8.444%;
+  width: 80vw;
   height: 15%;
   padding: 20px;
   align-items: center;
