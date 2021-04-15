@@ -1,32 +1,23 @@
 <template>
   <!-- This component is used to get the list of restaurants from the back end API. -->
   <div class="restaurant-list">
-    
-    <div id="invite-instructions">
-      <h2>Lets pick some restaurants to invite your friends to.</h2>
-      <h3>
-        Select 2 or more restaurants and then click Make an Event
-        to get the party started!
-
-      <div class="audio-player">
-    <audio id="audio-player" src="/pics/lol.mp3" type="audio/mp3" controls="controls" style="width:500px;height:150px;"></audio>
-</div>
-
-
-
-      </h3>
-      <button
+    <h2>Search Again</h2>
+    <search-location> </search-location>
+    <button
       id="event-button"
       class="notEvent"
       v-on:click="showEventForm = true"
-      v-if="event.length > 1 && event.length < 6"
-      
+      v-if="event.length > 1 && event.length <6"
     >
       Make an event
     </button>
-    
+    <div v-else>Please save 2-5 restaurants</div>
     <div v-if="showEventForm"><create-event v-bind:formEvent="event" /></div>
-    </div>
+    <div id ="invite-instructions">
+      <h2>Feeling hungry and want to invite some friends along?</h2>
+      <h3>Check the boxes below 2 or more restaurants and then click Make an Event to get the party started!</h3>
+      </div>
+    <div v-if="showEventForm"><create-event v-bind:formEvent="event"/></div>
     <span id="restaurant-list-container">
       <div
         v-for="restaurant in restaurantsOpenToday"
@@ -35,56 +26,47 @@
       >
         <span>
           <h2>{{ restaurant.name }}</h2>
+          <div>{{ restaurant.cuisine }}</div>
+          <div>{{ restaurant.address }} {{ restaurant.address2 }}</div>
           <div>
-            <input class="checkbox"
-              type="checkbox"
-              v-bind:value="restaurant.restaurantId"
-              v-bind:id="restaurant.restaurantId"
-              v-model="event"
-            /><b>Save to List</b>
+            {{ convertTime(restaurant.openTime) }} -
+            {{ convertTime(restaurant.closeTime) }}
           </div>
-          <br>
           <div
             class="responsive"
             v-if="isOpen(time, restaurant.openTime, restaurant.closeTime)"
           >
-            <!-- We are Open! -->
-            <div class="image-cropper">
-              <img
-                src="/pics/New Open.svg"
-                style="width: 150px; height: 150px"
-              />
-            </div>
-          </div>
+           <!-- We are Open! -->
+<div class="image-cropper">
+   <img src="/pics/New Open.svg"  style="width:150px;height:150px;"  />
+        </div>
 
-          <div v-else>
-            <!--Currently Closed-->
-
-            <div class="image-cropper">
-              <img
-                src="/pics/New Closed.svg"
-                style="width: 100px; height: 100px"
-              />
-            </div>
           </div>
           
-          <div>
-            <b>{{ convertTime(restaurant.openTime) }} -
-            {{ convertTime(restaurant.closeTime) }}</b>
+          
+          <div v-else> <!--Currently Closed-->
+            
+             <div class="image-cropper">
+   <img src="/pics/New Closed.svg" style="width:150px;height:150px;" />
+</div>
+
           </div>
-          <br>
-            <div><b>{{ restaurant.cuisine }}</b></div>
+
+
           <div id="phoneNumber-alert-message">
-            <button v-on:click="say(restaurant.name + ' phone number is ' + restaurant.phoneNumber)">
+            <button
+              v-on:click="
+                say(
+                  restaurant.name + ' phone number is ' + restaurant.phoneNumber
+                )
+              "
+            >
               Call to order
             </button>
           </div>
-          <br>
-<div><b>{{ restaurant.address }} {{ restaurant.address2 }}</b></div>
+
           <div id="directions">
-            <button @click="webFunction(restaurant.name, restaurant.address)">
-              Find Directions
-            </button>
+            <button @click="webFunction(restaurant.name, restaurant.address)">Find Directions</button>
           </div>
 
           <img
@@ -92,10 +74,14 @@
             v-bind:src="'../pics/' + restaurant.thumbnailImg"
             alt="thumbnail not available"
           />
-          
-    
-
-
+          <div>
+            <input
+              type="checkbox"
+              v-bind:value="restaurant.restaurantId"
+              v-bind:id="restaurant.restaurantId"
+              v-model="event"
+            />Save
+          </div>
         </span>
       </div>
     </span>
@@ -104,8 +90,12 @@
 
 <script>
 import services from "@/services/BaseService";
-import CreateEvent from "./CreateEvent.vue";
+import SearchLocation from './SearchLocation.vue';
+import CreateEvent from './CreateEvent.vue';
 let today = new Date();
+
+
+
 
 //get time right now
 let time =
@@ -124,7 +114,7 @@ weekday[6] = "Saturday";
 let todayDay = weekday[dayOfWeek.getDay()];
 
 export default {
-  components: {CreateEvent},
+  components: { SearchLocation, CreateEvent },
   name: "restaurant-list",
   data() {
     return {
@@ -134,13 +124,15 @@ export default {
       restaurants: [],
       event: [],
       showEventForm: false,
+      
     };
   },
   methods: {
+
     //converts time from HH MM SS to 12 hour format
     convertTime(time) {
-      if (time === null) {
-        return " ";
+      if (time === null){
+        return " "
       }
       let newTime = "";
       const hours = time.substr(0, 2);
@@ -157,10 +149,10 @@ export default {
           newTime = hours + ":" + minutes + "AM";
         }
       }
-      if (hours == 12) {
-        newTime = "Noon";
+      if (hours == 12){
+        newTime = "Noon"
       }
-
+      
       return newTime;
     },
     //Filters input for the search and pulls the array of locations
@@ -186,19 +178,16 @@ export default {
         return true;
       } else return false;
     },
-    addToEvent(restaurant) {
-      this.event.push(restaurant.name);
+    addToEvent(restaurant){
+      this.event.push(restaurant.name)
     },
     //this method can be called to create an alert that prints a message
     say: function (message) {
-      alert(message);
+      alert(message)
     },
-    webFunction: function (name, nameTwo) {
-      window.open(
-        "https://www.google.com/maps/place/" + name + ", " + nameTwo,
-        "_blank"
-      );
-    },
+     webFunction: function(name, nameTwo) {
+      window.open("https://www.google.com/maps/place/" + name + ", " + nameTwo, "_blank");
+    }
   },
   computed: {
     restaurantsOpenToday() {
@@ -220,13 +209,6 @@ export default {
 *::after {
   box-sizing: border-box;
 }
-
-#invite-instructions{
-  background-color: rgba(236, 235, 235, 0.801);
-  border-radius: 10px;
-  padding: 5%;
-  margin:5vh;
-}
 .restaurant-list {
   margin-top: 55px;
   background-image: url("../pics/happytable.jpg");
@@ -240,11 +222,9 @@ export default {
   box-sizing: border-box;
 }
 .restaurant {
-  background-color: rgba(236, 235, 235, 0.801);
-  border-radius: 10px;
+  background-color: rgba(212, 211, 211, 0.404);
   background-size: 50%;
   margin: 5vw 5vh;
-  padding: 5%;
 }
 #restaurant-list-container {
   display: flex;
@@ -288,4 +268,8 @@ button {
   display: inline-block;
   margin: 1vw;
 }
+
+
+
+
 </style>
