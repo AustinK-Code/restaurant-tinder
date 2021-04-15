@@ -53,10 +53,10 @@
         See Results for event # {{ event.eventId }}
       </button>
     </div>
-    <div v-if="Object.keys(eventResults).length != 0">
+    <div id='score' v-if="Object.keys(eventResults).length != 0">
       <div v-for="thing in thingArr" v-bind:key="thing.restaurantName">
         <div v-if="thing.voteTotal > 0">
-        Score:{{thing.voteTotal}}      
+        Score: {{thing.voteTotal}}      
         Restaurant: {{thing.restaurantName}}
         </div>
         
@@ -328,5 +328,21 @@ export default {
   height: 100%;
   overflow: hidden;
   background-attachment: fixed;
+}
+
+#score {
+  background-color: rgba(236, 235, 235, 0.801);
+  border-radius: 10px;
+  background-size: 10%;
+  margin: 2vw 2vh;
+  padding: 1%;
+  width: 80vw;
+  height: 15%;
+  padding: 20px;
+  align-items: center;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  font-weight: bold;
 }
 </style>
