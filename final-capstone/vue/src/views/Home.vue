@@ -4,9 +4,16 @@
       <h1>Search for Restaurants</h1>
       <p>Input a City or Zip Code and search for restaurants. Invite your friends to pick thier favorites and plan the perfect meal! </p>
       <locationSearch />
+
+       
     </form>
-  </div>
+
+</div>
+
+
+
 </template>
+
 
 <script>
 import locationSearch from "@/components/SearchLocation.vue"

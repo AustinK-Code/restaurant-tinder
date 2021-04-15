@@ -7,6 +7,13 @@
       <h3>
         Select 2 or more restaurants and then click Make an Event
         to get the party started!
+
+      <div class="audio-player">
+    <audio id="audio-player" src="/pics/lol.mp3" type="audio/mp3" controls="controls" style="width:500px;height:150px;"></audio>
+</div>
+
+
+
       </h3>
       <button
       id="event-button"
@@ -86,6 +93,9 @@
             alt="thumbnail not available"
           />
           
+    
+
+
         </span>
       </div>
     </span>
