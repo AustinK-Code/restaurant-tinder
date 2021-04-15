@@ -188,7 +188,7 @@ export default {
         this.thing.restaurantName = this.restaurantNameArr[x];
         this.thingArr.push(this.thing);
       }
-      this.thingArr.reverse(function(a,b){return b.voteTotal - a.voteTotal})
+      this.thingArr.sort(function(a,b){return b.voteTotal - a.voteTotal})
 
     },
 
