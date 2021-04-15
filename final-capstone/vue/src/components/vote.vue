@@ -6,7 +6,7 @@
     <h2>My Invitations:</h2>
     <div v-for="(invite, index) in invitation" v-bind:key="invite.id">
       <button v-on:click="getRestaurants(index), (temp = index)" v-bind="temp">
-        Invitation #{{ index + 1 }}
+        Invitation #{{ invite.eventId }}
       </button>
       <!-- <button v-on:click="location.reload()">X</button> -->
       <button v-on:click="saveVotes(index)">
@@ -16,7 +16,7 @@
 
     <div
       v-for="(restaurant, index) in restaurantArr"
-      v-bind:key="restaurant.name"
+      v-bind:key="index"
     >
       <h4>{{ restaurant.name }}</h4>
       <h3>{{ restaurant.cuisine }}</h3>
@@ -43,6 +43,7 @@
       <!--- <button v-on:click="getEvent(21)"></button>--->
     </div>
     <h2>Events I'm Hosting:</h2>
+    <h3>Click once for score <br/> Click twice to reveal restaurant names</h3>
     <div
       class="hostedEvents"
       v-for="event in hostedEvents"
@@ -54,7 +55,11 @@
     </div>
     <div v-if="Object.keys(eventResults).length != 0">
       <div v-for="thing in thingArr" v-bind:key="thing.restaurantName">
-        {{thing.restaurantName}}{{thing.voteTotal}}
+        <div v-if="thing.voteTotal > 0">
+        Score:{{thing.voteTotal}}      
+        Restaurant: {{thing.restaurantName}}
+        </div>
+        
       </div>
     </div>
   </div>
@@ -198,26 +203,31 @@ export default {
       let restaurantt = {};
       BaseService.getEventById(id).then((response) => {
         eventt = response.data;
+        if(eventt.restaurantChoice1 > 0){
         BaseService.getDetails(eventt.restaurantChoice1).then((response) => {
           restaurantt = response.data;
-          this.restaurantNameArr.push(restaurantt.name);
-        });
+          this.restaurantNameArr.push(restaurantt.name)
+        })}
+        if(eventt.restaurantChoice2 > 0){
         BaseService.getDetails(eventt.restaurantChoice2).then((response) => {
           restaurantt = response.data;
           this.restaurantNameArr.push(restaurantt.name);
-        });
+        })}
+        if(eventt.restaurantChoice3 > 0){
         BaseService.getDetails(eventt.restaurantChoice3).then((response) => {
           restaurantt = response.data;
           this.restaurantNameArr.push(restaurantt.name);
-        });
+        })}
+        if(eventt.restaurantChoice4 > 0){
         BaseService.getDetails(eventt.restaurantChoice4).then((response) => {
           restaurantt = response.data;
           this.restaurantNameArr.push(restaurantt.name);
-        });
+        })}
+        if(eventt.restaurantChoice5 > 0){
         BaseService.getDetails(eventt.restaurantChoice5).then((response) => {
           restaurantt = response.data;
           this.restaurantNameArr.push(restaurantt.name);
-        });
+        })}
       });
 
       return eventt;
