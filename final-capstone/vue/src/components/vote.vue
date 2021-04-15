@@ -45,7 +45,7 @@
     <h2>Events I'm Hosting:</h2>
     <div class="hostedEvents" v-for="event in hostedEvents" v-bind:key="event.id">
      <button v-on:click="showResults(event,event.eventId)">See Results for event # {{event.eventId}}</button>
-     </div>
+     
      <div v-if="Object.keys(eventResults).length != 0">{{eventResults}}test
        <div></div>
      </div>
@@ -53,7 +53,7 @@
 
 
     
-    
+    </div>
      
   </div>
  
@@ -66,7 +66,7 @@ export default {
   components: {},
   data() {
     return {
-      result:{},
+      result: {},
       temp: "",
       restaurantVoteIndex: "",
       invitation: [],
@@ -77,21 +77,21 @@ export default {
         cuisine: "",
         thumbnailImg: "",
       },
-      hostedEvents:"",
-      eventResults: {}
+      hostedEvents: "",
+      eventResults: "",
     };
   },
   methods: {
-    
-    saveVotes(index){
-      BaseService.updateVotes(this.invitation[index])
+    saveVotes(index) {
+      BaseService.updateVotes(this.invitation[index]);
     },
-    showResults(event,eventId){
-      this.eventResults = {}
-      BaseService.calculateResults(event).then(
-      BaseService.getVotingResults(eventId).then((response =>{
+    getResults(event) {
+      BaseService.calculateResults(event);
+    },
+    showResults(eventId) {
+      BaseService.getVotingResults(eventId).then((response) => {
         this.eventResults = response.data;
-      })))
+      });
     },
     getEvent(id) {
       BaseService.getEventById(id).then((response) => {
@@ -100,41 +100,45 @@ export default {
     },
     getRestaurants(index) {
       this.resetArray();
-      if(this.invitation[index].restaurantChoice1 != 0){
-      BaseService.getRestaurantById(
-        this.invitation[index].restaurantChoice1
-      ).then((results) => {
-        this.restaurantArr.push(results.data);
-      })}
-      
-      if(this.invitation[index].restaurantChoice2 != 0){
-      BaseService.getRestaurantById(
-        this.invitation[index].restaurantChoice2
-      ).then((results) => {
-        this.restaurantArr.push(results.data);
-      })}
+      if (this.invitation[index].restaurantChoice1 != 0) {
+        BaseService.getRestaurantById(
+          this.invitation[index].restaurantChoice1
+        ).then((results) => {
+          this.restaurantArr.push(results.data);
+        });
+      }
 
-      if(this.invitation[index].restaurantChoice3 != 0){
-      BaseService.getRestaurantById(
-        this.invitation[index].restaurantChoice3
-      ).then((results) => {
-        this.restaurantArr.push(results.data);
-      })}
+      if (this.invitation[index].restaurantChoice2 != 0) {
+        BaseService.getRestaurantById(
+          this.invitation[index].restaurantChoice2
+        ).then((results) => {
+          this.restaurantArr.push(results.data);
+        });
+      }
 
-      if(this.invitation[index].restaurantChoice4 != 0){
-      BaseService.getRestaurantById(
-        this.invitation[index].restaurantChoice4
-      ).then((results) => {
-        this.restaurantArr.push(results.data);
-      })}
+      if (this.invitation[index].restaurantChoice3 != 0) {
+        BaseService.getRestaurantById(
+          this.invitation[index].restaurantChoice3
+        ).then((results) => {
+          this.restaurantArr.push(results.data);
+        });
+      }
 
-      if(this.invitation[index].restaurantChoice5 != 0){
-      BaseService.getRestaurantById(
-        this.invitation[index].restaurantChoice5
-      ).then((results) => {
-        this.restaurantArr.push(results.data);
-      })}
+      if (this.invitation[index].restaurantChoice4 != 0) {
+        BaseService.getRestaurantById(
+          this.invitation[index].restaurantChoice4
+        ).then((results) => {
+          this.restaurantArr.push(results.data);
+        });
+      }
 
+      if (this.invitation[index].restaurantChoice5 != 0) {
+        BaseService.getRestaurantById(
+          this.invitation[index].restaurantChoice5
+        ).then((results) => {
+          this.restaurantArr.push(results.data);
+        });
+      }
     },
     pushNum() {
       this.invNum.push(this.invCount);
@@ -142,7 +146,7 @@ export default {
     resetArray() {
       this.restaurantArr.length = 0;
     },
-        vote(value,index,arrPos) {
+    vote(value, index, arrPos) {
       if (index == 0) {
         this.invitation[arrPos].vote1 = value;
       }
@@ -159,24 +163,28 @@ export default {
         this.invitation[arrPos].vote5 = value;
       }
     },
-      findWinner(){
-      let arr = []
-      arr.push(this.eventResults.choice1Results)
-      arr.push(this.eventResults.choice2Results)
-      arr.push(this.eventResults.choice3Results)
-      arr.push(this.eventResults.choice4Results)
-      arr.push(this.eventResults.choice5Results)
+    findWinner() {
+      let arr = [];
+      arr.push(this.eventResults.choice1Results);
+      arr.push(this.eventResults.choice2Results);
+      arr.push(this.eventResults.choice3Results);
+      arr.push(this.eventResults.choice4Results);
+      arr.push(this.eventResults.choice5Results);
     },
-    findRestaurantName(id){
-      let eventt = {}
-      let restaurantt = {}
-      BaseService.getEventById(id).then((response) => {
-        eventt = response.data
-      }).then(BaseService.getDetails(eventt.restaurantId).then((response) => {
-        restaurantt = response.data
-      }))
-      return restaurantt.name
-    }
+    findRestaurantName(id) {
+      let eventt = {};
+      let restaurantt = {};
+      BaseService.getEventById(id)
+        .then((response) => {
+          eventt = response.data;
+        })
+        .then(
+          BaseService.getDetails(eventt.restaurantId).then((response) => {
+            restaurantt = response.data;
+          })
+        );
+      return restaurantt.name;
+    },
   },
   created() {
     BaseService.getInvitesByUserId(this.$store.state.user.id).then(
@@ -184,11 +192,13 @@ export default {
         this.invitation = response.data;
       }
     ),
-    BaseService.getEventsByHostId(this.$store.state.user.id).then((response)=>{
-        this.hostedEvents = response.data;
-    });
-  }
-  };
+      BaseService.getEventsByHostId(this.$store.state.user.id).then(
+        (response) => {
+          this.hostedEvents = response.data;
+        }
+      );
+  },
+};
 </script>
 
 <style>

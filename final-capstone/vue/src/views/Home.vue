@@ -2,6 +2,7 @@
   <div class="home">
     <form id="search-form">
       <h1>Search for Restaurants</h1>
+      <p>Input a City or Zip Code and search for restaurants. Invite your friends to pick thier favorites and plan the perfect meal! </p>
       <locationSearch />
     </form>
   </div>
@@ -36,7 +37,7 @@ components:{
   justify-content: center;
    background-attachment: fixed;
 }
-form{
+#search-form{
   background-color: rgba(236, 235, 235, 0.801);
   border-radius: 10px;
   padding: 5%;
@@ -46,7 +47,8 @@ form{
   align-items: center;
   width: 40vw;
   height: 45vh;
-  margin: 1vw
+  margin: 1vw;
+  text-align: center;
 
 }
 </style>

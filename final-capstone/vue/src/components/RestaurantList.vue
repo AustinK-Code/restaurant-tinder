@@ -1,22 +1,25 @@
 <template>
   <!-- This component is used to get the list of restaurants from the back end API. -->
   <div class="restaurant-list">
-    <button
+    
+    <div id="invite-instructions">
+      <h2>Lets pick some restaurants to invite your friends to.</h2>
+      <h3>
+        Select 2 or more restaurants and then click Make an Event
+        to get the party started!
+      </h3>
+      <button
       id="event-button"
       class="notEvent"
       v-on:click="showEventForm = true"
       v-if="event.length > 1 && event.length < 6"
+      
     >
       Make an event
     </button>
-    <div id="invite-instructions">
-      <h2>Feeling hungry and want to invite some friends along?</h2>
-      <h3>
-        Check the boxes below 2 or more restaurants and then click Make an Event
-        to get the party started!
-      </h3>
-    </div>
+    
     <div v-if="showEventForm"><create-event v-bind:formEvent="event" /></div>
+    </div>
     <span id="restaurant-list-container">
       <div
         v-for="restaurant in restaurantsOpenToday"
@@ -25,12 +28,15 @@
       >
         <span>
           <h2>{{ restaurant.name }}</h2>
-          <div>{{ restaurant.cuisine }}</div>
-          <div>{{ restaurant.address }} {{ restaurant.address2 }}</div>
           <div>
-            {{ convertTime(restaurant.openTime) }} -
-            {{ convertTime(restaurant.closeTime) }}
+            <input class="checkbox"
+              type="checkbox"
+              v-bind:value="restaurant.restaurantId"
+              v-bind:id="restaurant.restaurantId"
+              v-model="event"
+            /><b>Save to List</b>
           </div>
+          <br>
           <div
             class="responsive"
             v-if="isOpen(time, restaurant.openTime, restaurant.closeTime)"
@@ -50,23 +56,24 @@
             <div class="image-cropper">
               <img
                 src="/pics/New Closed.svg"
-                style="width: 150px; height: 150px"
+                style="width: 100px; height: 100px"
               />
             </div>
           </div>
-
+          
+          <div>
+            <b>{{ convertTime(restaurant.openTime) }} -
+            {{ convertTime(restaurant.closeTime) }}</b>
+          </div>
+          <br>
+            <div><b>{{ restaurant.cuisine }}</b></div>
           <div id="phoneNumber-alert-message">
-            <button
-              v-on:click="
-                say(
-                  restaurant.name + ' phone number is ' + restaurant.phoneNumber
-                )
-              "
-            >
+            <button v-on:click="say(restaurant.name + ' phone number is ' + restaurant.phoneNumber)">
               Call to order
             </button>
           </div>
-
+          <br>
+<div><b>{{ restaurant.address }} {{ restaurant.address2 }}</b></div>
           <div id="directions">
             <button @click="webFunction(restaurant.name, restaurant.address)">
               Find Directions
@@ -78,14 +85,7 @@
             v-bind:src="'../pics/' + restaurant.thumbnailImg"
             alt="thumbnail not available"
           />
-          <div>
-            <input
-              type="checkbox"
-              v-bind:value="restaurant.restaurantId"
-              v-bind:id="restaurant.restaurantId"
-              v-model="event"
-            />Save
-          </div>
+          
         </span>
       </div>
     </span>
@@ -210,7 +210,12 @@ export default {
 *::after {
   box-sizing: border-box;
 }
-#img-cropper {
+
+#invite-instructions{
+  background-color: rgba(236, 235, 235, 0.801);
+  border-radius: 10px;
+  padding: 5%;
+  margin:5vh;
 }
 .restaurant-list {
   margin-top: 55px;
@@ -225,9 +230,11 @@ export default {
   box-sizing: border-box;
 }
 .restaurant {
-  background-color: rgba(212, 211, 211, 0.404);
+  background-color: rgba(236, 235, 235, 0.801);
+  border-radius: 10px;
   background-size: 50%;
   margin: 5vw 5vh;
+  padding: 5%;
 }
 #restaurant-list-container {
   display: flex;
