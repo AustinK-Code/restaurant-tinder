@@ -1,14 +1,12 @@
 <template>
-<div>
-  <br> <!--- need to add css to replace br -->
-  <br>
-  <br>
+    <div class="invite-container">
     <h2>Select Friends to Invite:</h2>
     <div v-for="user in users" v-bind:key="user.userid">
-     
+     <br>
      <input type="checkbox" v-bind:value="user.id" v-bind:id="user.id" v-model="invited"/>
-     <label for="checkbox"> {{user.username}}</label>
+     <label for="checkbox"> <b>{{user.username}}</b></label>
     </div>
+    <br>
     <router-link to="/events">
     <button v-on:click="sendInvites()">Send Invitations</button>
     </router-link>
@@ -53,6 +51,16 @@ export default {
     }
 </script>
 
-<style>
+<style scoped>
+.invite-container{
+  background-color: rgba(236, 235, 235, 0.801);
+  border-radius: 10px;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 50vw;
+  height: 50vh;
+  
+}
 
 </style>

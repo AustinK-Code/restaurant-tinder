@@ -10,7 +10,7 @@
          <h3> The only app designed to find the
           perfect dining experience for any occasion.</h3> 
           <p>Our goal here is simple:
-          to find the very best local restaurants with only the highest quality
+          Find the very best local restaurants with only the highest quality
           of ingredients, and an atmosphere to match. If you’re looking for
           bland, or the same-old thing you’ve had a hundred times, you’re on the
           wrong app. We stand by each and every restaurant that we feature here,
@@ -57,7 +57,7 @@
       <button type="submit" class="myButton">Sign in</button>
       
       <div class="reviews">
-        <h1>User Testimonial:</h1>
+        <h1>User Testimonials:</h1>
         <p>
           "I’ve been spending a lot more time with friends since
           I started using the app, it makes it so easy to plan a meal together" -

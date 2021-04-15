@@ -1,6 +1,6 @@
 <template>
   <form id="search-form">
-    <label for="location">City/ZipCode</label>
+    <label for="location">City or ZipCode</label>
     <div><input
       type="text"
       id="location"

@@ -3,13 +3,16 @@
     <form id="eventform" @submit.prevent="addNewEvent" >
       <!-- date event is held on field  -->
       <label for="dateOfEvent">Date and time of event</label>
+      <br>
       <input type= "date" v-model="newEvent.eventDate"/>
+      
       <input type="time" v-model="newEvent.eventTime"/>
-
+      <br>
       <!-- poll end date and time  -->
       <label for="dateOfPoll">Poll end date and time</label>
       <input type= "date" v-model="newEvent.respondByDate"/>
       <input type="time" v-model="newEvent.respondByTime"/>
+      <br>
       <button class=" myButton" type="submit" v-on:click="commitEventToStore()">
         Create Event
       </button>
